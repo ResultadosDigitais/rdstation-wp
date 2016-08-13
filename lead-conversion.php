@@ -36,8 +36,8 @@ class LeadConversion {
       $form_data["c_utmz"] = $_COOKIE["__utmz"];
     }
 
-    if ( isset($_COOKIE["__trf_src"]) && empty($form_data["traffic_source"]) ) {
-      $form_data["traffic_source"] = $_COOKIE["__trf_src"];
+    if ( isset($_COOKIE["__trf.src"]) && empty($form_data["traffic_source"]) ) {
+      $form_data["traffic_source"] = $_COOKIE["__trf.src"];
     }
 
     if (empty($form_data["client_id"]) && !empty($_COOKIE["rdtrk"])) {
