@@ -41,7 +41,7 @@ Se o seu site ou blog foi desenvolvido pela Resultados Digitais, este plugin já
 Você pode instalar o plugin diretamente pelo seu painel do WordPress, clicando em **Plugins**, **Adicionar novo** e pesquise por **Integração RD Station**. Provavelmente será o único plugin a aparecer nos resultados da pesquisa. Basta clicar em **Instalar** e depois em **Ativar**. Seu plugin está funcionando e você já pode pular para a parte de configuração.
 
 Caso você prefira instalar o plugin manualmente, você pode baixá-lo [clicando neste link](https://github.com/ResultadosDigitais/rdstation-wp/archive/master.zip) ou baixando o arquivo ZIP diretamente pelo [endereço oficial](https://wordpress.org/plugins/integracao-rd-station/).
-  
+
 Para instalá-lo no seu site, você precisa entrar no seu painel do WordPress, clicar em **Plugins**, **Adicionar novo** e depois em **Fazer upload do plugin**. Então selecione o arquivo que você baixou e clique em **Instalar agora**. Se o plugin foi instalado com sucesso, clique em **Ativar plugin**.
 
 ### Configuração
@@ -90,11 +90,7 @@ Na página de configuração das integrações, você pode definir o nome de cad
 
 ## Como contribuir
 
-Você pode contribuir com o plugin, criando novas integrações e sugerindo melhorias
-
-### Fork do repositório
-
-A primeira coisa que você tem a fazer, é criar um fork do repositório. Ao fazer um fork, você terá esse repositório clonado em sua conta do GitHub e poderá trabalhar nela tranquilamente.
+Você pode contribuir com o plugin, criando novas integrações e sugerindo melhorias. Para isto, basta abrir uma *issue* relatando algum erro ou fazendo uma sugestão, ou abrir um *Pull Request* com alguma nova funcionalidade ou correção de erro.
 
 ### Criando novas integrações
 
