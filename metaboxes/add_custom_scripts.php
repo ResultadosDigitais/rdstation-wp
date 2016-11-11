@@ -1,11 +1,4 @@
 <?php
-/**
- * User: Olavo Zapata
- * Date: 01/11/2016
- * Time: 16:55
- */
-//** INICIO DE ÁREA DE SCRIPT Onpage the_content [Page e posts]
-
 
 add_filter('the_content', 'rdscript_display_hook',  10);
 
@@ -13,36 +6,38 @@ add_action('wp_head', 'rdscript_display_hook_header');
 add_action('wp_footer', 'rdscript_display_hook_footer');
 
 
-// execute the scripts on page and single posts (Edição Olavo)
+// execute the scripts on page and single posts
 function rdscript_display_hook_header() {
   global $post;
-    if(is_single() || is_page()) {
-echo html_entity_decode(get_post_meta($post->ID, '_rdscriptcontentinhead', true));
-}
 
-echo get_option('rdscript_all_head');
-return;
+  if(is_single() || is_page()) {
+    echo html_entity_decode(get_post_meta($post->ID, '_rdscriptcontentinhead', true));
+  }
+
+  echo get_option('rdscript_all_head');
+  return;
 }
 
 function rdscript_display_hook_footer() {
   global $post;
-    if(is_single() || is_page()) {
-echo html_entity_decode(get_post_meta($post->ID, '_rdscriptcontentinfooter', true));
-}
+  if(is_single() || is_page()) {
+    echo html_entity_decode(get_post_meta($post->ID, '_rdscriptcontentinfooter', true));
+  }
 
-echo get_option('rdscript_all_body');
-return;
+  echo get_option('rdscript_all_body');
+  return;
 }
 
 
 function rdscript_display_hook($content='') {
 	global $post;
   $contents=$content;
-    if(is_single() || is_page()) {
-   $contents= html_entity_decode(get_post_meta($post->ID, '_rdscriptcontenttop', true)) . $content . html_entity_decode(get_post_meta($post->ID, '_rdscriptcontentbottom', true));
-     }
 
-return $contents;
+  if(is_single() || is_page()) {
+    $contents= html_entity_decode(get_post_meta($post->ID, '_rdscriptcontenttop', true)) . $content . html_entity_decode(get_post_meta($post->ID, '_rdscriptcontentbottom', true));
+  }
+
+  return $contents;
 }
 
 //Displays a box that allows users to insert the scripts for the post or page
