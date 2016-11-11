@@ -31,8 +31,11 @@ Endereço oficial: [https://wordpress.org/plugins/integracao-rd-station/](https:
 
 O plugin **Integração RD Station** atualmente é compatível com os seguintes plugins de formulário:
 
-* [Contact Form 7](#contact-form-7)
-* [Gravity Forms](#gravity-forms)
+* VIA API
+** [Contact Form 7](#contact-form-7)
+** [Gravity Forms](#gravity-forms)
+* VIA Script
+** Inserção do script gerado pelo RD diretamente nas páginas.
 
 ### Instalação
 
@@ -48,6 +51,8 @@ Para instalá-lo no seu site, você precisa entrar no seu painel do WordPress, c
 
 Depois de instalar o plugin, irá aparecer um item no seu menu WordPress, de acordo com o plugin de formulários que você tem instalado e ativo. Se você tem o Contact Form 7, irá aparecer **RD Station CF7**, já se você tiver o Gravity Forms, irá aparecer **RD Station GF**.
 Se você tiver os dois formulários instalados, ambos estarão ativos no seu menu, e você pode usar os dois formulários simultaneamente sem problemas.
+Caso os formulários não tenham sido gerados por esses plugins não aparecerá nenhum novo item no menu.
+No entanto, dentro das páginas e posts será aberto uma área para inserção de scripts de integração RD Station.
 
 #### Contact Form 7
 
@@ -74,6 +79,16 @@ Para fazer uma integração, clique no item **RD Station GF** que apareceu no me
 Siga os mesmos passos usados no [Contact Form 7](#contact-form-7)
 
 Clique em **Integrar** e seu formulário escolhido está integrado ao RD Station.
+
+#### Integração de scripts RD Station
+
+Para integração via script é necessário criar um script através do RD Station no menu Conta>Integrações>Integração de Formulário.
+
+Após o script gerado e copiado, acesse o painel de controle do wordpress e na página da qual contém o formulário que gerou o script,
+no final da tela de edição aparecerá a área "Integração de script RD Station".
+Inserir o script gerado pelo RD Station no campo "Área para inserção do script de integração de formulário antes do fechamento do </body>"
+
+E atualize a edição clicando no botão Atualizar no menu direito do wordpress.
 
 ### Múltiplas integrações
 Você pode integrar quantos formulários for necessário. Além disso, você também pode integrar um único formulário a mais de uma conta no RD Station, criando duas integrações com tokens diferentes. Isso pode ser útil quando você criar alguma campanha com um parceiro, e precisa gerar o lead para as duas contas.
