@@ -52,7 +52,6 @@ class LeadConversion {
         'senha',
         'confirme_senha',
         'captcha',
-        'G-recaptcha-response',
         '_wpcf7',
         '_wpcf7_version',
         '_wpcf7_unit_tag',

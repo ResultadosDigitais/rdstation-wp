@@ -29,6 +29,7 @@ require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 require_once('metaboxes/add_custom_scripts.php');
 require_once('RD_Custom_Post_Type.php');
 require_once('lead-conversion.php');
+require_once('metaboxes/add_custom_scripts.php');
 
 function enqueue_rd_admin_style($hook) {
     if ( 'post.php' != $hook ) return;
