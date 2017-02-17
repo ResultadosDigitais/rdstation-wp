@@ -10,28 +10,28 @@ class RD_Metabox {
 
 	public function rd_create_meta_boxes(){
 		add_meta_box(
-	        'form_identifier_box',
-	        'Identificador',
-	        array($this, 'form_identifier_box_content'),
-	        $this->plugin_prefix.'_integrations',
-	        'normal'
-	    );
+      'form_identifier_box',
+      'Identificador',
+      array($this, 'form_identifier_box_content'),
+      $this->plugin_prefix.'_integrations',
+      'normal'
+	  );
 
-	    add_meta_box(
-	        'token_rdstation_box',
-	        'Token RD Station',
-	        array($this, 'token_rdstation_box_content'),
-	        $this->plugin_prefix.'_integrations',
-	        'normal'
-	    );
+    add_meta_box(
+      'token_rdstation_box',
+      'Token RD Station',
+      array($this, 'token_rdstation_box_content'),
+      $this->plugin_prefix.'_integrations',
+      'normal'
+    );
 
-	    add_meta_box(
-	        'form_id_box',
-	        'Qual formulário você deseja integrar ao RD Station?',
-	        array($this, 'form_id_box_content'),
-	        $this->plugin_prefix.'_integrations',
-	        'normal'
-	    );
+	  add_meta_box(
+      'form_id_box',
+      'Qual formulário você deseja integrar ao RD Station?',
+      array($this, 'form_id_box_content'),
+      $this->plugin_prefix.'_integrations',
+      'normal'
+	  );
 	}
 
 	public function form_identifier_box_content() {
@@ -56,7 +56,6 @@ class RD_Metabox {
 		if ( isset( $_POST['form_id'] ) ) update_post_meta( $post_id, 'form_id', $_POST['form_id'] );
 		if ( isset( $_POST['gf_mapped_fields'] ) ) update_post_meta( $post_id, 'gf_mapped_fields', $_POST['gf_mapped_fields'] );
 	}
-
 }
 
 ?>

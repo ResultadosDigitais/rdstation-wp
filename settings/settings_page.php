@@ -18,15 +18,12 @@ function initialize_rdstation_settings_page() {
 function rdstation_settings_page_callback() {
   ?>
   <form action='options.php' method='post'>
-
     <h1>RD Station</h1>
-
     <?php
     settings_fields( 'rdstation-settings-page' );
     do_settings_sections( 'rdstation-settings-page' );
     submit_button();
     ?>
-
   </form>
   <?php
 }
