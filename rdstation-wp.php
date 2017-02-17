@@ -30,8 +30,8 @@ require_once('metaboxes/add_custom_scripts.php');
 require_once('lead-conversion.php');
 
 require_once('RD_Custom_Post_Type.php');
-require_once('settings/contact_form7.php');
-require_once('settings/gravity_forms.php');
+require_once('initializers/contact_form7.php');
+require_once('initializers/gravity_forms.php');
 require_once('settings/settings_page.php');
 
 function enqueue_rd_admin_style($hook) {
