@@ -29,7 +29,6 @@ class LeadConversion {
 
   public function conversion( $form_data ) {
     $api_url = "https://app.rdstation.com.br/api/1.3/conversions";
-
     $form_data["email"] = $this->get_email_field($form_data);
 
     if ( isset($_COOKIE["__utmz"]) && empty($form_data["c_utmz"]) ) {
@@ -130,11 +129,20 @@ class LeadConversion {
     }
   }
 
+  public function rd_woocommerce($order_id) {
+    $order = new WC_Order( $order_id );
+    $this->form_data = (array) $order;
+    $this->form_data['identificador'] = 'WooCommerce';
+    $this->form_data['token_rdstation'] = get_option( 'rd_settings' )['rd_public_token'];
+    $this->form_data['email'] = $order->billing_email;
+    unset($this->form_data['post']);
+    $this->conversion($this->form_data);
+  }
+
   public function generate_static_fields($form_id, $origin_form){
     $this->form_data[ 'token_rdstation' ] = get_post_meta($form_id, 'token_rdstation', true);
     $this->form_data[ 'identificador' ] = get_post_meta($form_id, 'form_identifier', true);
     $this->form_data[ 'form_origem' ] = $origin_form;
-    $this->form_data[ 'identificador' ] = get_post_meta($form_id, 'form_identifier', true);
     $this->form_data[ '_is' ] = 8; // Internal source
   }
 

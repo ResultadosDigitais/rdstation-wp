@@ -32,6 +32,7 @@ require_once('lead-conversion.php');
 require_once('RD_Custom_Post_Type.php');
 require_once('settings/contact_form7.php');
 require_once('settings/gravity_forms.php');
+require_once('settings/settings_page.php');
 
 function enqueue_rd_admin_style($hook) {
   if ( 'post.php' != $hook ) return;
@@ -41,3 +42,4 @@ add_action( 'admin_enqueue_scripts', 'enqueue_rd_admin_style' );
 
 new LeadConversion('contact_form_7', 'wpcf7_mail_sent');
 new LeadConversion('gravity_forms', 'gform_after_submission');
+new LeadConversion('rd_woocommerce', 'woocommerce_checkout_order_processed');
