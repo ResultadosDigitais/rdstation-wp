@@ -13,6 +13,13 @@ function initialize_rdstation_settings_page() {
     'rdstation-settings-page'
   );
 
+  add_settings_section(
+    'rd_woocommerce_settings_section',
+    'Integração com WooCommerce',
+    null,
+    'rdstation-settings-page'
+  );
+
   add_settings_field(
     'rd_public_token',
     'Token Público',
@@ -27,6 +34,14 @@ function initialize_rdstation_settings_page() {
     'rd_private_token_callback',
     'rdstation-settings-page',
     'rd_general_settings_section'
+  );
+
+  add_settings_field(
+    'rd_woocommerce_conversion_identifier',
+    'Identificador das conversões de checkout',
+    'rd_woocommerce_conversion_identifier_callback',
+    'rdstation-settings-page',
+    'rd_woocommerce_settings_section'
   );
 }
 
@@ -61,5 +76,11 @@ function rd_private_token_callback() {
 function rd_enable_woocommerce_integration_callback() {
   $options = get_option( 'rd_settings' ); ?>
   <input type='checkbox' name='rd_settings[rd_enable_woocommerce_integration]' size="32" value='<?php echo $options['rd_enable_woocommerce_integration']; ?>'>
+  <?php
+}
+
+function rd_woocommerce_conversion_identifier_callback() {
+  $options = get_option( 'rd_settings' ); ?>
+  <input type='text' name='rd_settings[rd_woocommerce_conversion_identifier]' size="32" value='<?php echo $options['rd_woocommerce_conversion_identifier']; ?>'>
   <?php
 }

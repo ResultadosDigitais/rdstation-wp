@@ -131,9 +131,10 @@ class LeadConversion {
 
   public function rd_woocommerce($order_id) {
     $order = new WC_Order( $order_id );
+    $options = get_option('rd_settings');
     $this->form_data = (array) $order;
-    $this->form_data['identificador'] = 'WooCommerce';
-    $this->form_data['token_rdstation'] = get_option( 'rd_settings' )['rd_public_token'];
+    $this->form_data['identificador'] = $options['rd_woocommerce_conversion_identifier'];
+    $this->form_data['token_rdstation'] = $options['rd_public_token'];
     $this->form_data['email'] = $order->billing_email;
     unset($this->form_data['post']);
     $this->conversion($this->form_data);
