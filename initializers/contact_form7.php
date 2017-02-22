@@ -1,5 +1,7 @@
 <?php
 
+require_once('RD_Custom_Post_Type.php');
+
 $setup = new RD_Custom_Post_Type('rdcf7');
 $setup->acronym = 'CF7';
 $setup->name = 'Contact Form 7';
