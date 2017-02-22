@@ -4,8 +4,8 @@ class LeadConversion {
 
   public $form_data = array();
 
-  public function __construct($callback, $submit_action){
-    add_filter($submit_action, array($this, $callback), 10, 2);
+  public function add_callback($trigger, $callback) {
+    add_filter($trigger, array($this, $callback), 10, 2);
   }
 
   private function ignore_fields(array $fields, $data){
@@ -83,61 +83,9 @@ class LeadConversion {
     }
   }
 
-  private function get_forms($post_type){
+  protected function get_forms($post_type){
     $args = array( 'post_type' => $post_type, 'posts_per_page' => 100 );
     return $forms = get_posts($args);
-  }
-
-  public function contact_form_7($cf7){
-    $forms = $this->get_forms('rdcf7_integrations');
-    foreach ($forms as $form) {
-      $form_id = get_post_meta($form->ID, 'form_id', true);
-      if ( $form_id == $cf7->id() ) {
-        $submission = WPCF7_Submission::get_instance();
-        if ( $submission ) $this->form_data = $submission->get_posted_data();
-        $this->generate_static_fields($form->ID, 'Plugin Contact Form 7');
-        $this->conversion($this->form_data);
-      }
-    }
-  }
-
-  public function gravity_forms($entry, $gform){
-
-    foreach ($entry as $item => $value) {
-      if (is_numeric($item)) $this->form_data[$value] = $item;
-    }
-
-    $forms = $this->get_forms('rdgf_integrations');
-
-    foreach ($forms as $form) {
-      $fields = get_post_meta($form->ID, 'gf_mapped_fields', true);
-      $form_id = get_post_meta($form->ID, 'form_id', true);
-
-      if ( $form_id == $gform['id'] ) {
-        foreach ($this->form_data as $key => $value) {
-          if($fields[$value] != null && !empty($fields[$value])) {
-            $this->form_data[$key] = $fields[$value];
-          }
-          else {
-            unset($this->form_data[$key]);
-          }
-        }
-        $this->form_data = array_flip($this->form_data);
-        $this->generate_static_fields($form->ID, 'Plugin Gravity Forms');
-        $this->conversion($this->form_data);
-      }
-    }
-  }
-
-  public function rd_woocommerce($order_id) {
-    $order = new WC_Order( $order_id );
-    $options = get_option('rd_settings');
-    $this->form_data = (array) $order;
-    $this->form_data['identificador'] = $options['rd_woocommerce_conversion_identifier'];
-    $this->form_data['token_rdstation'] = $options['rd_public_token'];
-    $this->form_data['email'] = $order->billing_email;
-    unset($this->form_data['post']);
-    $this->conversion($this->form_data);
   }
 
   public function generate_static_fields($form_id, $origin_form){

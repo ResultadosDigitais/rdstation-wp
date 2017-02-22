@@ -29,17 +29,18 @@ require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 require_once('metaboxes/add_custom_scripts.php');
 require_once('lead-conversion.php');
 
-require_once('RD_Custom_Post_Type.php');
+// plugin setup
 require_once('initializers/contact_form7.php');
 require_once('initializers/gravity_forms.php');
 require_once('settings/settings_page.php');
+
+// available integrations
+require_once('integrations/woocommerce/setup.php');
+require_once('integrations/gravity_forms/setup.php');
+require_once('integrations/contact_form7/setup.php');
 
 function enqueue_rd_admin_style($hook) {
   if ( 'post.php' != $hook ) return;
   wp_enqueue_style( 'rd_admin_style', plugin_dir_url( __FILE__ ) . 'styles/admin.css' );
 }
 add_action( 'admin_enqueue_scripts', 'enqueue_rd_admin_style' );
-
-new LeadConversion('contact_form_7', 'wpcf7_mail_sent');
-new LeadConversion('gravity_forms', 'gform_after_submission');
-new LeadConversion('rd_woocommerce', 'woocommerce_checkout_order_processed');
