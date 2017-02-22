@@ -26,6 +26,7 @@ along with Integração RD Station. If not, see https://www.gnu.org/licenses/gpl
 */
 
 require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+require_once('rd_custom_post_type.php');
 require_once('metaboxes/add_custom_scripts.php');
 require_once('lead-conversion.php');
 
