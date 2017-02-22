@@ -1,15 +1,15 @@
 <?php
 
-class RD_Custom_Post_Type {
+class RDCustomPostType {
 
   public function __construct($slug) {
     $this->slug = $slug;
     require_once("metaboxes/$this->slug.php");
   }
 
-	public function init(){
-		add_action( 'init', array($this, 'rd_custom_post_type' ));
-	}
+  public function init(){
+    add_action( 'init', array($this, 'rd_custom_post_type' ));
+  }
 
 	public function rd_custom_post_type() {
 	    $labels = array(

@@ -35,7 +35,7 @@ require_once('initializers/contact_form7.php');
 require_once('initializers/gravity_forms.php');
 require_once('settings/settings_page.php');
 
-// available integrations
+// setup available integrations
 require_once('integrations/woocommerce/setup.php');
 require_once('integrations/gravity_forms/setup.php');
 require_once('integrations/contact_form7/setup.php');
