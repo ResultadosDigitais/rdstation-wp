@@ -55,6 +55,10 @@ https://github.com/ResultadosDigitais/rdstation-wp
 
 == Changelog ==
 
+= 3.0 =
+
+* Integração com WooCommerce
+
 = 2.4 =
 
 * Adiciona área para inserção de scripts personalizados do RD Station
