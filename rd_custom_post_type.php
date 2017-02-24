@@ -1,18 +1,17 @@
 <?php
 
-class RD_Custom_Post_Type {
+class RDCustomPostType {
 
-	public function __construct($acronym, $name, $slug, $plugin_path){
-		$this->acronym = $acronym;
-		$this->name = $name;
-		$this->slug = $slug;
-		$this->plugin_path = $plugin_path;
-		add_action( 'init', array($this, 'rd_custom_post_type' ));
-	}
+  public function __construct($slug) {
+    $this->slug = $slug;
+    require_once("metaboxes/$this->slug.php");
+  }
+
+  public function init(){
+    add_action( 'init', array($this, 'rd_custom_post_type' ));
+  }
 
 	public function rd_custom_post_type() {
-		require_once("metaboxes/$this->slug.php");
-
 	    $labels = array(
 	        'name'                  => _x( 'Integrações '.$this->acronym, 'post_type_general_name' ),
 	        'singular_name'         => _x( 'Integração '.$this->acronym, 'post_type_singular_name' ),
