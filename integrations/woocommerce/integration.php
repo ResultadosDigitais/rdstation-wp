@@ -1,8 +1,10 @@
 <?php
 
 class RDWoocommerceIntegration extends LeadConversion {
-  public function send_lead_conversion() {
+  public function send_lead_conversion($order_id) {
+    $order = new WC_Order($order_id);
     $this->conversion_data = $this->build_conversion_data($_POST);
+    $this->add_product_information($order);
     parent::conversion($this->conversion_data);
   }
 
@@ -36,5 +38,19 @@ class RDWoocommerceIntegration extends LeadConversion {
     }
 
     return $data;
+  }
+
+  private function add_product_information($order) {
+    $order_price = 0;
+    $products_names = [];
+    $products = $order->get_items();
+
+    foreach ($products as $product) {
+      array_push($products_names, $product['name']);
+      $order_price += $product['line_total'];
+    }
+
+    $this->conversion_data['produtos'] = $products_names;
+    $this->conversion_data['valor_total'] = $order_price;
   }
 }
