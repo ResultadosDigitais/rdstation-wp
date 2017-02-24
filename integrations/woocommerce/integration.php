@@ -42,7 +42,7 @@ class RDWoocommerceIntegration extends LeadConversion {
 
   private function add_product_information($order) {
     $order_price = 0;
-    $products_names = [];
+    $products_names = array();
     $products = $order->get_items();
 
     foreach ($products as $product) {
