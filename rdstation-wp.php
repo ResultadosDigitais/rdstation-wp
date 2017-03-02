@@ -40,8 +40,13 @@ require_once('integrations/woocommerce/setup.php');
 require_once('integrations/gravity_forms/setup.php');
 require_once('integrations/contact_form7/setup.php');
 
+add_action( 'admin_enqueue_scripts', 'enqueue_rd_admin_style' );
 function enqueue_rd_admin_style($hook) {
   if ( 'post.php' != $hook ) return;
-  wp_enqueue_style( 'rd_admin_style', plugin_dir_url( __FILE__ ) . 'styles/admin.css' );
+  wp_enqueue_style( 'rd_admin_style', plugin_dir_url( __FILE__ ) . 'assets/styles/admin.css' );
 }
-add_action( 'admin_enqueue_scripts', 'enqueue_rd_admin_style' );
+
+add_action('wp_enqueue_scripts', 'enqueue_rd_scripts');
+function enqueue_rd_scripts() {
+  wp_enqueue_script('rd_error_handling', plugin_dir_url( __FILE__ ) . 'assets/scripts/error_handling.js');
+}
