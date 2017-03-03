@@ -74,12 +74,8 @@ class LeadConversion {
       $response = wp_remote_post( $api_url, $args );
 
       if (is_wp_error($response)){
-        wp_die('Erro ao enviar o formulário');
         unset($form_data);
       }
-    }
-    else {
-      wp_die('Erro ao enviar o formulário. Certifique-se de ter preenchido os campos corretamente');
     }
   }
 

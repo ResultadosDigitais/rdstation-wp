@@ -45,8 +45,3 @@ function enqueue_rd_admin_style($hook) {
   if ( 'post.php' != $hook ) return;
   wp_enqueue_style( 'rd_admin_style', plugin_dir_url( __FILE__ ) . 'assets/styles/admin.css' );
 }
-
-add_action('wp_enqueue_scripts', 'enqueue_rd_scripts');
-function enqueue_rd_scripts() {
-  wp_enqueue_script('rd_error_handling', plugin_dir_url( __FILE__ ) . 'assets/scripts/error_handling.js');
-}
