@@ -68,6 +68,9 @@ function rdscript_updates($pID) {
   // if the function is called by the WP autosave feature, nothing must be saved
   if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE )
     return;
+	
+  if ( !isset( $_POST['wpwox_noncename'] ) )
+    return;
 
   // verify this came from the our screen and with proper authorization,
   // because save_post can be triggered at other times
