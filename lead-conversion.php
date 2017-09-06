@@ -91,6 +91,18 @@ class LeadConversion {
     $this->form_data[ '_is' ] = 8; // Internal source
   }
 
+  public function nf_generate_static_fields($form_id, $token, $identifier, $origin_form){
+    $this->form_data[ 'token_rdstation' ] = $token;
+    $this->form_data[ 'identificador' ] = $identifier;
+    $this->form_data[ 'form_origem' ] = $origin_form;
+    $this->form_data[ '_is' ] = 8; // Internal source
+
+    /* LOG */
+    $fp = fopen('../logs/nf_generate_static_fields.txt', 'w');
+    fwrite($fp, json_encode($this->form_data));
+    fclose($fp);
+  }
+
   private function get_email_field($form_data) {
     $common_email_names = array(
       'email',

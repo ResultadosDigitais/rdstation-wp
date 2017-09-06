@@ -33,7 +33,6 @@ require_once('lead-conversion.php');
 // plugin setup
 require_once('initializers/contact_form7.php');
 require_once('initializers/gravity_forms.php');
-require_once('initializers/ninja_forms.php');
 require_once('settings/settings_page.php');
 
 // setup available integrations
