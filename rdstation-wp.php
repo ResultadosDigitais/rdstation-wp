@@ -33,12 +33,14 @@ require_once('lead-conversion.php');
 // plugin setup
 require_once('initializers/contact_form7.php');
 require_once('initializers/gravity_forms.php');
+require_once('initializers/ninja_forms.php');
 require_once('settings/settings_page.php');
 
 // setup available integrations
 require_once('integrations/woocommerce/setup.php');
 require_once('integrations/gravity_forms/setup.php');
 require_once('integrations/contact_form7/setup.php');
+require_once('integrations/ninja_forms/setup.php');
 
 add_action( 'admin_enqueue_scripts', 'enqueue_rd_admin_style' );
 function enqueue_rd_admin_style($hook) {

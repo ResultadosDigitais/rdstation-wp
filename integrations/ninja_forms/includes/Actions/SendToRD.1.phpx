@@ -1,0 +1,106 @@
+<?php 
+
+/*
+class RDNinjaFormsIntegration extends LeadConversion {
+    public function send_lead_conversion($nf){
+        parent::generate_static_fields($form->ID, 'Plugin Ninja Forms');
+        parent::conversion($this->form_data);
+    }
+  }
+*/
+
+final class NF_ResultadosDigitais_Actions_SendToRD2 extends NF_Abstracts_Action
+{
+    /**
+    * @var string
+    */
+    protected $_name  = 'RDINTEGRATION';
+    
+        /**
+        * @var array
+        */
+        protected $_tags = array();
+    
+        /**
+        * @var string
+        */
+        protected $_timing = 'normal';
+    
+        /**
+        * @var int
+        */
+        protected $_priority = 10;
+    
+        /**
+        * Constructor
+        */
+        public function __construct()
+        {
+            parent::__construct();
+    
+            $this->_nicename = __( 'Integração RD', 'rdstation-wp' );
+
+            /*
+            * Settings
+            
+            $this->_settings = array(
+                'identificador' => array(
+                    'name' => 'identificador',
+                    'type' => 'textbox',
+                    'group' => 'primary',
+                    'label' => __( 'Identificador', 'ninja-forms' ),
+                    'placeholder' => '',
+                    'value' => '',
+                    'help' => __( 'Esse identificador irá lhe ajudar a saber o formulário de origem do lead.', 'ninja-forms' ),
+                    'width' => 'full',
+                    'use_merge_tags' => FALSE,
+                ),
+                'token' => array(
+                    'name' => 'token',
+                    'type' => 'textbox',
+                    'group' => 'primary',
+                    'label' => __( 'Token', 'ninja-forms' ),
+                    'placeholder' => '',
+                    'value' => '',
+                    'help' => __( 'Não sabe seu token? acesse https://www.rdstation.com.br/integracoes', 'ninja-forms' ),
+                    'width' => 'full',
+                    'use_merge_tags' => FALSE,
+                ),          
+            );*/
+    
+        }
+
+        
+        
+        /*
+        * PUBLIC METHODS
+        */
+    
+        public function process( $action_settings, $form_id, $data )
+        {
+            /*
+            $errors = $this->check_for_errors( $action_settings );
+            $ninjaforms_integration = new RDNinjaFormsIntegration();
+
+            $postData = array();
+            $values = $ninja_forms_processing->get_all_fields();
+            foreach ($values as $i => $value) {
+                if (array_key_exists($i, $map))
+                    $postData[$map[$i]] = $value;
+            }
+            */
+            
+            return $data;
+        }
+
+        protected function check_for_errors( $action_settings )
+        {
+            $errors = array();
+            $rd_settings = array( 'identificador', 'token');
+            foreach( $rd_settings as $setting ){
+                if( ! isset( $action_settings[ $setting ] ) ) continue;
+                if( ! $action_settings[ $setting ] ) continue;
+            }
+            return $errors;
+        }
+}
