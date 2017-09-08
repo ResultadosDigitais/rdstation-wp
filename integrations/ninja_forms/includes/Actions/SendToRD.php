@@ -4,25 +4,27 @@ if ( ! defined( 'ABSPATH' ) || ! class_exists( 'NF_Abstracts_Action' )) exit;
 
 class RDNinjaFormsIntegration extends LeadConversion {
     public function send_lead_conversion($form_id, $token, $identifier){
-        /* LOG */
-        $fp = fopen('../logs/send_lead_conversion.txt', 'w');
-        fwrite($fp, json_encode($form_id));
-        fwrite($fp, json_encode($token));
-        fwrite($fp, json_encode($identifier));
-        fclose($fp);
-
-        parent::nf_generate_static_fields($form_id, $token, $identifier, 'Plugin Ninja Forms');
-        //parent::conversion($this->form_data);
+        parent::nf_generate_static_fields($form_id, $identifier, $token, 'Plugin Ninja Forms');
     }
 
+    /*
+    * Preparar dados do formulário do ninja form, pois vem vários campos desnecessários
+    */
     public function prepare_conversion($form_data) {
-        $form_data_reduced = unset($a['b']); 
-        /* LOG */
-        $fp = fopen('../logs/prepare_conversion.txt', 'w');
-        fwrite($fp, json_encode($form_data["email"]["value"]));
-        fclose($fp);
-
-
+        foreach($form_data as $itemKey => $item ){
+            $id = $item['id'];
+            $value = $item['value'];
+            $label = $item['label'];
+            $teste = (object) [
+              'id' => $id,
+              'value' => $value, 
+              'label' => $label,
+            ];
+            $this->form_data[$itemKey] = $value;
+            unset($item);
+        }
+        $data_reduzido = (array) $this->form_data;
+        parent::conversion($data_reduzido);
     }
 }
 
@@ -108,11 +110,6 @@ final class NF_ResultadosDigitais_Actions_SendToRD extends NF_Abstracts_Action
         } catch (\Exception $e) {
             error_log("Não foi possível enviar para o RD");
         }
-
-        /* LOG */
-        $fp = fopen('../logs/process.txt', 'w');
-        fwrite($fp, json_encode($form_data));
-        fclose($fp);
         
         return $data;
     }
