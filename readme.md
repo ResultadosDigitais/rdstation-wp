@@ -8,6 +8,7 @@ Dúvidas e Sugestões? [https://github.com/ResultadosDigitais/rdstation-wp/issue
 * [Configuração](#configuração)
 	* [Contact Form 7](#contact-form-7)
 	* [Gravity Forms](#gravity-forms)
+	* [Ninja Forms](#ninja-forms)
 * [Múltiplas Integrações](#múltiplas-integrações)
 * [Campos personalizados](#campos-personalizados)
 * [Mapeamento de campos](#mapeamento-de-campos)
@@ -34,6 +35,7 @@ O plugin **Integração RD Station** atualmente é compatível com os seguintes 
 * VIA API
 ** [Contact Form 7](#contact-form-7)
 ** [Gravity Forms](#gravity-forms)
+** [Ninja Forms](#ninja-forms)
 * VIA Script
 ** Inserção do script gerado pelo RD diretamente nas páginas.
 
@@ -80,6 +82,12 @@ Siga os mesmos passos usados no [Contact Form 7](#contact-form-7)
 
 Clique em **Integrar** e seu formulário escolhido está integrado ao RD Station.
 
+#### Ninja Forms
+
+Para a integração com o Gravity Forms funcionar, você precisa ter pelo menos um campo do tipo **e-mail** no seu formulário.
+
+Para fazer uma integração, edite o seu formulário `/admin.php?page=ninja-forms` no item **Ninja Forms** que apareceu no menu do seu painel. Após isso o processo para criar uma nova integração é acessar a opção **Emails & Ações** e cadastrar uma nova ação do tipo **Integração RD** informando o identificador do formulário e o token.
+
 #### Integração de scripts RD Station
 
 Para integração via script é necessário criar um script através do RD Station no menu Conta>Integrações>Integração de Formulário.
@@ -102,6 +110,8 @@ Para que os dados de um campo do formulário sejam enviados como campo personali
 Se você usa o Gravity Forms, deve ter percebido que quando um formulário é criado, os campos são gerados com nomes não amigáveis, por exemplo: input_1, input_2, input_3... Em consequencia disto, os leads chegam no RD Station de uma forma difícil de ser identificada.
 
 Na página de configuração das integrações, você pode definir o nome de cada campo do seu formulário. Você pode dizer, por exemplo, que o campo `input_1` vai se chamar `nome` e o `input_2` será cidade.
+
+Se você usa o Ninja Forms os campos também são gerados com nomes não amigáveis conforme o Gravity Forms, Para alterar o nome dos campos você deve editar a opção `CHAVE DO CAMPO` dentro do grupo `ADMINISTRAÇÃO`
 
 ## Como contribuir
 

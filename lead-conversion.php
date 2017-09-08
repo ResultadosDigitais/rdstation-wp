@@ -91,6 +91,17 @@ class LeadConversion {
     $this->form_data[ '_is' ] = 8; // Internal source
   }
 
+  /*
+  * Adicionado nova function pois foi a forma que consegui passar os parametros do ninja form;
+  * Não tenho conhecimento/tempo de verificar se get_post_meta funcionaria neste caso
+  */
+  public function nf_generate_static_fields($form_id, $token, $identifier, $origin_form){
+    $this->form_data[ 'token_rdstation' ] = $token;
+    $this->form_data[ 'identificador' ] = $identifier;
+    $this->form_data[ 'form_origem' ] = $origin_form;
+    $this->form_data[ '_is' ] = 8; // Internal source
+  }
+
   private function get_email_field($form_data) {
     $common_email_names = array(
       'email',

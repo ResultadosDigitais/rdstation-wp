@@ -39,6 +39,7 @@ require_once('settings/settings_page.php');
 require_once('integrations/woocommerce/setup.php');
 require_once('integrations/gravity_forms/setup.php');
 require_once('integrations/contact_form7/setup.php');
+require_once('integrations/ninja_forms/setup.php');
 
 add_action( 'admin_enqueue_scripts', 'enqueue_rd_admin_style' );
 function enqueue_rd_admin_style($hook) {
