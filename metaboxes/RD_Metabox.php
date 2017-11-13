@@ -2,7 +2,7 @@
 
 class RD_Metabox {
 
-	protected $text_domain = 'rdstation-wp';
+	static $text_domain = 'rdstation-wp';
 
 	public function __construct($plugin_prefix){
 		$this->plugin_prefix = $plugin_prefix;
