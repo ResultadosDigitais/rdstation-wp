@@ -2,6 +2,8 @@
 
 class RD_Metabox {
 
+	protected $text_domain = 'rdstation-wp';
+
 	public function __construct($plugin_prefix){
 		$this->plugin_prefix = $plugin_prefix;
 		add_action( 'add_meta_boxes', array($this, 'rd_create_meta_boxes' ) );
@@ -11,7 +13,7 @@ class RD_Metabox {
 	public function rd_create_meta_boxes(){
 		add_meta_box(
       'form_identifier_box',
-      'Identificador',
+      __('Identificador', $text_domain),
       array($this, 'form_identifier_box_content'),
       $this->plugin_prefix.'_integrations',
       'normal'
@@ -19,7 +21,7 @@ class RD_Metabox {
 
     add_meta_box(
       'token_rdstation_box',
-      'Token RD Station',
+      __('Token RD Station', $text_domain),
       array($this, 'token_rdstation_box_content'),
       $this->plugin_prefix.'_integrations',
       'normal'
@@ -27,7 +29,7 @@ class RD_Metabox {
 
 	  add_meta_box(
       'form_id_box',
-      'Qual formulário você deseja integrar ao RD Station?',
+      __('Qual formulário você deseja integrar ao RD Station?', $text_domain),
       array($this, 'form_id_box_content'),
       $this->plugin_prefix.'_integrations',
       'normal'
@@ -38,14 +40,17 @@ class RD_Metabox {
 	    $identifier = get_post_meta(get_the_ID(), 'form_identifier', true);
 	    $use_post_title = get_post_meta(get_the_ID(), 'use_post_title', true); ?>
 	    <input type="text" name="form_identifier" value="<?php echo $identifier; ?>">
-	    <span class="rd-integration-tips">Esse identificador irá lhe ajudar a saber o formulário de origem do lead.</span>
+	    <span class="rd-integration-tips">
+				<?php _e('Esse identificador irá ajudar a saber o formulário de origem do lead.', $text_domain) ?>
+			</span>
 	    <?php
 	}
 
 	public function token_rdstation_box_content(){
 	    $token = get_post_meta(get_the_ID(), 'token_rdstation', true); ?>
 	    <input type="text" name="token_rdstation" size="32" value="<?php echo $token ?>">
-	    <span class="rd-integration-tips">Não sabe seu token? <a href="https://www.rdstation.com.br/integracoes" target="blank">Clique aqui</a></span>
+	    <span class="rd-integration-tips">
+				<?php _e('Não sabe seu token?', $text_domain) ?> <a href="https://app.rdstation.com.br/integracoes" target="blank"><?php _e('Clique aqui', $text_domain) ?></a></span>
 	    <?php
 	}
 
