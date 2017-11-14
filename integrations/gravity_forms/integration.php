@@ -3,6 +3,8 @@
 class RDGravityFormsIntegration extends LeadConversion {
   public function send_lead_conversion($entry, $gform){
 
+    $form_data = array_filter($entry);
+
     foreach ($entry as $item => $value) {
       if (is_numeric($item)) $this->form_data[$value] = $item;
     }
