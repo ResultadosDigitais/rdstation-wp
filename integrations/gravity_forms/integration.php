@@ -2,13 +2,15 @@
 
 class RDGravityFormsIntegration extends LeadConversion {
 
+  const POST_TYPE        = 'rdgf_integrations';
   const INTEGRATION_NAME = 'Plugin Gravity Forms';
 
   public function send_lead_conversion($form_data, $gform) {
     // Remove all empty values from $form_data
     $form_data = array_filter($form_data);
     $this->build_form_data($form_data);
-    $integrations = parent::get_forms('rdgf_integrations');
+
+    $integrations = parent::get_forms(self::POST_TYPE);
 
     foreach ($integrations as $integration) {
       $fields = get_post_meta($integration->ID, 'gf_mapped_fields', true);
@@ -18,7 +20,7 @@ class RDGravityFormsIntegration extends LeadConversion {
 
       $this->field_mapping($fields);
 
-      parent::generate_static_fields($integration->ID, INTEGRATION_NAME);
+      parent::generate_static_fields($integration->ID, self::INTEGRATION_NAME);
       parent::conversion($this->form_data);
     }
   }
