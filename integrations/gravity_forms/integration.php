@@ -28,7 +28,7 @@ class RDGravityFormsIntegration extends LeadConversion {
   private function build_form_data($form_data) {
     $form_data = array_flip($form_data);
 
-    // Remove all fields that does not have an valid id
+    // Remove all fields that does not have a valid id
     $fields = array_filter($form_data, 'is_numeric');
 
     foreach ($fields as $value => $id) {
