@@ -55,6 +55,10 @@ https://github.com/ResultadosDigitais/rdstation-wp
 
 == Changelog ==
 
+= 3.2 =
+
+* Adição de chaves de internacionalização
+
 = 3.0 =
 
 * Integração com WooCommerce
