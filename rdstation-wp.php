@@ -4,11 +4,12 @@
 Plugin Name: 	Integração RD Station
 Plugin URI: 	https://wordpress.org/plugins/integracao-rdstation
 Description:  Integre seus formulários de contato do WordPress com o RD Station
-Version:      3.1.1
+Version:      3.2.2
 Author:       Resultados Digitais
 Author URI:   http://resultadosdigitais.com.br
 License:      GPL2
 License URI:  https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain:  rdstation-wp
 
 Integração RD Station is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

@@ -9,9 +9,9 @@
 		    $args = array('post_type' => 'wpcf7_contact_form', 'posts_per_page' => 100);
 		    $cf7Forms = get_posts( $args );
 
-		    if ( !$cf7Forms ) :
-		        echo '<p>Não encontramos nenhum formulário cadastrado, entre no seu plugin de formulário de contato ou <a href="admin.php?page=wpcf7-new">clique aqui para criar um novo.</a></p>';
-		    else : ?>
+		    if ( !$cf7Forms ) : ?>
+		    <p><?php _e('Não encontramos nenhum formulário cadastrado, entre no seu plugin de formulário de contato ou <a href="admin.php?page=wpcf7-new">clique aqui para criar um novo.</a>', $this->text_domain) ?></p>
+		    <?php else : ?>
 		        <select name="form_id">
 		            <option value=""></option>
 		                <?php

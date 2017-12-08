@@ -1,17 +1,20 @@
 <?php
 
 class RDSettingsSection {
+
+  private $text_domain = 'rdstation-wp';
+
   public function register_sections() {
     add_settings_section(
       'rd_general_settings_section',
-      'Configurações Gerais',
+      __('Configurações Gerais', $this->text_domain),
       null,
       'rdstation-settings-page'
     );
 
     add_settings_section(
       'rd_woocommerce_settings_section',
-      'Integração com WooCommerce',
+      __('Integração com WooCommerce', $this->text_domain),
       null,
       'rdstation-settings-page'
     );

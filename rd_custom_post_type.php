@@ -2,6 +2,8 @@
 
 class RDCustomPostType {
 
+  private $text_domain = 'rdstation-wp';
+
   public function __construct($slug) {
     $this->slug = $slug;
     require_once("metaboxes/$this->slug.php");
@@ -13,24 +15,24 @@ class RDCustomPostType {
 
 	public function rd_custom_post_type() {
 	    $labels = array(
-	        'name'                  => _x( 'Integrações '.$this->acronym, 'post_type_general_name' ),
-	        'singular_name'         => _x( 'Integração '.$this->acronym, 'post_type_singular_name' ),
-	        'add_new'               => _x( 'Criar integração', 'integration' ),
-	        'add_new_item'          => __( 'Criar Nova Integração' ),
-	        'edit_item'             => __( 'Editar Integração' ),
-	        'new_item'              => __( 'Nova Integração' ),
-	        'all_items'             => __( 'Todas Integrações' ),
-	        'view_item'             => __( 'Ver Integrações' ),
-	        'search_items'          => __( 'Procurar Integrações' ),
-	        'not_found'             => __( 'Nenhuma integração encontrada' ),
-	        'not_found_in_trash'    => __( 'Nenhuma integração encontrada na lixeira' ),
+	        'name'                  => __( 'Todas integrações: RD Station + ' . $this->acronym, $this->text_domain),
+	        'singular_name'         => __( 'Integração ' . $this->acronym, $this->text_domain ),
+	        'add_new'               => __( 'Criar integração', $this->text_domain ),
+	        'add_new_item'          => __( 'Criar Nova Integração', $this->text_domain ),
+	        'edit_item'             => __( 'Editar Integração', $this->text_domain ),
+	        'new_item'              => __( 'Nova Integração', $this->text_domain ),
+	        'all_items'             => __( 'Todas Integrações', $this->text_domain ),
+	        'view_item'             => __( 'Ver Integrações', $this->text_domain ),
+	        'search_items'          => __( 'Procurar Integrações', $this->text_domain ),
+	        'not_found'             => __( 'Nenhuma integração encontrada', $this->text_domain ),
+	        'not_found_in_trash'    => __( 'Nenhuma integração encontrada na lixeira', $this->text_domain ),
 	        'parent_item_colon'     => '',
 	        'menu_name'             => 'RD Station '.$this->acronym
 	    );
 
 	    $args = array(
 	        'labels'                => $labels,
-	        'description'           => 'Integração do '.$this->name.' com o RD Station',
+	        'description'           => __('Integração do ' . $this->name . ' com o RD Station', $this->text_domain),
 	        'public'                => true,
 	        'menu_position'         => 50,
 	        'supports'              => array( 'title' ),

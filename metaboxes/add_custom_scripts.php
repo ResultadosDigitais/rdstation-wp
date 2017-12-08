@@ -43,23 +43,55 @@ function rdscript_display_hook($content='') {
 //Displays a box that allows users to insert the scripts for the post or page
 function rdscript_metaboxs($post) {
   // Use nonce for verification
-  wp_nonce_field( plugin_basename( __FILE__ ), 'wpwox_noncename' );
-
+  wp_nonce_field( plugin_basename( __FILE__ ), 'rd_noncename' );
 	?>
-  <label for="rdscriptcontentinhead"><?php _e('&Aacute;rea para inser&ccedil;&atilde;o de scripts dentro da tag <strong>&lt;head&gt;</strong>','rdscript') ?></label><br />
-  <textarea style="width:100%; min-height: 50px;" id="rdscriptcontentinhead" name="rdscriptcontentinhead" /><?php echo html_entity_decode(get_post_meta($post->ID,'_rdscriptcontentinhead',true)); ?></textarea><br />
-  <label for="rdscriptcontentinfooter"><?php _e('&Aacute;rea para inser&ccedil;&atilde;o do script de integra&ccedil;&atilde;o de formul&aacute;rio <strong>antes do fechamento do &lt;/body&gt;</strong>','rdscript') ?></label><br />
-  <textarea style="width:100%; min-height: 150px;" id="rdscriptcontentinfooter" name="rdscriptcontentinfooter" /><?php echo html_entity_decode(get_post_meta($post->ID,'_rdscriptcontentinfooter',true)); ?></textarea>
+
+  <label for="rdscriptcontentinhead">
+    <?php _e('Área para inserção de scripts dentro da tag <strong><code>&lt;head&gt</code></strong>','rdstation-wp') ?>
+  </label>
+
+  <br/>
+
+  <textarea style="width:100%; min-height: 50px;" id="rdscriptcontentinhead" name="rdscriptcontentinhead" />
+    <?php echo html_entity_decode(get_post_meta($post->ID,'_rdscriptcontentinhead',true)); ?>
+  </textarea>
+
+  <br/>
+
+  <label for="rdscriptcontentinfooter">
+    <?php _e('Área para inserção do script de integração de formulário <strong>antes do fechamento do &lt;/body&gt;</strong>','rdstation-wp') ?>
+  </label>
+
+  <br/>
+
+  <textarea style="width:100%; min-height: 150px;" id="rdscriptcontentinfooter" name="rdscriptcontentinfooter" />
+    <?php echo html_entity_decode(get_post_meta($post->ID,'_rdscriptcontentinfooter',true)); ?>
+  </textarea>
 
   	<?php
 }
 
 //Add the meta box to post and page
-function wpwox_custom_script_meta_box() {
-	add_meta_box('wpwox_custom_script','Integra&ccedil;&atilde;o de scripts RD Station','rdscript_metaboxs','post','advanced');
-	add_meta_box('wpwox_custom_script','Integra&ccedil;&atilde;o de scripts RD Station','rdscript_metaboxs','page','advanced');
+function rd_custom_script_meta_box() {
+  $text_domain = 'rdstation-wp';
+
+	add_meta_box(
+    'rd_custom_script',
+    __('Adicione scripts do RD Station', $text_domain),
+    'rdscript_metaboxs',
+    'post',
+    'advanced'
+  );
+
+	add_meta_box(
+    'rd_custom_script',
+    __('Adicione scripts do RD Station', $text_domain),
+    'rdscript_metaboxs',
+    'page',
+    'advanced'
+  );
 }
-add_action('admin_menu', 'wpwox_custom_script_meta_box');
+add_action('admin_menu', 'rd_custom_script_meta_box');
 
 // When the post is updating, save the script.
 
@@ -72,7 +104,7 @@ function rdscript_updates($pID) {
   // verify this came from the our screen and with proper authorization,
   // because save_post can be triggered at other times
 
-  if ( !wp_verify_nonce( $_POST['wpwox_noncename'], plugin_basename( __FILE__ ) ) )
+  if ( !wp_verify_nonce( $_POST['rd_noncename'], plugin_basename( __FILE__ ) ) )
       return;
 
 
