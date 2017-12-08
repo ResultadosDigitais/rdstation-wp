@@ -2,7 +2,6 @@
 Contributors: Filipe Mateus do Nascimento
 Donate link: -
 Tags: integrations, forms, contact form, rd station, resultados digitais
-
 Requires at least: 4.6
 Tested up to: 4.9.1
 Stable tag: 4.7
