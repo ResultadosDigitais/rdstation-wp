@@ -73,6 +73,8 @@ function rdscript_metaboxs($post) {
 
 //Add the meta box to post and page
 function rd_custom_script_meta_box() {
+  $text_domain = 'rdstation-wp';
+
 	add_meta_box(
     'rd_custom_script',
     __('Adicione scripts do RD Station', $text_domain),

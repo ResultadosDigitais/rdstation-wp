@@ -15,24 +15,24 @@ class RDCustomPostType {
 
 	public function rd_custom_post_type() {
 	    $labels = array(
-	        'name'                  => __( 'Todas integrações: RD Station + ' . $this->acronym, $text_domain),
-	        'singular_name'         => __( 'Integração ' . $this->acronym, $text_domain ),
-	        'add_new'               => __( 'Criar integração', $text_domain ),
-	        'add_new_item'          => __( 'Criar Nova Integração', $text_domain ),
-	        'edit_item'             => __( 'Editar Integração', $text_domain ),
-	        'new_item'              => __( 'Nova Integração', $text_domain ),
-	        'all_items'             => __( 'Todas Integrações', $text_domain ),
-	        'view_item'             => __( 'Ver Integrações', $text_domain ),
-	        'search_items'          => __( 'Procurar Integrações', $text_domain ),
-	        'not_found'             => __( 'Nenhuma integração encontrada', $text_domain ),
-	        'not_found_in_trash'    => __( 'Nenhuma integração encontrada na lixeira', $text_domain ),
+	        'name'                  => __( 'Todas integrações: RD Station + ' . $this->acronym, $this->text_domain),
+	        'singular_name'         => __( 'Integração ' . $this->acronym, $this->text_domain ),
+	        'add_new'               => __( 'Criar integração', $this->text_domain ),
+	        'add_new_item'          => __( 'Criar Nova Integração', $this->text_domain ),
+	        'edit_item'             => __( 'Editar Integração', $this->text_domain ),
+	        'new_item'              => __( 'Nova Integração', $this->text_domain ),
+	        'all_items'             => __( 'Todas Integrações', $this->text_domain ),
+	        'view_item'             => __( 'Ver Integrações', $this->text_domain ),
+	        'search_items'          => __( 'Procurar Integrações', $this->text_domain ),
+	        'not_found'             => __( 'Nenhuma integração encontrada', $this->text_domain ),
+	        'not_found_in_trash'    => __( 'Nenhuma integração encontrada na lixeira', $this->text_domain ),
 	        'parent_item_colon'     => '',
 	        'menu_name'             => 'RD Station '.$this->acronym
 	    );
 
 	    $args = array(
 	        'labels'                => $labels,
-	        'description'           => __('Integração do ' . $this->name . ' com o RD Station', $text_domain),
+	        'description'           => __('Integração do ' . $this->name . ' com o RD Station', $this->text_domain),
 	        'public'                => true,
 	        'menu_position'         => 50,
 	        'supports'              => array( 'title' ),
