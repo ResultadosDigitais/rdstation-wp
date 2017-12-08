@@ -9,7 +9,7 @@
 	    $gForms = RGFormsModel::get_forms( null, 'title' );
 
 			if( !$gForms ) : ?>
-				<p><?php _e('Não encontramos nenhum formulário cadastrado, entre no seu plugin de formulário de contato ou <a href="admin.php?page=gf_new_form">clique aqui para criar um novo.</a>', $this->text_domain) ?></p>
+				<p><?php _e('Não encontramos nenhum formulário cadastrado, entre no seu plugin de formulário de contato ou <a href="admin.php?page=gf_new_form">clique aqui para criar um novo.</a>', 'rdstation-wp') ?></p>
 		  <?php else : ?>
 				<div class="rd-select-form">
 					<select name="form_id">
@@ -27,7 +27,7 @@
 
 				foreach ($gf_forms as $form) {
 					if ($form['id'] == $form_id) { ?>
-						<h4><?php _e('Como os campos abaixo irão se chamar no RD Station?', $this->text_domain) ?></h4>
+						<h4><?php _e('Como os campos abaixo irão se chamar no RD Station?', 'rdstation-wp') ?></h4>
 						<?php foreach ($form['fields'] as $field) {
 							if(!empty($form_map[$field['id']])){
 								$value = $form_map[$field['id']];
