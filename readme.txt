@@ -2,10 +2,9 @@
 Contributors: Filipe Mateus do Nascimento
 Donate link: -
 Tags: integrations, forms, contact form, rd station, resultados digitais
-
-Requires at least: 3.0
-Tested up to: 4.6
-Stable tag: 4.6
+Requires at least: 4.6
+Tested up to: 4.9.1
+Stable tag: 4.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 

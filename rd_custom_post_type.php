@@ -1,9 +1,6 @@
 <?php
 
 class RDCustomPostType {
-
-  private $text_domain = 'rdstation-wp';
-
   public function __construct($slug) {
     $this->slug = $slug;
     require_once("metaboxes/$this->slug.php");
@@ -15,24 +12,24 @@ class RDCustomPostType {
 
 	public function rd_custom_post_type() {
 	    $labels = array(
-	        'name'                  => __( 'Todas integrações: RD Station + ' . $this->acronym, $this->text_domain),
-	        'singular_name'         => __( 'Integração ' . $this->acronym, $this->text_domain ),
-	        'add_new'               => __( 'Criar integração', $this->text_domain ),
-	        'add_new_item'          => __( 'Criar Nova Integração', $this->text_domain ),
-	        'edit_item'             => __( 'Editar Integração', $this->text_domain ),
-	        'new_item'              => __( 'Nova Integração', $this->text_domain ),
-	        'all_items'             => __( 'Todas Integrações', $this->text_domain ),
-	        'view_item'             => __( 'Ver Integrações', $this->text_domain ),
-	        'search_items'          => __( 'Procurar Integrações', $this->text_domain ),
-	        'not_found'             => __( 'Nenhuma integração encontrada', $this->text_domain ),
-	        'not_found_in_trash'    => __( 'Nenhuma integração encontrada na lixeira', $this->text_domain ),
+	        'name'                  => __( 'Todas integrações: RD Station + ' . $this->acronym, 'integracao-rd-station'),
+	        'singular_name'         => __( 'Integração ' . $this->acronym, 'integracao-rd-station' ),
+	        'add_new'               => __( 'Criar integração', 'integracao-rd-station' ),
+	        'add_new_item'          => __( 'Criar Nova Integração', 'integracao-rd-station' ),
+	        'edit_item'             => __( 'Editar Integração', 'integracao-rd-station' ),
+	        'new_item'              => __( 'Nova Integração', 'integracao-rd-station' ),
+	        'all_items'             => __( 'Todas Integrações', 'integracao-rd-station' ),
+	        'view_item'             => __( 'Ver Integrações', 'integracao-rd-station' ),
+	        'search_items'          => __( 'Procurar Integrações', 'integracao-rd-station' ),
+	        'not_found'             => __( 'Nenhuma integração encontrada', 'integracao-rd-station' ),
+	        'not_found_in_trash'    => __( 'Nenhuma integração encontrada na lixeira', 'integracao-rd-station' ),
 	        'parent_item_colon'     => '',
 	        'menu_name'             => 'RD Station '.$this->acronym
 	    );
 
 	    $args = array(
 	        'labels'                => $labels,
-	        'description'           => __('Integração do ' . $this->name . ' com o RD Station', $this->text_domain),
+	        'description'           => __('Integração do ' . $this->name . ' com o RD Station', 'integracao-rd-station'),
 	        'public'                => true,
 	        'menu_position'         => 50,
 	        'supports'              => array( 'title' ),
