@@ -47,7 +47,7 @@ function rdscript_metaboxs($post) {
 	?>
 
   <label for="rdscriptcontentinhead">
-    <?php _e('Scripts added here will be added inside the <strong><code>&lt;head&gt</code> tag</strong>','integracao-rd-station') ?>
+    <?php _e('Scripts added here will be inserted inside the <strong><code>&lt;head&gt</code> tag</strong>','integracao-rd-station') ?>
   </label>
 
   <br/>
@@ -59,7 +59,7 @@ function rdscript_metaboxs($post) {
   <br/>
 
   <label for="rdscriptcontentinfooter">
-    <?php _e('Scripts added here will be added <strong>before closing &lt;/body&gt; tag</strong>','integracao-rd-station') ?>
+    <?php _e('Scripts added here will be inserted <strong>before closing &lt;/body&gt; tag</strong>','integracao-rd-station') ?>
   </label>
 
   <br/>
