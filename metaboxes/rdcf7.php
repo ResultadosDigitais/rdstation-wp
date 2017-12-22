@@ -10,7 +10,7 @@
 		    $cf7Forms = get_posts( $args );
 
 		    if ( !$cf7Forms ) : ?>
-		    <p><?php _e("There's no form created. <a href='admin.php?page=wpcf7-new'>Click here to create a new one.</a>", 'integracao-rd-station')?></p>
+		    <p><?php _e("No forms have been found. <a href='admin.php?page=wpcf7-new'>Click here to create a new one.</a>", 'integracao-rd-station')?></p>
 		    <?php else : ?>
 		        <select name="form_id">
 		            <option value=""></option>

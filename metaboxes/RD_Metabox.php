@@ -38,7 +38,7 @@ class RD_Metabox {
 	    $use_post_title = get_post_meta(get_the_ID(), 'use_post_title', true); ?>
 	    <input type="text" name="form_identifier" value="<?php echo $identifier; ?>">
 	    <span class="rd-integration-tips">
-				<?php _e('This identifier will help you identify the Lead source.', 'integracao-rd-station') ?>
+				<?php _e('This identifier will help you to identify the Lead source.', 'integracao-rd-station') ?>
 			</span>
 	    <?php
 	}
@@ -47,7 +47,7 @@ class RD_Metabox {
 	    $token = get_post_meta(get_the_ID(), 'token_rdstation', true); ?>
 	    <input type="text" name="token_rdstation" size="32" value="<?php echo $token ?>">
 	    <span class="rd-integration-tips">
-				<?php _e("Don't know your token?", 'integracao-rd-station') ?> <a href="https://app.rdstation.com.br/integracoes" target="blank"><?php _e('Click here', 'integracao-rd-station') ?></a></span>
+				<a href="https://app.rdstation.com.br/integracoes" target="blank"><?php _e('Click here to get your token', 'integracao-rd-station') ?></a></span>
 	    <?php
 	}
 
