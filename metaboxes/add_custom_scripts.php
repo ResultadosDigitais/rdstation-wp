@@ -47,7 +47,7 @@ function rdscript_metaboxs($post) {
 	?>
 
   <label for="rdscriptcontentinhead">
-    <?php _e('Área para inserção de scripts dentro da tag <strong><code>&lt;head&gt</code></strong>','integracao-rd-station') ?>
+    <?php _e('Scripts added here will be inserted inside the <strong><code>&lt;head&gt</code> tag</strong>','integracao-rd-station') ?>
   </label>
 
   <br/>
@@ -59,7 +59,7 @@ function rdscript_metaboxs($post) {
   <br/>
 
   <label for="rdscriptcontentinfooter">
-    <?php _e('Área para inserção do script de integração de formulário <strong>antes do fechamento do &lt;/body&gt;</strong>','integracao-rd-station') ?>
+    <?php _e('Scripts added here will be inserted <strong>before closing &lt;/body&gt; tag</strong>','integracao-rd-station') ?>
   </label>
 
   <br/>
@@ -75,7 +75,7 @@ function rdscript_metaboxs($post) {
 function rd_custom_script_meta_box() {
 	add_meta_box(
     'rd_custom_script',
-    __('Adicione scripts do RD Station', 'integracao-rd-station'),
+    __('Add RD Station scripts', 'integracao-rd-station'),
     'rdscript_metaboxs',
     'post',
     'advanced'
@@ -83,7 +83,7 @@ function rd_custom_script_meta_box() {
 
 	add_meta_box(
     'rd_custom_script',
-    __('Adicione scripts do RD Station', 'integracao-rd-station'),
+    __('Add RD Station scripts', 'integracao-rd-station'),
     'rdscript_metaboxs',
     'page',
     'advanced'

@@ -10,7 +10,7 @@ class RD_Metabox {
 	public function rd_create_meta_boxes(){
 		add_meta_box(
       'form_identifier_box',
-      __('Identificador', 'integracao-rd-station'),
+      __('Conversion identifier', 'integracao-rd-station'),
       array($this, 'form_identifier_box_content'),
       $this->plugin_prefix.'_integrations',
       'normal'
@@ -18,7 +18,7 @@ class RD_Metabox {
 
     add_meta_box(
       'token_rdstation_box',
-      __('Token RD Station', 'integracao-rd-station'),
+      __('RD Station Token', 'integracao-rd-station'),
       array($this, 'token_rdstation_box_content'),
       $this->plugin_prefix.'_integrations',
       'normal'
@@ -26,7 +26,7 @@ class RD_Metabox {
 
 	  add_meta_box(
       'form_id_box',
-      __('Qual formulário você deseja integrar ao RD Station?', 'integracao-rd-station'),
+      __('Select a form to integrate with RD Station', 'integracao-rd-station'),
       array($this, 'form_id_box_content'),
       $this->plugin_prefix.'_integrations',
       'normal'
@@ -38,7 +38,7 @@ class RD_Metabox {
 	    $use_post_title = get_post_meta(get_the_ID(), 'use_post_title', true); ?>
 	    <input type="text" name="form_identifier" value="<?php echo $identifier; ?>">
 	    <span class="rd-integration-tips">
-				<?php _e('Esse identificador irá ajudar a saber o formulário de origem do lead.', 'integracao-rd-station') ?>
+				<?php _e('This identifier will help you to identify the Lead source.', 'integracao-rd-station') ?>
 			</span>
 	    <?php
 	}
@@ -47,7 +47,7 @@ class RD_Metabox {
 	    $token = get_post_meta(get_the_ID(), 'token_rdstation', true); ?>
 	    <input type="text" name="token_rdstation" size="32" value="<?php echo $token ?>">
 	    <span class="rd-integration-tips">
-				<?php _e('Não sabe seu token?', 'integracao-rd-station') ?> <a href="https://app.rdstation.com.br/integracoes" target="blank"><?php _e('Clique aqui', 'integracao-rd-station') ?></a></span>
+				<a href="https://app.rdstation.com.br/integracoes" target="blank"><?php _e('Click here to get your token', 'integracao-rd-station') ?></a></span>
 	    <?php
 	}
 
