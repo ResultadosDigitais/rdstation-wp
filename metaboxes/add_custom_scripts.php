@@ -94,18 +94,10 @@ add_action('admin_menu', 'rd_custom_script_meta_box');
 // When the post is updating, save the script.
 
 function rdscript_updates($pID) {
+  if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) return;
 
-  // if the function is called by the WP autosave feature, nothing must be saved
-  if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE )
-    return;
-
-  // verify this came from the our screen and with proper authorization,
-  // because save_post can be triggered at other times
-
-  if ( !wp_verify_nonce( $_POST['rd_noncename'], plugin_basename( __FILE__ ) ) )
-      return;
-
-
+  $rd_noncename = isset($_POST['rd_noncename']) ? $_POST['rd_noncename'] : '';
+  if (!wp_verify_nonce($rd_noncename, plugin_basename( __FILE__ ))) return;
 
   if ( 'page' == $_POST['post_type'] )
   {
