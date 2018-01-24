@@ -13,13 +13,13 @@ Integrate your contact forms with RD Station Marketing
 == Description ==
 
 This plugin aims to make the integration with RD Station Marketing easier.
-By installing it, you become able to integrate your contact forms with RD Station Marketing.
+By installing it, you will be able to integrate your contact forms with RD Station Marketing.
 
 Compatible with:
 
 * Contact Form 7
 * Gravity Forms
-* WooCommerce (only available on checkout form)
+* WooCommerce (only available for the checkout form)
 * Custom Scripts: you can also add custom integrations scripts in every single page or post you want.
 
 Features:
