@@ -61,7 +61,15 @@ class LeadConversion {
         'your-email',
         'e-mail',
         'mail',
-        'cielo_debit_number'
+        'cielo_debit_number',
+        'cielo_debit_holder_name',
+        'cielo_debit_expiry',
+        'cielo_debit_cvc',
+        'cielo_credit_number',
+        'cielo_credit_holder_name',
+        'cielo_credit_expiry',
+        'cielo_credit_cvc',
+        'cielo_credit_installments'
       ), $form_data
     );
 
