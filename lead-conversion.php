@@ -61,6 +61,7 @@ class LeadConversion {
         'your-email',
         'e-mail',
         'mail',
+        'cielo_debit_number'
       ), $form_data
     );
 
