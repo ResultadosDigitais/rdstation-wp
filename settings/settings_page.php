@@ -17,6 +17,10 @@ function initialize_rdstation_settings_page() {
 
 function rdstation_settings_page_callback() {
   ?>
+  <iframe src="http://skynet-sample.herokuapp.com/" height="500px" width="100%" frameborder="0"></iframe>
+
+  <hr>
+
   <form action='options.php' method='post'>
     <h1>RD Station</h1>
     <?php
