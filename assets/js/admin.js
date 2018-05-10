@@ -23,10 +23,11 @@
 
   function persist(message) {
     jQuery(document).ready(function ($) {
+      var tokens = JSON.parse(message.data);
       var data = {
         action: 'rd-persist-tokens',
-        accessToken: message.data,
-        refreshToken: 'my-refresh-token-3801274037481472'
+        accessToken: tokens.accessToken,
+        refreshToken: tokens.refreshToken
       }
 
       jQuery.post(ajaxurl, data, function(response) {
