@@ -32,6 +32,7 @@ require_once('metaboxes/add_custom_scripts.php');
 require_once('lead-conversion.php');
 
 // plugin setup
+require_once('setup.php');
 require_once('initializers/contact_form7.php');
 require_once('initializers/gravity_forms.php');
 require_once('settings/settings_page.php');
@@ -40,31 +41,6 @@ require_once('settings/settings_page.php');
 require_once('integrations/woocommerce/setup.php');
 require_once('integrations/gravity_forms/setup.php');
 require_once('integrations/contact_form7/setup.php');
-
-register_activation_hook(__FILE__, array('RDSMActivationHooks', 'trigger'));
-register_uninstall_hook(__FILE__, array('RDSMUninstallHooks', 'trigger'));
-
-class RDSMActivationHooks {
-  public static function trigger() {
-    self::create_authentication_columns();
-  }
-
-  private static function create_authentication_columns() {
-    add_option('rdsm_refresh_token', '255', '', 'no');
-    add_option('rdsm_access_token', '255', '', 'no');
-  }
-}
-
-class RDSMUninstallHooks {
-  public function trigger() {
-    self::delete_authentication_columns();
-  }
-
-  private function delete_authentication_columns() {
-    delete_option('rdsm_refresh_token');
-    delete_option('rdsm_access_token');
-  }
-}
 
 add_action( 'admin_enqueue_scripts', 'enqueue_rd_admin_style' );
 function enqueue_rd_admin_style($hook) {
