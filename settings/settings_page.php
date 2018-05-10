@@ -25,7 +25,10 @@ function rdstation_settings_page_callback() {
     submit_button();
     ?>
   </form>
+
   <?php
+
+  rd_oauth_integration_structure();
 }
 
 function rd_public_token_callback() {
@@ -46,10 +49,16 @@ function rd_woocommerce_conversion_identifier_callback() {
   <?php
 }
 
-function rd_oauth_integration_callback() {
+function rd_oauth_integration_structure() {
   ?>
 
-  <button type="button" class="button button-primary rd-oauth-integration">Integre agora</button>
+  <section class="rd-oauth-integration-section">
+    <h1 class="rd-oauth-integration-title">RDStation Marketing Integration</h1>
+
+    <p>Integre agora com o RDStation Marketing para ter acesso a uma varidade de funcionalidades</p>
+
+    <button type="button" class="button button-primary rd-oauth-integration">Integre agora</button>
+  </section>
 
   <?php
 }
