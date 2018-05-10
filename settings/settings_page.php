@@ -45,3 +45,11 @@ function rd_woocommerce_conversion_identifier_callback() {
   <input type='text' name='rd_settings[rd_woocommerce_conversion_identifier]' size="32" value='<?php echo $options['rd_woocommerce_conversion_identifier']; ?>'>
   <?php
 }
+
+function rd_oauth_integration_callback() {
+  ?>
+
+  <button type="button" class="button button-primary rd-oauth-integration">Integre agora</button>
+
+  <?php
+}

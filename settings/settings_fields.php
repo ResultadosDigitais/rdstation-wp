@@ -25,5 +25,13 @@ class RDSettingsFields {
       'rdstation-settings-page',
       'rd_woocommerce_settings_section'
     );
+
+      add_settings_field(
+      'rd_oauth_integration',
+      __('Integre agora', 'integracao-rd-station'),
+      'rd_oauth_integration_callback',
+      'rdstation-settings-page',
+      'rd_oauth_integration_settings_section'
+    );
   }
 }

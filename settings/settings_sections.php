@@ -15,5 +15,12 @@ class RDSettingsSection {
       null,
       'rdstation-settings-page'
     );
+
+    add_settings_section(
+      'rd_oauth_integration_settings_section',
+      __('RDStation Marketing Integration', 'integracao-rd-station'),
+      null,
+      'rdstation-settings-page'
+    );
   }
 }
