@@ -6,6 +6,17 @@ add_action('wp_head', 'rdscript_display_hook_header');
 add_action('wp_footer', 'rdscript_display_hook_footer');
 
 
+add_action( 'wp_ajax_rd_persist_tokens', 'rd_persist_tokens' );
+function rd_persist_tokens() {
+	global $wpdb; // this is how you get access to the database
+  
+  $data = json_decode($_POST['data'], true);
+
+  echo $data;
+
+	wp_die(); // this is required to terminate immediately and return a proper response
+}
+
 // execute the scripts on page and single posts
 function rdscript_display_hook_header() {
   global $post;

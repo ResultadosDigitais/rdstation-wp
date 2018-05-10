@@ -3,13 +3,13 @@
   var CLIENT_ID = '12051950-222a-4513-bf02-638364768099';
   var REDIRECT_URL = 'https://skynet-sample.herokuapp.com/auth/callback';
 
-  function oauth_integration(message) {
+  function oauthIntegration(message) {
     if (message.origin === SERVER_ORIGIN) {
-      console.log(message);
+      persist(message);
     }
   }
 
-  function bind_button() {
+  function bindButton() {
     var button = document.querySelector('.rd-oauth-integration');
 
     button.addEventListener('click', function () {
@@ -17,13 +17,26 @@
     })
   }
 
-  function listen_for_message() {
-    window.addEventListener('message', oauth_integration);
+  function listenForMessage() {
+    window.addEventListener('message', oauthIntegration);
+  }
+
+  function persist(message) {
+    jQuery(document).ready(function ($) {
+      var data = {
+        'action': 'rd_persist_tokens',
+        'data': message.data
+      };
+
+      jQuery.post(ajaxurl, data, function (response) {
+        console.log(response);
+      });
+    });
   }
 
   function init() {
-    bind_button();
-    listen_for_message();
+    bindButton();
+    listenForMessage();
   }
 
   window.addEventListener('load', init);
