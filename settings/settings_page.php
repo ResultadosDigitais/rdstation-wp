@@ -26,9 +26,21 @@ function rdstation_settings_page_callback() {
     ?>
   </form>
 
-  <?php
+  <section class="rd-oauth-integration-section">
+    <h1 class="rd-oauth-integration-title">
+      <?php echo __('RD Station Marketing Integration', 'integracao-rd-station') ?>
+    </h1>
 
-  rd_oauth_integration_structure();
+    <p>
+      <?php echo __('Allow WordPress to integrate with your RD Station account.', 'integracao-rd-station') ?>
+    </p>
+
+    <button type="button" class="button button-primary rd-oauth-integration">
+      <?php echo __('Integrate now', 'integracao-rd-station') ?>
+    </button>
+  </section>
+
+  <?php
 }
 
 function rd_public_token_callback() {
@@ -46,19 +58,5 @@ function rd_private_token_callback() {
 function rd_woocommerce_conversion_identifier_callback() {
   $options = get_option( 'rd_settings' ); ?>
   <input type='text' name='rd_settings[rd_woocommerce_conversion_identifier]' size="32" value='<?php echo $options['rd_woocommerce_conversion_identifier']; ?>'>
-  <?php
-}
-
-function rd_oauth_integration_structure() {
-  ?>
-
-  <section class="rd-oauth-integration-section">
-    <h1 class="rd-oauth-integration-title">RDStation Marketing Integration</h1>
-
-    <p>Integre agora com o RDStation Marketing para ter acesso a uma varidade de funcionalidades</p>
-
-    <button type="button" class="button button-primary rd-oauth-integration">Integre agora</button>
-  </section>
-
   <?php
 }
