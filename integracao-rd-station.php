@@ -41,6 +41,9 @@ require_once('integrations/woocommerce/setup.php');
 require_once('integrations/gravity_forms/setup.php');
 require_once('integrations/contact_form7/setup.php');
 
+// Authorization tokens persistence
+require_once('includes/authorization/tokens.php');
+
 add_action( 'admin_enqueue_scripts', 'enqueue_rd_admin_style' );
 function enqueue_rd_admin_style($hook) {
   $screen = get_current_screen();
@@ -51,24 +54,4 @@ function enqueue_rd_admin_style($hook) {
 
   if ( 'post.php' != $hook ) return;
   wp_enqueue_style( 'rd_admin_style', plugin_dir_url( __FILE__ ) . 'assets/styles/admin.css' );
-}
-
-add_action( 'wp_ajax_rd-persist-tokens', 'update_tokens' );
-add_action( 'wp_ajax_nopriv_rd-persist-tokens', 'update_tokens' );
-
-function update_tokens() {
-    $access_token_value = $_POST['accessToken'];
-    $refresh_token_value = $_POST['refreshToken'];
-
-    update_option('rdsm_access_token', $access_token_value);
-    update_option('rdsm_refresh_token', $refresh_token_value);
-
-    die(
-      json_encode(
-        array(
-          'success' => true,
-          'message' => 'Database updated successfully.'
-        )
-      )
-    );
 }

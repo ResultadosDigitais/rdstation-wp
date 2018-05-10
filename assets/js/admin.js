@@ -30,9 +30,7 @@
         refreshToken: tokens.refreshToken
       }
 
-      jQuery.post(ajaxurl, data, function(response) {
-        console.log(response);
-      });
+      jQuery.post(ajaxurl, data);
     });
   }
 
