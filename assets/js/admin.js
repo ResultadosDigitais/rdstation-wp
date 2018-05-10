@@ -24,11 +24,12 @@
   function persist(message) {
     jQuery(document).ready(function ($) {
       var data = {
-        'action': 'rd_persist_tokens',
-        'data': message.data
-      };
+        action: 'rd-persist-tokens',
+        accessToken: message.data,
+        refreshToken: 'my-refresh-token-3801274037481472'
+      }
 
-      jQuery.post(ajaxurl, data, function (response) {
+      jQuery.post(ajaxurl, data, function(response) {
         console.log(response);
       });
     });
@@ -40,4 +41,4 @@
   }
 
   window.addEventListener('load', init);
-})(); 
+})();

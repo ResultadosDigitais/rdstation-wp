@@ -52,3 +52,23 @@ function enqueue_rd_admin_style($hook) {
   if ( 'post.php' != $hook ) return;
   wp_enqueue_style( 'rd_admin_style', plugin_dir_url( __FILE__ ) . 'assets/styles/admin.css' );
 }
+
+add_action( 'wp_ajax_rd-persist-tokens', 'update_tokens' );
+add_action( 'wp_ajax_nopriv_rd-persist-tokens', 'update_tokens' );
+
+function update_tokens() {
+    $access_token_value = $_POST['accessToken'];
+    $refresh_token_value = $_POST['refreshToken'];
+
+    update_option('rdsm_access_token', $access_token_value);
+    update_option('rdsm_refresh_token', $refresh_token_value);
+
+    die(
+      json_encode(
+        array(
+          'success' => true,
+          'message' => 'Database updated successfully.'
+        )
+      )
+    );
+}
