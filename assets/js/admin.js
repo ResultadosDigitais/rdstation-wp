@@ -2,10 +2,15 @@
   var SERVER_ORIGIN = 'https://je5ypxtc6b.execute-api.us-west-2.amazonaws.com';
   var CLIENT_ID = '12051950-222a-4513-bf02-638364768099';
   var REDIRECT_URL = 'https://je5ypxtc6b.execute-api.us-west-2.amazonaws.com/dev/oauth/callback';
+  var newWindowInstance = null;
 
   function oauthIntegration(message) {
     if (message.origin === SERVER_ORIGIN) {
       persist(message);
+
+      if (newWindowInstance) {
+        newWindowInstance.close();
+      }
     }
   }
 
@@ -13,7 +18,7 @@
     var button = document.querySelector('.rd-oauth-integration');
 
     button.addEventListener('click', function () {
-      window.open('https://app-staging.rdstation.com.br/api/platform/auth?client_id=' + CLIENT_ID + '&;redirect_url=' + REDIRECT_URL, '_blank')
+      newWindowInstance = window.open('https://app-staging.rdstation.com.br/api/platform/auth?client_id=' + CLIENT_ID + '&;redirect_url=' + REDIRECT_URL, '_blank')
     })
   }
 
