@@ -42,7 +42,7 @@ require_once('integrations/gravity_forms/setup.php');
 require_once('integrations/contact_form7/setup.php');
 
 // Authorization tokens persistence
-require_once('includes/authorization/tokens.php');
+require_once('includes/authorization/rdsm_tokens.php');
 
 add_action( 'admin_enqueue_scripts', 'enqueue_rd_admin_style' );
 function enqueue_rd_admin_style($hook) {

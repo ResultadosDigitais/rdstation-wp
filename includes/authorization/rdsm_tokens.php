@@ -1,6 +1,6 @@
 <?php
 
-class Tokens {
+class RDSMTokens {
   public static function save() {
     $access_token_value = $_POST['accessToken'];
     $refresh_token_value = $_POST['refreshToken'];
@@ -12,4 +12,4 @@ class Tokens {
   }
 }
 
-add_action('wp_ajax_rd-persist-tokens',  array('Tokens','save'));
+add_action('wp_ajax_rd-persist-tokens',  array('RDSMTokens','save'));
