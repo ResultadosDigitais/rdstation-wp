@@ -17,28 +17,30 @@ function initialize_rdstation_settings_page() {
 
 function rdstation_settings_page_callback() {
   ?>
+
   <form action='options.php' method='post'>
-    <h1>RD Station</h1>
+    <h1>
+      <?php echo __('RD Station Settings', 'integracao-rd-station') ?>
+    </h1>
+
+    <section class="rd-oauth-integration-section">
+      <?php if (get_option('rdsm_access_token')) :?>
+          <?php echo __('Already connected to your RD Station account', 'integracao-rd-station') ?>
+          <span class="dashicons dashicons-yes"></span>
+      <?php else: ?>
+        <button type="button" class="button button-warning rd-oauth-integration">
+          <?php echo __('Connect to RD Station', 'integracao-rd-station') ?>
+        </button>
+      <?php endif; ?>
+    </section>
+
+
     <?php
     settings_fields( 'rdstation-settings-page' );
     do_settings_sections( 'rdstation-settings-page' );
     submit_button();
     ?>
   </form>
-
-  <section class="rd-oauth-integration-section">
-    <h1 class="rd-oauth-integration-title">
-      <?php echo __('RD Station Marketing Integration', 'integracao-rd-station') ?>
-    </h1>
-
-    <p>
-      <?php echo __('Allow WordPress to integrate with your RD Station account.', 'integracao-rd-station') ?>
-    </p>
-
-    <button type="button" class="button button-primary rd-oauth-integration">
-      <?php echo __('Integrate now', 'integracao-rd-station') ?>
-    </button>
-  </section>
 
   <?php
 }
