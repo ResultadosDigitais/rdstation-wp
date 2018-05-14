@@ -1,7 +1,7 @@
 (function RDStationIntegration() {
-  var SERVER_ORIGIN = 'https://skynet-sample.herokuapp.com';
+  var SERVER_ORIGIN = 'https://je5ypxtc6b.execute-api.us-west-2.amazonaws.com';
   var CLIENT_ID = '12051950-222a-4513-bf02-638364768099';
-  var REDIRECT_URL = 'https://skynet-sample.herokuapp.com/auth/callback';
+  var REDIRECT_URL = 'https://je5ypxtc6b.execute-api.us-west-2.amazonaws.com/dev/oauth/callback';
 
   function oauthIntegration(message) {
     if (message.origin === SERVER_ORIGIN) {
