@@ -32,7 +32,6 @@ require_once('metaboxes/add_custom_scripts.php');
 require_once('lead-conversion.php');
 
 // plugin setup
-require_once('setup.php');
 require_once('initializers/contact_form7.php');
 require_once('initializers/gravity_forms.php');
 require_once('settings/settings_page.php');
@@ -44,6 +43,12 @@ require_once('integrations/contact_form7/setup.php');
 
 // Authorization tokens persistence
 require_once('includes/authorization/rdsm_tokens.php');
+
+// Setup hooks
+require_once("includes/hooks/rdsm_uninstall_hook.php");
+$rdsm_uninstall_hook = new RDSMUninstallHook;
+register_deactivation_hook(__FILE__, array($rdsm_uninstall_hook, 'trigger'));
+
 
 add_action( 'admin_enqueue_scripts', 'enqueue_rd_admin_style' );
 function enqueue_rd_admin_style($hook) {
