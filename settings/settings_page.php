@@ -24,7 +24,7 @@ function rdstation_settings_page_callback() {
     <?php echo __('RD Station Settings', 'integracao-rd-station') ?>
   </h1>
 
-  <?php update_option('rdsm_access_token', null);
+  <?php
   if (get_option('rdsm_access_token')) :?>
       <?php echo __('Already connected to your RD Station account', 'integracao-rd-station') ?>
       <span class="dashicons dashicons-yes"></span>

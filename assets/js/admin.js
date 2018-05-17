@@ -2,6 +2,7 @@
   var SERVER_ORIGIN = 'https://je5ypxtc6b.execute-api.us-west-2.amazonaws.com';
   var CLIENT_ID = '12051950-222a-4513-bf02-638364768099';
   var REDIRECT_URL = 'https://je5ypxtc6b.execute-api.us-west-2.amazonaws.com/dev/oauth/callback';
+  var LEGACY_TOKENS_ENDPOINT = 'https://app-staging.rdstation.com.br/api/v2/legacy/tokens';
   var newWindowInstance = null;
 
   function oauthIntegration(message) {
@@ -35,7 +36,26 @@
         refreshToken: tokens.refreshToken
       }
 
-      jQuery.post(ajaxurl, data);
+      jQuery.ajax({
+        method: "POST",
+        url: ajaxurl,
+        data: data,
+        success: function() {
+          persistLegacyTokens(tokens.accessToken)
+        }
+      });
+    });
+  }
+
+  function persistLegacyTokens(accessToken) {
+    jQuery.ajax({
+      url: LEGACY_TOKENS_ENDPOINT,
+      headers: { 'Authorization':'Bearer ' + accessToken },
+      method: 'GET',
+      success: function(data){
+        data.action = 'rd-persist-legacy-tokens';
+        jQuery.post(ajaxurl, data);
+      }
     });
   }
 
