@@ -17,10 +17,11 @@
 
   function bindButton() {
     var button = document.querySelector('.rd-oauth-integration');
-
-    button.addEventListener('click', function () {
-      newWindowInstance = window.open('https://app-staging.rdstation.com.br/api/platform/auth?client_id=' + CLIENT_ID + '&;redirect_url=' + REDIRECT_URL, '_blank')
-    })
+    if (button) {
+      button.addEventListener('click', function () {
+        newWindowInstance = window.open('https://app-staging.rdstation.com.br/api/platform/auth?client_id=' + CLIENT_ID + '&;redirect_url=' + REDIRECT_URL, '_blank')
+      })
+    }
   }
 
   function listenForMessage() {
