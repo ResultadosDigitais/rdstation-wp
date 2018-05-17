@@ -46,8 +46,12 @@ require_once('includes/authorization/rdsm_tokens.php');
 
 // Setup hooks
 require_once("includes/hooks/rdsm_uninstall_hooks.php");
+require_once("includes/hooks/rdsm_tracking_code_hooks.php");
+
 $rdsm_uninstall_hook = new RDSMUninstallHooks;
 register_deactivation_hook(__FILE__, array($rdsm_uninstall_hook, 'trigger'));
+
+// Tracking Code
 
 
 add_action( 'admin_enqueue_scripts', 'enqueue_rd_admin_style' );
