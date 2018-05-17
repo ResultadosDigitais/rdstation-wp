@@ -45,8 +45,8 @@ require_once('integrations/contact_form7/setup.php');
 require_once('includes/authorization/rdsm_tokens.php');
 
 // Setup hooks
-require_once("includes/hooks/rdsm_uninstall_hook.php");
-$rdsm_uninstall_hook = new RDSMUninstallHook;
+require_once("includes/hooks/rdsm_uninstall_hooks.php");
+$rdsm_uninstall_hook = new RDSMUninstallHooks;
 register_deactivation_hook(__FILE__, array($rdsm_uninstall_hook, 'trigger'));
 
 

@@ -1,6 +1,6 @@
 <?php
 
-class RDSMUninstallHook {
+class RDSMUninstallHooks {
   public function trigger() {
     self::delete_authentication_columns();
   }
