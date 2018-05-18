@@ -29,8 +29,8 @@ class LeadConversion {
     'cielo_credit_installments'
   );
 
-  public function add_callback($trigger, $callback) {
-    add_filter($trigger, array($this, $callback), 10, 2);
+  public function add_callback($trigger, $integration) {
+    add_filter($trigger, array($integration, 'send_lead_conversion'), 10, 2);
   }
 
   private function can_save_lead($data){
