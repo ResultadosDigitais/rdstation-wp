@@ -1,6 +1,7 @@
 <?php
 
 class LeadConversion {
+  const INTERNAL_SOURCE = 8;
 
   public $form_data = array();
 
@@ -28,7 +29,6 @@ class LeadConversion {
   }
 
   public function conversion( $form_data ) {
-    $api_url = "http://app.rdstation.com.br/api/1.3/conversions";
     $form_data["email"] = $this->get_email_field($form_data);
 
     if ( isset($_COOKIE["__utmz"]) && empty($form_data["c_utmz"]) ) {
@@ -80,7 +80,7 @@ class LeadConversion {
         'body' => json_encode($form_data)
       );
 
-      $response = wp_remote_post( $api_url, $args );
+      $response = wp_remote_post(CONVERSIONS_ENDPOINT, $args);
 
       if (is_wp_error($response)){
         unset($form_data);
@@ -97,7 +97,7 @@ class LeadConversion {
     $this->form_data['token_rdstation'] = get_option('rdsm_public_token');
     $this->form_data['identificador'] = get_post_meta($form_id, 'form_identifier', true);
     $this->form_data['form_origem'] = $origin_form;
-    $this->form_data['_is'] = 8; // Internal source
+    $this->form_data['_is'] = self::INTERNAL_SOURCE;
   }
 
   private function get_email_field($form_data) {
