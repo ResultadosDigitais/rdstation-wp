@@ -11,9 +11,7 @@ class RDSMSettingsAPI {
   } 
 
   public function tracking_code() {
-    $response = $this->$api_client->get('/settings/tracking_code'); 
-
-    return wp_remote_retrieve_body($response);
+    return $this->$api_client->get('/settings/tracking_code');
   }
 }
 

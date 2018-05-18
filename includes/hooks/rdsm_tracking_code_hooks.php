@@ -25,9 +25,10 @@ class RDSMTrackingCodeHooks {
 
   public function persist_tracking_code() {
     $response = $this->$api->tracking_code();
+    $body = wp_remote_retrieve_body($response);
 
-    if (!empty($response->{ 'path' })) {
-      update_option( 'rdsm_tracking_code', $response->{ 'path' } );
+    if (!empty($body->{ 'path' })) {
+      update_option( 'rdsm_tracking_code', $body->{ 'path' } );
       
       return true;
     }
