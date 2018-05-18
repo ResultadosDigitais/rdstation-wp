@@ -54,11 +54,9 @@ require_once("includes/hooks/rdsm_tracking_code_hooks.php");
 $rdsm_uninstall_hook = new RDSMUninstallHooks;
 register_deactivation_hook(__FILE__, array($rdsm_uninstall_hook, 'trigger'));
 
-$rdsm_tracking_code_hook = new RDSMTrackingCodeHooks(new RDSMSettingsAPI);
-$rdsm_tracking_code_hook->enable();
-
 // Tracking Code
-
+$rdsm_tracking_code_hook = new RDSMTrackingCodeHooks(new RDSMSettingsAPI);
+$rdsm_tracking_code_hook->handle();
 
 add_action( 'admin_enqueue_scripts', 'enqueue_rd_admin_style' );
 function enqueue_rd_admin_style($hook) {
