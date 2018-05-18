@@ -43,11 +43,11 @@ class LeadConversion {
     return strlen( $data['token_rdstation'] ) == 32 ? true : false;
   }
 
-  public function build_payload($form_data) {
+  public function build_payload($integration_id, $form_data) {
     $default_payload = array(
       '_is'             => self::INTERNAL_SOURCE,
       'form_origem'     => $form_data['origin_form'],
-      'identificador'   => get_post_meta($form_id, 'form_identifier', true),
+      'identificador'   => get_post_meta($integration_id, 'form_identifier', true),
       'token_rdstation' => get_option('rdsm_public_token'),
       'email'           => $this->get_email_field($form_data),
       'c_utmz'          => $this->set_utmz($form_data),

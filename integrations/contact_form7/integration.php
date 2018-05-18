@@ -13,8 +13,8 @@ class RDSMIntegrations {
 class RDContactForm7Integration {
   const PLUGIN_DESCRIPTION = 'Plugin Contact Form 7';
 
-  public $form_data = array(
-    'form_origem' => self::PLUGIN_DESCRIPTION
+  public $default_payload = array(
+    'origin_form' => self::PLUGIN_DESCRIPTION
   );
 
   public function __construct($conversion) {
@@ -29,9 +29,9 @@ class RDContactForm7Integration {
       $form_id = get_post_meta($integration->ID, 'form_id', true);
       if ($form_id == $submitted_form->id() ) {
         $submission = WPCF7_Submission::get_instance();
-        if ($submission) $this->form_data = $submission->get_posted_data();
-        $payload = $conversion->build_payload($integration->ID, $this->form_data);
-        $conversion->send($payload);
+        if ($submission) $this->form_data = merge_array($submission->get_posted_data(), $default_payload);
+        $payload = $this->conversion->build_payload($integration->ID, $this->form_data);
+        $this->conversion->send($payload);
       }
     }
   }
