@@ -5,7 +5,7 @@ class RDSMAPI {
 
   function __construct($server_url) {
     $this->$api_url = $server_url;
-  } 
+  }
 
   function get($resource, $args) {
     return wp_remote_get(sprintf("%s%s", $this->$api_url, $resource), $args);
@@ -15,4 +15,3 @@ class RDSMAPI {
     return wp_remote_post(sprintf("%s%s", $this->$api_url, $resource), $args);
   }
 }
-
