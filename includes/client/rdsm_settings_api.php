@@ -1,19 +1,19 @@
 <?php
 
-require_once('rdsm_api');
+require_once('rdsm_api.php');
 
-class RDSSettingsMAPI {
+class RDSMSettingsAPI {
   private $api_client;
 
-  function __construct($api_client) {
+  function __construct() {
     $api = new RDSMAPI("https://staging.rdstation.com.br/api/v2");
     $this->$api_client = $api;
   } 
 
-  function tracking_code() {
-    $respone = $this->$api_client->get('/settings/tracking_code'); 
+  public function tracking_code() {
+    $response = $this->$api_client->get('/settings/tracking_code'); 
 
-    var_dump($reponse);
+    return wp_remote_retrieve_body($response);
   }
 }
 

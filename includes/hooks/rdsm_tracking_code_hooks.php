@@ -1,6 +1,6 @@
 <?php
 
-class RDSMTrackingCodelHooks {
+class RDSMTrackingCodeHooks {
   private $api;
 
   public function __construct($api_client) {
@@ -8,22 +8,28 @@ class RDSMTrackingCodelHooks {
   }
 
   public function enable() {
-    $this->api->tracking_code();
-
-    add_action('wp_footer', 'tracking_code_hook');
+    add_action('wp_footer', array($this, 'tracking_code_hook'));
   }
 
   public function disable() {
-    remove_action('wp_fotter', 'tracking_code_hook');
+    remove_action('wp_fotter', array($this, 'tracking_code_hook'));
   }
 
-  private function tracking_code_hook() {
+  public function tracking_code_hook() {
     $options = get_option( 'rdsm_tag_manager_settings' );
   
     if (is_home() || is_single() || is_page()) {
-        echo html_entity_decode($options['tracking_code']);
+        echo html_entity_decode($this->tracking_code_script_tag($options[ 'tracking_code' ]));
     }
   
-     return;
+    return; 
+  }
+
+  public function persist_tracking_code() {
+    $response = $this->$api->tracking_code();
+  }
+
+  private function tracking_code_script_tag($path) {
+    return sprintf("<script type='text/javascript'async src='%s'></script>", $path)
   }
 }
