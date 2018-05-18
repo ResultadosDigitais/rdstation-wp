@@ -2,5 +2,5 @@
 
 require_once('integration.php');
 
-$contact_form7_integration = new RDContactForm7Integration();
-$contact_form7_integration->add_callback('wpcf7_mail_sent', 'send_lead_conversion');
+$cf7_integration = new RDContactForm7Integration();
+$cf7_integration->add_callback('wpcf7_mail_sent', array($cf7_integration, 'send_lead_conversion'));

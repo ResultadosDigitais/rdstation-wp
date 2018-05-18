@@ -2,20 +2,35 @@
 
 class LeadConversion {
   const INTERNAL_SOURCE = 8;
-
-  public $form_data = array();
+  const IGNORED_FIELDS = array(
+    'password',
+    'password_confirmation',
+    'senha',
+    'confirme_senha',
+    'captcha',
+    'G-recaptcha-response',
+    '_wpcf7',
+    '_wpcf7_version',
+    '_wpcf7_unit_tag',
+    '_wpnonce',
+    '_wpcf7_is_ajax_call',
+    '_wpcf7_locale',
+    'your-email',
+    'e-mail',
+    'mail',
+    'cielo_debit_number',
+    'cielo_debit_holder_name',
+    'cielo_debit_expiry',
+    'cielo_debit_cvc',
+    'cielo_credit_number',
+    'cielo_credit_holder_name',
+    'cielo_credit_expiry',
+    'cielo_credit_cvc',
+    'cielo_credit_installments'
+  );
 
   public function add_callback($trigger, $callback) {
     add_filter($trigger, array($this, $callback), 10, 2);
-  }
-
-  private function ignore_fields(array $fields, $data){
-    foreach ($data as $field => $value) {
-      if(in_array($field, $fields)){
-        unset($data[$field]);
-      }
-    }
-    return $data;
   }
 
   private function can_save_lead($data){
@@ -28,76 +43,70 @@ class LeadConversion {
     return strlen( $data['token_rdstation'] ) == 32 ? true : false;
   }
 
-  public function conversion( $form_data ) {
-    $form_data["email"] = $this->get_email_field($form_data);
-
-    if ( isset($_COOKIE["__utmz"]) && empty($form_data["c_utmz"]) ) {
-      $form_data["c_utmz"] = $_COOKIE["__utmz"];
-    }
-
-    if ( isset($_COOKIE["__trf_src"]) && empty($form_data["traffic_source"]) ) {
-      $form_data["traffic_source"] = $_COOKIE["__trf_src"];
-    }
-
-    if (empty($form_data["client_id"]) && !empty($_COOKIE["rdtrk"])) {
-      preg_match("/(\w{8}-\w{4}-4\w{3}-\w{4}-\w{12})/",$_COOKIE["rdtrk"],$Matches);
-      $form_data["client_id"] = $Matches[0];
-    }
-
-    $form_data = $this->ignore_fields(
-      array(
-        'password',
-        'password_confirmation',
-        'senha',
-        'confirme_senha',
-        'captcha',
-        'G-recaptcha-response',
-        '_wpcf7',
-        '_wpcf7_version',
-        '_wpcf7_unit_tag',
-        '_wpnonce',
-        '_wpcf7_is_ajax_call',
-        '_wpcf7_locale',
-        'your-email',
-        'e-mail',
-        'mail',
-        'cielo_debit_number',
-        'cielo_debit_holder_name',
-        'cielo_debit_expiry',
-        'cielo_debit_cvc',
-        'cielo_credit_number',
-        'cielo_credit_holder_name',
-        'cielo_credit_expiry',
-        'cielo_credit_cvc',
-        'cielo_credit_installments'
-      ), $form_data
+  public function build_payload($form_data) {
+    $default_payload = array(
+      '_is'             => self::INTERNAL_SOURCE,
+      'form_origem'     => $form_data['origin_form'],
+      'identificador'   => get_post_meta($form_id, 'form_identifier', true),
+      'token_rdstation' => get_option('rdsm_public_token'),
+      'email'           => $this->get_email_field($form_data),
+      'c_utmz'          => $this->set_utmz($form_data),
+      'traffic_source'  => $this->set_traffic_source($form_data),
+      'client_id'       => $this->set_client_id($form_data)
     );
 
+    $payload = array_merge($form_data, $default_payload);
+    $payload = $this->filter_fields(self::IGNORED_FIELDS, $form_data);
+    return $payload;
+  }
+
+  public function send($form_data) {
     if($this->can_save_lead($form_data)){
       $args = array(
         'timeout' => 10,
         'headers' => array('Content-Type' => 'application/json'),
         'body' => json_encode($form_data)
       );
+      $conversions_api = new RDSMConversionsAPI;
+      $response = $conversions_api->create_lead_conversion($args));
 
-      $response = wp_remote_post(CONVERSIONS_ENDPOINT, $args);
-
-      if (is_wp_error($response)){
+      if (is_wp_error($response)) {
         unset($form_data);
       }
+    }
+  }
+
+  private function filter_fields(array $ignored_fields, $form_fields){
+    foreach ($form_fields as $field => $value) {
+      if(in_array($field, $ignored_fields)){
+        unset($form_fields[$field]);
+      }
+    }
+    return $form_fields;
+  }
+
+  private function set_utmz($form_data) {
+    if (isset($form_data["c_utmz"])) return $form_data["c_utmz"];
+    if (isset($_COOKIE["__utmz"])) return $_COOKIE["__utmz"];
+  }
+
+  private function set_traffic_source($form_data) {
+    if (isset($form_data["traffic_source"])) return $form_data["traffic_source"];
+    if (isset($_COOKIE["__trf_src"])) return $_COOKIE["__trf_src"];
+  }
+
+  private function set_client_id($form_data) {
+    if (isset($form_data["client_id"])) return $form_data["client_id"];
+    if (isset($_COOKIE["rdtrk"])) {
+      $client_id_format = "/(\w{8}-\w{4}-4\w{3}-\w{4}-\w{12})/"
+      preg_match($client_id_format, $_COOKIE["rdtrk"], $matches);
+      return $matches[0];
     }
   }
 
   protected function get_forms($post_type){
     $args = array( 'post_type' => $post_type, 'posts_per_page' => 100 );
     return $forms = get_posts($args);
-  }
-
-  public function generate_static_fields($form_id, $origin_form){
-    $this->form_data['token_rdstation'] = get_option('rdsm_public_token');
-    $this->form_data['identificador'] = get_post_meta($form_id, 'form_identifier', true);
-    $this->form_data['form_origem'] = $origin_form;
-    $this->form_data['_is'] = self::INTERNAL_SOURCE;
   }
 
   private function get_email_field($form_data) {
