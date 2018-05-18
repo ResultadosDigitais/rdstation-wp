@@ -41,9 +41,6 @@ require_once('integrations/woocommerce/setup.php');
 require_once('integrations/gravity_forms/setup.php');
 require_once('integrations/contact_form7/setup.php');
 
-// API client
-require_once('includes/client/rdsm_settings_api.php');
-
 // Authorization tokens persistence
 require_once('includes/authorization/rdsm_tokens.php');
 
@@ -55,7 +52,7 @@ $rdsm_uninstall_hook = new RDSMUninstallHooks;
 register_deactivation_hook(__FILE__, array($rdsm_uninstall_hook, 'trigger'));
 
 // Tracking Code
-$rdsm_tracking_code_hook = new RDSMTrackingCodeHooks(new RDSMSettingsAPI);
+$rdsm_tracking_code_hook = new RDSMTrackingCodeHooks;
 $rdsm_tracking_code_hook->handle();
 
 add_action( 'admin_enqueue_scripts', 'enqueue_rd_admin_style' );

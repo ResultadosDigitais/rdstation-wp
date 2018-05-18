@@ -1,10 +1,15 @@
 <?php
+require_once(__DIR__ . '/../client/rdsm_settings_api.php');
 
 class RDSMTrackingCodeHooks {
   private $api;
   private $options;
 
-  public function __construct($api_client) {
+  public function __construct($api_client = null) {
+    if (!isset($api_client)) {
+      $api_client = new RDSMSettingsAPI;
+    }
+
     $this->$api = $api_client;
     $this->$options = get_option( 'rdsm_general_settings' );
   }
