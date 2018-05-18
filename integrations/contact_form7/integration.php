@@ -14,7 +14,7 @@ class RDContactForm7Integration {
   const PLUGIN_DESCRIPTION = 'Plugin Contact Form 7';
 
   public $form_data = array(
-    'form_origem' => PLUGIN_DESCRIPTION
+    'form_origem' => self::PLUGIN_DESCRIPTION
   );
 
   public function __construct($conversion) {

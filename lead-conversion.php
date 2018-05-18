@@ -68,7 +68,7 @@ class LeadConversion {
         'body' => json_encode($form_data)
       );
       $conversions_api = new RDSMConversionsAPI;
-      $response = $conversions_api->create_lead_conversion($args));
+      $response = $conversions_api->create_lead_conversion($args);
 
       if (is_wp_error($response)) {
         unset($form_data);
@@ -98,7 +98,7 @@ class LeadConversion {
   private function set_client_id($form_data) {
     if (isset($form_data["client_id"])) return $form_data["client_id"];
     if (isset($_COOKIE["rdtrk"])) {
-      $client_id_format = "/(\w{8}-\w{4}-4\w{3}-\w{4}-\w{12})/"
+      $client_id_format = "/(\w{8}-\w{4}-4\w{3}-\w{4}-\w{12})/";
       preg_match($client_id_format, $_COOKIE["rdtrk"], $matches);
       return $matches[0];
     }
