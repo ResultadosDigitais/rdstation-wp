@@ -10,9 +10,7 @@ class RDSMAPI {
   } 
 
   function get($resource, $args = array()) {
-    if ($args['headers']) {
-      $args = $this->authorization_header($args);
-    }
+    $args['headers'] = $this->authorization_header($args);
 
     return wp_remote_get(sprintf("%s%s", $this->api_url, $resource), $args);
   }
@@ -26,9 +24,12 @@ class RDSMAPI {
   }
 
   private function authorization_header($args) {
-    $authorization_header = array('Authorization' => sprintf('Bearer %', $this->user_access_token));
-    $args['headers'] = array_merge($args['headers'], $authorization_header);
+    $authorization_header = array('Authorization' => 'Bearer ' . $this->user_access_token);
 
-    return $args;
+    if ($args['headers']) {
+      return array_merge($args['headers'], $authorization_header);
+    }
+
+    return $authorization_header;
   }
 }

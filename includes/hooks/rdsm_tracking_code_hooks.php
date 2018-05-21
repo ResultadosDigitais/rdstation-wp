@@ -3,7 +3,6 @@ require_once(__DIR__ . '/../client/rdsm_settings_api.php');
 
 class RDSMTrackingCodeHooks {
   private $api;
-  private $options;
 
   public function __construct($api_client = null) {
     if (!isset($api_client)) {
@@ -11,32 +10,40 @@ class RDSMTrackingCodeHooks {
     }
 
     $this->api = $api_client;
-    $this->options = get_option( 'rdsm_general_settings' );
   }
 
   public function handle() {
-    $this->persist_tracking_code();
+    $options = get_option( 'rdsm_general_settings' );
 
-    if (!!$this->options[ 'enable_tracking_code' ]) {
+    if (!!$options[ 'enable_tracking_code' ]) {
       $this->enable();
     }
   }
 
   public function tracking_code_hook() {
-    if (is_home() || is_single() || is_page()) {
-        echo html_entity_decode($this->tracking_code_script_tag($this->options[ 'rdsm_tracking_code' ]));
+    $tracking_code = get_option( 'rdsm_tracking_code' );
+
+    if (!empty($tracking_code)) {
+      if (is_home() || is_single() || is_page()) {
+        echo html_entity_decode($this->tracking_code_script_tag($tracking_code));
+        
+        return true;
+      }
+
+      return false;
     }
   
-    return; 
+    return false; 
   }
 
   public function persist_tracking_code() {
     $response = $this->api->tracking_code();
     $body = wp_remote_retrieve_body($response);
+    $parsed_body = json_decode($body);
 
-    if (!empty($body->{ 'path' })) {
-      update_option( 'rdsm_tracking_code', $body->{ 'path' } );
-      
+    if ($parsed_body->path) {
+      update_option( 'rdsm_tracking_code', $parsed_body->path );
+
       return true;
     }
 
@@ -52,6 +59,6 @@ class RDSMTrackingCodeHooks {
   }
 
   private function tracking_code_script_tag($path) {
-    return sprintf("<script type='text/javascript' async src='%s'></script>", $path);
+    return "<script type='text/javascript' async src='". $path ."'></script>";
   }
 }
