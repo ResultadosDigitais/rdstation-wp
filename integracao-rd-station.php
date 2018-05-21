@@ -31,7 +31,6 @@ require_once('config.php');
 require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 require_once('rd_custom_post_type.php');
 require_once('metaboxes/add_custom_scripts.php');
-require_once('lead-conversion.php');
 
 // plugin setup
 require_once('initializers/contact_form7.php');
@@ -41,18 +40,18 @@ require_once('settings/settings_page.php');
 // setup available integrations
 require_once('integrations/woocommerce/setup.php');
 require_once('integrations/gravity_forms/setup.php');
-require_once('integrations/contact_form7/setup.php');
+require_once(SRC_DIR . '/integrations/contact_form7/setup.php');
 
 // API client
-require_once('includes/client/rdsm_settings_api.php');
+require_once(SRC_DIR . '/client/rdsm_settings_api.php');
 
 // Authorization tokens persistence
-require_once('includes/authorization/rdsm_tokens.php');
-require_once('includes/client/rdsm_legacy_tokens.php');
+require_once(SRC_DIR . '/authorization/rdsm_tokens.php');
+require_once(SRC_DIR . '/client/rdsm_legacy_tokens.php');
 
 // Setup hooks
-require_once("includes/hooks/rdsm_uninstall_hooks.php");
-require_once("includes/hooks/rdsm_tracking_code_hooks.php");
+require_once(SRC_DIR . "/hooks/rdsm_uninstall_hooks.php");
+require_once(SRC_DIR . "/hooks/rdsm_tracking_code_hooks.php");
 
 $rdsm_uninstall_hook = new RDSMUninstallHooks;
 register_deactivation_hook(__FILE__, array($rdsm_uninstall_hook, 'trigger'));

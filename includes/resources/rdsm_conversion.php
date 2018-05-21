@@ -1,8 +1,6 @@
 <?php
 
-require_once('includes/client/rdsm_conversions_api.php');
-
-class LeadConversion {
+class RDSMConversion {
   const INTERNAL_SOURCE = 8;
   const IGNORED_FIELDS = array(
     'password',
@@ -32,10 +30,6 @@ class LeadConversion {
   );
 
   public $args;
-
-  public function add_callback($trigger, $integration) {
-    add_filter($trigger, array($integration, 'send_lead_conversion'), 10, 2);
-  }
 
   private function valid_payload($data){
     $required_fields = array('email', 'token_rdstation', 'identificador');
@@ -91,11 +85,6 @@ class LeadConversion {
     }
   }
 
-  protected function get_forms($post_type){
-    $args = array( 'post_type' => $post_type, 'posts_per_page' => 100 );
-    return $forms = get_posts($args);
-  }
-
   private function get_email_field($form_data) {
     $common_email_names = array(
       'email',
@@ -105,6 +94,9 @@ class LeadConversion {
     );
 
     $match_keys = array_intersect_key(array_flip($common_email_names), $form_data);
+
+    // Checks if a common email field is present, otherwise it will try to match
+    // any field with the "mail" substring
     if (count($match_keys) > 0) {
        return $form_data[key($match_keys)];
     } else {

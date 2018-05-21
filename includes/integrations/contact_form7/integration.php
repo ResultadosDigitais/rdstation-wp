@@ -1,9 +1,10 @@
 <?php
 
-require_once(PLUGIN_DIR . 'includes/integrations/rdsm_integrations.php');
+require_once(SRC_DIR . '/integrations/rdsm_integrations.php');
 
 class RDContactForm7Integration {
   const PLUGIN_DESCRIPTION = 'Plugin Contact Form 7';
+  const MAIL_SENT_TRIGGER = 'wpcf7_mail_sent';
 
   public $default_payload = array(
     'form_origem' => self::PLUGIN_DESCRIPTION
@@ -11,13 +12,18 @@ class RDContactForm7Integration {
 
   private $submitted_form_id;
 
-  public function __construct($conversion) {
-    $this->conversion = $conversion;
+  public function __construct($resource, $api_client) {
+    $this->resource = $resource;
+    $this->api_client = $api_client;
+    $this->integrations = new RDSMIntegrations;
   }
 
-  public function send_lead_conversion($submitted_form){
-    $integrations = new RDSMIntegrations;
-    $cf7_integrations = $integrations->get('rdcf7_integrations');
+  public function setup() {
+    add_filter(self::MAIL_SENT_TRIGGER, array($this, 'send_resource_to_rd'), 10, 2);
+  }
+
+  public function send_resource_to_rd($submitted_form){
+    $cf7_integrations = $this->integrations->get('rdcf7_integrations');
     $this->submitted_form_id = $submitted_form->id();
 
     $current_form_integrations = array_filter(
@@ -28,9 +34,8 @@ class RDContactForm7Integration {
     $this->build_default_payload();
 
     foreach ($current_form_integrations as $integration) {
-      $this->conversion->build_payload($integration->ID, $this->form_data);
-      $conversions_api = new RDSMConversionsAPI($this->conversion);
-      $conversions_api->create_lead_conversion();
+      $this->resource->build_payload($integration->ID, $this->form_data);
+      $this->api_client->post($this->resource);
     }
   }
 

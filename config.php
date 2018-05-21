@@ -1,6 +1,6 @@
 <?php
 
-define('PLUGIN_DIR', dirname(__FILE__).'/');
+define('SRC_DIR', dirname(__FILE__) . '/includes');
 
 // URIs
 define('LEGACY_API_URL', 'http://app.rdstation.com.br/api/1.3');
