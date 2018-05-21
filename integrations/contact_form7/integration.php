@@ -1,14 +1,6 @@
 <?php
 
-class RDSMIntegrations {
-  public function get($type){
-    $args = array(
-      'post_type' => $type,
-      'posts_per_page' => 100
-    );
-    return get_posts($args);
-  }
-}
+require_once(PLUGIN_DIR . 'includes/integrations/rdsm_integrations.php');
 
 class RDContactForm7Integration {
   const PLUGIN_DESCRIPTION = 'Plugin Contact Form 7';
@@ -36,9 +28,9 @@ class RDContactForm7Integration {
     $this->build_default_payload();
 
     foreach ($current_form_integrations as $integration) {
-      $form_id = get_post_meta($integration->ID, 'form_id', true);
-      $payload = $this->conversion->build_payload($integration->ID, $this->form_data);
-      $this->conversion->send($payload);
+      $this->conversion->build_payload($integration->ID, $this->form_data);
+      $conversions_api = new RDSMConversionsAPI($this->conversion);
+      $conversions_api->create_lead_conversion();
     }
   }
 
@@ -49,6 +41,7 @@ class RDContactForm7Integration {
   }
 
   private function integrations_from_current_form($integration) {
-    return $integration->ID == $this->submitted_form_id;
+    $integrated_form_id = get_post_meta($integration->ID, 'form_id', true);
+    return $integrated_form_id == $this->submitted_form_id;
   }
 }

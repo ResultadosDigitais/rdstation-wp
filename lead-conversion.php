@@ -31,11 +31,13 @@ class LeadConversion {
     'cielo_credit_installments'
   );
 
+  public $args;
+
   public function add_callback($trigger, $integration) {
     add_filter($trigger, array($integration, 'send_lead_conversion'), 10, 2);
   }
 
-  private function can_save_lead($data){
+  private function valid_payload($data){
     $required_fields = array('email', 'token_rdstation', 'identificador');
     foreach ($required_fields as $field) {
       if(empty($data[$field]) || is_null($data[$field])){
@@ -59,22 +61,6 @@ class LeadConversion {
     $payload = array_merge($form_data, $default_payload);
     $payload = $this->filter_fields(self::IGNORED_FIELDS, $payload);
     return $payload;
-  }
-
-  public function send($form_data) {
-    if($this->can_save_lead($form_data)){
-      $args = array(
-        'timeout' => 10,
-        'headers' => array('Content-Type' => 'application/json'),
-        'body' => json_encode($form_data)
-      );
-      $conversions_api = new RDSMConversionsAPI;
-      $response = $conversions_api->create_lead_conversion($args);
-
-      if (is_wp_error($response)) {
-        unset($form_data);
-      }
-    }
   }
 
   private function filter_fields(array $ignored_fields, $form_fields){
