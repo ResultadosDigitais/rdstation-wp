@@ -1,5 +1,7 @@
 <?php
 
+require_once('includes/client/rdsm_conversions_api.php');
+
 class LeadConversion {
   const INTERNAL_SOURCE = 8;
   const IGNORED_FIELDS = array(
@@ -46,7 +48,6 @@ class LeadConversion {
   public function build_payload($integration_id, $form_data) {
     $default_payload = array(
       '_is'             => self::INTERNAL_SOURCE,
-      'form_origem'     => $form_data['origin_form'],
       'identificador'   => get_post_meta($integration_id, 'form_identifier', true),
       'token_rdstation' => get_option('rdsm_public_token'),
       'email'           => $this->get_email_field($form_data),
@@ -56,7 +57,7 @@ class LeadConversion {
     );
 
     $payload = array_merge($form_data, $default_payload);
-    $payload = $this->filter_fields(self::IGNORED_FIELDS, $form_data);
+    $payload = $this->filter_fields(self::IGNORED_FIELDS, $payload);
     return $payload;
   }
 
