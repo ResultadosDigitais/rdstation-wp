@@ -42,16 +42,31 @@ require_once('integrations/gravity_forms/setup.php');
 require_once('integrations/contact_form7/setup.php');
 
 // Authorization tokens persistence
+require_once('includes/client/rdsm_settings_api.php');
 require_once('includes/authorization/rdsm_tokens.php');
 
 // Setup hooks
 require_once("includes/hooks/rdsm_uninstall_hooks.php");
+require_once("includes/hooks/rdsm_admin_tracking_code_hooks.php");
 require_once("includes/hooks/rdsm_tracking_code_hooks.php");
 
 $rdsm_uninstall_hook = new RDSMUninstallHooks;
 register_deactivation_hook(__FILE__, array($rdsm_uninstall_hook, 'trigger'));
 
 // Tracking Code
+add_action( 'admin_init',  'rdsm_tracking_code_hooks' );
+function rdsm_tracking_code_hooks() {
+  $access_token = get_option('rdsm_access_token');
+  
+  if (isset($access_token)) {
+    $api_instance = new RDSMSettingsAPI($access_token);
+
+    $rdsm_admin_tracking_code_hook = new RDSMAdminTrackingCodeHooks($api_instance);
+    $rdsm_admin_tracking_code_hook->active_hooks();
+  }
+}
+
+// Enable on site script
 $rdsm_tracking_code_hook = new RDSMTrackingCodeHooks;
 $rdsm_tracking_code_hook->handle();
 

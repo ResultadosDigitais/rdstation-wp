@@ -5,8 +5,8 @@ require_once('rdsm_api.php');
 class RDSMSettingsAPI {
   private $api_client;
 
-  function __construct() {
-    $api = new RDSMAPI("https://app.rdstation.com.br/api/v2", get_option('rdsm_access_token'));
+  function __construct($user_access_token) {
+    $api = new RDSMAPI("https://app.rdstation.com.br/api/v2", $user_access_token);
     $this->api_client = $api;
   } 
 
