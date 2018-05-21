@@ -13,15 +13,17 @@ class RDSMTrackingCodeHooks {
   }
 
   public function handle() {
-    $options = get_option( 'rdsm_general_settings' );
+    $options = get_option('rdsm_general_settings');
+    
+    if (is_array($options) && !!$options['enable_tracking_code']) {
+      add_action('update_option_rdsm_enable_tracking_code_html', array($this, 'persist_tracking_code'));
 
-    if (!!$options[ 'enable_tracking_code' ]) {
       $this->enable();
     }
   }
 
   public function tracking_code_hook() {
-    $tracking_code = get_option( 'rdsm_tracking_code' );
+    $tracking_code = get_option('rdsm_tracking_code');
 
     if (!empty($tracking_code)) {
       if (is_home() || is_single() || is_page()) {
@@ -42,7 +44,7 @@ class RDSMTrackingCodeHooks {
     $parsed_body = json_decode($body);
 
     if ($parsed_body->path) {
-      update_option( 'rdsm_tracking_code', $parsed_body->path );
+      update_option('rdsm_tracking_code', $parsed_body->path);
 
       return true;
     }
