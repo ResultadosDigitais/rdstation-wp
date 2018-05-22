@@ -37,13 +37,13 @@ class RDContactForm7Integration {
 
     foreach ($current_form_integrations as $integration) {
       $this->apply_identifier($integration->ID);
-      $this->resource->build_payload($integration->ID, $this->form_data);
+      $this->resource->build_payload($this->form_data);
       $this->api_client->post($this->resource);
     }
   }
 
-  private apply_identifier($integration_id) {
-    $this->form_data['identificador'] =  get_post_meta($integration_id, 'form_identifier', true);
+  private function apply_identifier($integration_id) {
+    $this->form_data['identificador'] = get_post_meta($integration_id, 'form_identifier', true);
   }
 
   private function build_default_payload() {

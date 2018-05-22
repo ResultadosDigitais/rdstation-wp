@@ -41,16 +41,13 @@ class RDSMGravityFormsIntegration {
 
       $this->apply_identifier($integration->ID);
 
-      $this->resource->build_payload(
-        $integration->ID,
-        array_merge($this->form_data, $this->default_payload)
-      );
+      $this->resource->build_payload(array_merge($this->form_data, $this->default_payload));
 
       $this->api_client->post($this->resource);
     }
   }
 
-  private apply_identifier($integration_id) {
+  private function apply_identifier($integration_id) {
     $this->form_data['identificador'] =  get_post_meta($integration_id, 'form_identifier', true);
   }
 
