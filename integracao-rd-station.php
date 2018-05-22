@@ -50,11 +50,14 @@ require_once(SRC_DIR . '/authorization/rdsm_tokens.php');
 require_once(SRC_DIR . '/client/rdsm_legacy_tokens.php');
 
 // Setup hooks
-require_once(SRC_DIR . "/hooks/rdsm_uninstall_hooks.php");
+require_once(SRC_DIR . "/hooks/rdsm_activation_hooks.php");
 require_once(SRC_DIR . "/hooks/rdsm_tracking_code_hooks.php");
+require_once(SRC_DIR . "/hooks/rdsm_uninstall_hooks.php");
 
-$rdsm_uninstall_hook = new RDSMUninstallHooks;
-register_deactivation_hook(__FILE__, array($rdsm_uninstall_hook, 'trigger'));
+$rdsm_activation_hook = new RDSMActivationHooks;
+register_activation_hook(__FILE__, array($rdsm_activation_hook, 'trigger'));
+
+register_uninstall_hook(__FILE__, array('RDSMUninstallHooks', 'trigger'));
 
 $rdsm_tracking_code_hook = new RDSMTrackingCodeHooks(new RDSMSettingsAPI);
 $rdsm_tracking_code_hook->enable();

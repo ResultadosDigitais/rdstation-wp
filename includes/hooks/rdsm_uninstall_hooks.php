@@ -1,8 +1,8 @@
 <?php
 
 class RDSMUninstallHooks {
-  public function trigger() {
-    self::delete_authentication_columns();
+  public static function trigger() {
+    $this->delete_authentication_columns();
   }
 
   private function delete_authentication_columns() {
