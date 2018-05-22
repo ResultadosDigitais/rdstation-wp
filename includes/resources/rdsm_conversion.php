@@ -44,7 +44,6 @@ class RDSMConversion {
   public function build_payload($form_data) {
     $default_payload = array(
       '_is'             => self::INTERNAL_SOURCE,
-      'token_rdstation' => get_option('rdsm_public_token'),
       'email'           => $this->get_email_field($form_data),
       'c_utmz'          => $this->set_utmz($form_data),
       'traffic_source'  => $this->set_traffic_source($form_data),

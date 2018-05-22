@@ -27,12 +27,10 @@ class RDSMWoocommerceIntegration {
   }
 
   private function build_conversion_data($data) {
-    // cuidar pra não quebrar quem já usa essa option hoje
-    // $options = get_option('rd_settings');
-    // $conversion_data['identificador'] = $options['rd_woocommerce_conversion_identifier'];
     $options = get_option('rdsm_woocommerce_settings');
     $conversion_data = $this->map_rd_fields($data);
     $conversion_data['identificador'] = $options['conversion_identifier'];
+    $conversion_data['token_rdstation'] = get_option('rdsm_public_token');
     return $conversion_data;
   }
 

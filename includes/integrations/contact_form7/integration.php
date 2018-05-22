@@ -36,14 +36,17 @@ class RDContactForm7Integration {
     $this->build_default_payload();
 
     foreach ($current_form_integrations as $integration) {
-      $this->apply_identifier($integration->ID);
+      $this->apply_integration_fields($integration->ID);
       $this->resource->build_payload($this->form_data);
       $this->api_client->post($this->resource);
     }
   }
 
-  private function apply_identifier($integration_id) {
-    $this->form_data['identificador'] = get_post_meta($integration_id, 'form_identifier', true);
+  private function apply_integration_fields($integration_id) {
+    $this->form_data['identificador'] =  get_post_meta($integration_id, 'form_identifier', true);
+
+    $public_token = get_post_meta($integration_id, 'token_rdstation', true);
+    $this->form_data['token_rdstation'] = $public_token || get_option('rdsm_public_token');
   }
 
   private function build_default_payload() {

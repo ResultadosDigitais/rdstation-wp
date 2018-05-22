@@ -39,7 +39,7 @@ class RDSMGravityFormsIntegration {
       $field_mapping = get_post_meta($integration->ID, 'gf_mapped_fields', true);
       $this->apply_field_mapping($field_mapping);
 
-      $this->apply_identifier($integration->ID);
+      $this->apply_integration_fields($integration->ID);
 
       $this->resource->build_payload(array_merge($this->form_data, $this->default_payload));
 
@@ -47,8 +47,11 @@ class RDSMGravityFormsIntegration {
     }
   }
 
-  private function apply_identifier($integration_id) {
+  private function apply_integration_fields($integration_id) {
     $this->form_data['identificador'] =  get_post_meta($integration_id, 'form_identifier', true);
+
+    $public_token = get_post_meta($integration_id, 'token_rdstation', true);
+    $this->form_data['token_rdstation'] = $public_token || get_option('rdsm_public_token');
   }
 
   private function build_default_payload($submitted_fields) {
