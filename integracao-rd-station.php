@@ -52,6 +52,7 @@ require_once(SRC_DIR . '/client/rdsm_legacy_tokens.php');
 // Setup hooks
 require_once(SRC_DIR . "/hooks/rdsm_activation_hooks.php");
 require_once(SRC_DIR . "/hooks/rdsm_tracking_code_hooks.php");
+require_once(SRC_DIR . "includes/hooks/rdsm_admin_tracking_code_hooks.php");
 require_once(SRC_DIR . "/hooks/rdsm_uninstall_hooks.php");
 
 $rdsm_activation_hook = new RDSMActivationHooks;
@@ -59,8 +60,22 @@ register_activation_hook(__FILE__, array($rdsm_activation_hook, 'trigger'));
 
 register_uninstall_hook(__FILE__, array('RDSMUninstallHooks', 'trigger'));
 
-$rdsm_tracking_code_hook = new RDSMTrackingCodeHooks(new RDSMSettingsAPI);
-$rdsm_tracking_code_hook->enable();
+// Tracking Code
+add_action( 'admin_init',  'rdsm_tracking_code_hooks' );
+function rdsm_tracking_code_hooks() {
+  $access_token = get_option('rdsm_access_token');
+
+  if (isset($access_token)) {
+    $api_instance = new RDSMSettingsAPI($access_token);
+
+    $rdsm_admin_tracking_code_hook = new RDSMAdminTrackingCodeHooks($api_instance);
+    $rdsm_admin_tracking_code_hook->active_hooks();
+  }
+}
+
+// Enable on site script
+$rdsm_tracking_code_hook = new RDSMTrackingCodeHooks;
+$rdsm_tracking_code_hook->handle();
 
 add_action( 'admin_enqueue_scripts', 'enqueue_rd_admin_style' );
 function enqueue_rd_admin_style($hook) {

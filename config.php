@@ -9,3 +9,4 @@ define('API_URL', 'https://api.rd.services');
 // Endpoints
 define('CONVERSIONS', '/conversions');
 define('CONTACTS', '/platform/contacts/');
+define('TRACKING_CODE', '/settings/tracking_code');
