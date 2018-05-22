@@ -25,7 +25,7 @@ function rdstation_settings_page_callback() {
   </h1>
 
   <?php
-  if (get_option('rdsm_access_token')) :?>
+  if (get_option('rdsm_access_token')) : ?>
       <?php echo __('Already connected to your RD Station account', 'integracao-rd-station') ?>
       <span class="dashicons dashicons-yes"></span>
   <?php else: ?>
@@ -71,9 +71,22 @@ function rdsm_woocommerce_conversion_identifier_html() {
 
 function rdsm_enable_tracking_code_html() {
   $options = get_option( 'rdsm_general_settings' );
-  $current_value = isset($options['enable_tracking_code']) ? $options['enable_tracking_code'] : '' ?>
-  <input type="checkbox" name="rdsm_general_settings[enable_tracking_code]" value="1" <?php checked($current_value, 1); ?> >
-<?php }
+  $access_token = get_option('rdsm_access_token');
+  $current_value = isset($options['enable_tracking_code']) ? $options['enable_tracking_code'] : '';
+
+  if (empty($access_token)) { ?>
+    <label class="checkbox-switch">
+      <input type="checkbox" name="rdsm_general_settings[enable_tracking_code]" value="1" <?php checked($current_value, 1); ?> disabled>
+      <span class="checkbox-slider checkbox-slider-round"></span>
+    </label>
+    <small><?php echo __('You need to connect to RD Station before enable this feature.', 'integracao-rd-station')  ?></small>
+  <?php } else { ?>
+    <label class="checkbox-switch">
+      <input type="checkbox" name="rdsm_general_settings[enable_tracking_code]" value="1" <?php checked($current_value, 1); ?>>
+      <span class="checkbox-slider checkbox-slider-round"></span>
+    </label>
+  <?php }
+}
 
 
 // HELPER METHODS
