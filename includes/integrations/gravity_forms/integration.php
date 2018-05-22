@@ -51,7 +51,7 @@ class RDSMGravityFormsIntegration {
     $this->form_data['identificador'] =  get_post_meta($integration_id, 'form_identifier', true);
 
     $public_token = get_post_meta($integration_id, 'token_rdstation', true);
-    $this->form_data['token_rdstation'] = $public_token || get_option('rdsm_public_token');
+    $this->form_data['token_rdstation'] = $public_token ? $public_token : get_option('rdsm_public_token');
   }
 
   private function build_default_payload($submitted_fields) {
