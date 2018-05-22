@@ -41,10 +41,9 @@ class RDSMConversion {
     return strlen($this->payload['token_rdstation']) == 32 ? true : false;
   }
 
-  public function build_payload($integration_id, $form_data) {
+  public function build_payload($form_data) {
     $default_payload = array(
       '_is'             => self::INTERNAL_SOURCE,
-      'identificador'   => get_post_meta($integration_id, 'form_identifier', true),
       'token_rdstation' => get_option('rdsm_public_token'),
       'email'           => $this->get_email_field($form_data),
       'c_utmz'          => $this->set_utmz($form_data),

@@ -39,6 +39,8 @@ class RDSMGravityFormsIntegration {
       $field_mapping = get_post_meta($integration->ID, 'gf_mapped_fields', true);
       $this->apply_field_mapping($field_mapping);
 
+      $this->apply_identifier($integration->ID);
+
       $this->resource->build_payload(
         $integration->ID,
         array_merge($this->form_data, $this->default_payload)
@@ -46,6 +48,10 @@ class RDSMGravityFormsIntegration {
 
       $this->api_client->post($this->resource);
     }
+  }
+
+  private apply_identifier($integration_id) {
+    $this->form_data['identificador'] =  get_post_meta($integration_id, 'form_identifier', true);
   }
 
   private function build_default_payload($submitted_fields) {
