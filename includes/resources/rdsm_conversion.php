@@ -29,16 +29,16 @@ class RDSMConversion {
     'cielo_credit_installments'
   );
 
-  public $args;
+  public $payload;
 
-  private function valid_payload($data){
+  public function valid_payload() {
     $required_fields = array('email', 'token_rdstation', 'identificador');
     foreach ($required_fields as $field) {
-      if(empty($data[$field]) || is_null($data[$field])){
+      if(empty($this->payload[$field]) || is_null($this->payload[$field])){
         return false;
       }
     }
-    return strlen( $data['token_rdstation'] ) == 32 ? true : false;
+    return strlen($this->payload['token_rdstation']) == 32 ? true : false;
   }
 
   public function build_payload($integration_id, $form_data) {
@@ -53,8 +53,7 @@ class RDSMConversion {
     );
 
     $payload = array_merge($form_data, $default_payload);
-    $payload = $this->filter_fields(self::IGNORED_FIELDS, $payload);
-    return $payload;
+    $this->payload = $this->filter_fields(self::IGNORED_FIELDS, $payload);
   }
 
   private function filter_fields(array $ignored_fields, $form_fields){

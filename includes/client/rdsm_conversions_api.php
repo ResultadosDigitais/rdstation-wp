@@ -17,13 +17,13 @@ class RDSMConversionsAPI {
 
   public function post($conversion) {
     if($conversion->valid_payload()) {
-      $body = array('body' => json_encode($conversion->form_data));
-      $args = array_merge(DEFAULT_REQUEST_ARGS, $body);
+      $body = array('body' => json_encode($conversion->payload));
+      $args = array_merge(self::DEFAULT_REQUEST_ARGS, $body);
 
       $response = $this->api_client->post(CONVERSIONS, $args);
 
       if (is_wp_error($response)) {
-        unset($conversion->form_data);
+        unset($conversion->payload);
       }
 
       return $response;

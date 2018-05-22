@@ -38,9 +38,9 @@ require_once('initializers/gravity_forms.php');
 require_once('settings/settings_page.php');
 
 // setup available integrations
-require_once('integrations/woocommerce/setup.php');
-require_once('integrations/gravity_forms/setup.php');
 require_once(SRC_DIR . '/integrations/contact_form7/setup.php');
+require_once(SRC_DIR . '/integrations/gravity_forms/setup.php');
+require_once(SRC_DIR . '/integrations/woocommerce/setup.php');
 
 // API client
 require_once(SRC_DIR . '/client/rdsm_settings_api.php');

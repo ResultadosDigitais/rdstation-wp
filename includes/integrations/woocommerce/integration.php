@@ -1,6 +1,6 @@
 <?php
 
-class RDWoocommerceIntegration extends LeadConversion {
+class RDWoocommerceIntegration {
   public function send_lead_conversion($order_id) {
     $order = new WC_Order($order_id);
     $this->conversion_data = $this->build_conversion_data($_POST);

@@ -6,6 +6,8 @@ class RDContactForm7Integration {
   const PLUGIN_DESCRIPTION = 'Plugin Contact Form 7';
   const MAIL_SENT_TRIGGER = 'wpcf7_mail_sent';
 
+  public $form_data;
+
   public $default_payload = array(
     'form_origem' => self::PLUGIN_DESCRIPTION
   );
