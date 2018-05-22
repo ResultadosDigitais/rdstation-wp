@@ -60,13 +60,18 @@ register_activation_hook(__FILE__, array($rdsm_activation_hook, 'trigger'));
 
 register_uninstall_hook(__FILE__, array('RDSMUninstallHooks', 'trigger'));
 
+// Legacy persistente
+$rdsm_token = new RDSMTokens;
+
 // Tracking Code
-add_action( 'admin_init',  'rdsm_tracking_code_hooks' );
+add_action( 'admin_init',  'rdsm_tracking_code_hooks', 1);
 function rdsm_tracking_code_hooks() {
   $access_token = get_option('rdsm_access_token');
+  $refresh_token = get_option('rdsm_refresh_token');
 
-  if (isset($access_token)) {
-    $api_instance = new RDSMSettingsAPI($access_token);
+  if (!empty($access_token) && !empty($refresh_token)) {
+    $user_credentials = new RDSMUserCredentials($access_token, $refresh_token);
+    $api_instance = new RDSMSettingsAPI($user_credentials);
 
     $rdsm_admin_tracking_code_hook = new RDSMAdminTrackingCodeHooks($api_instance);
     $rdsm_admin_tracking_code_hook->active_hooks();
