@@ -47,6 +47,7 @@ require_once(SRC_DIR . '/client/rdsm_settings_api.php');
 
 // Authorization tokens persistence
 require_once(SRC_DIR . '/authorization/rdsm_tokens.php');
+require_once(SRC_DIR . '/authorization/rdsm_authorization_check.php');
 require_once(SRC_DIR . '/client/rdsm_legacy_tokens.php');
 
 // Setup hooks

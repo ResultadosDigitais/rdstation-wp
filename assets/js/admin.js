@@ -24,13 +24,11 @@
   }
 
   function bindDisconnectButton() {
-    var connectButton = document.querySelector('.rd-oauth-integration');
     var disconnectButton = document.querySelector('.rd-oauth-disconnect');
-
 
     disconnectButton.addEventListener('click', function() {
       var data = { action: 'rdsm-disconnect-oauth' };
-      jQuery.post(ajaxurl, data);
+
       jQuery.ajax({
         method: "POST",
         url: ajaxurl,
@@ -48,8 +46,6 @@
 
   function persist(message) {
     jQuery(document).ready(function ($) {
-      var connectButton = document.querySelector('.rd-oauth-integration');
-      var disconnectButton = document.querySelector('.rd-oauth-disconnect');
       var tokens = JSON.parse(message.data);
       var data = {
         action: 'rd-persist-tokens',
@@ -81,13 +77,13 @@
     });
   }
 
-  function handleButtons() {
+  function toggleFeatures() {
     jQuery.ajax({
       url: ajaxurl,
       method: 'POST',
       data: { action: 'rdsm-authorization-check' },
-      success: function(connected) {
-        if (connected) {
+      success: function(data) {
+        if (data.token) {
           displayDisconnectButton();
         } else {
           displayConnectButton();
@@ -99,19 +95,28 @@
   function displayConnectButton() {
     var connectButton = document.querySelector('.rd-oauth-integration');
     var disconnectButton = document.querySelector('.rd-oauth-disconnect');
+    var checkbox = document.querySelector('.checkbox-switch input');
+    var warning = document.querySelector('small.warning');
     jQuery(disconnectButton).addClass('hidden');
     jQuery(connectButton).removeClass('hidden');
+    jQuery(checkbox).attr('checked', false);
+    jQuery(checkbox).attr('disabled', true);
+    jQuery(warning).removeClass('hidden');
   }
 
   function displayDisconnectButton() {
     var connectButton = document.querySelector('.rd-oauth-integration');
     var disconnectButton = document.querySelector('.rd-oauth-disconnect');
+    var checkbox = document.querySelector('.checkbox-switch input');
+    var warning = document.querySelector('small.warning');
     jQuery(connectButton).addClass('hidden');
     jQuery(disconnectButton).removeClass('hidden');
+    jQuery(checkbox).attr('disabled', false);
+    jQuery(warning).addClass('hidden');
   }
 
   function init() {
-    handleButtons();
+    toggleFeatures();
     bindConnectButton();
     bindDisconnectButton();
     listenForMessage();
