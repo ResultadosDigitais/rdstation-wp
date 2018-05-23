@@ -23,16 +23,13 @@ function rdstation_settings_page_callback() {
   <h1>
     <?php echo __('RD Station Settings', 'integracao-rd-station') ?>
   </h1>
-
-  <?php
-  if (get_option('rdsm_access_token')) : ?>
-      <?php echo __('Already connected to your RD Station account', 'integracao-rd-station') ?>
-      <span class="dashicons dashicons-yes"></span>
-  <?php else: ?>
-    <button type="button" class="button button-warning rd-oauth-integration">
+    <button type="button" class="button rd-oauth-integration hidden">
       <?php echo __('Connect to RD Station', 'integracao-rd-station') ?>
     </button>
-  <?php endif; ?>
+
+    <button type="button" class="button rd-oauth-disconnect hidden">
+      <?php echo __('Disconnect from RD Station', 'integracao-rd-station') ?>
+    </button>
 
   <p class="nav-tab-wrapper">
     <a href="?page=rdstation-settings-page&tab=general" class="nav-tab <?php echo rdsm_tab_class('general') ?>">

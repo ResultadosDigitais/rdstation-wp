@@ -51,6 +51,7 @@ require_once(SRC_DIR . '/client/rdsm_legacy_tokens.php');
 
 // Setup hooks
 require_once(SRC_DIR . "/hooks/rdsm_activation_hooks.php");
+require_once(SRC_DIR . "/hooks/rdsm_oauth_disconnect_hooks.php");
 require_once(SRC_DIR . "/hooks/rdsm_tracking_code_hooks.php");
 require_once(SRC_DIR . "/hooks/rdsm_admin_tracking_code_hooks.php");
 require_once(SRC_DIR . "/hooks/rdsm_uninstall_hooks.php");
