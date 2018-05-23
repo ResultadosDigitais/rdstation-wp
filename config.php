@@ -1,5 +1,6 @@
 <?php
 
+define('ASSETS_URL', plugin_dir_url(__FILE__) . '/assets');
 define('SRC_DIR', dirname(__FILE__) . '/includes');
 
 // URIs

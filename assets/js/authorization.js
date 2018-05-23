@@ -34,7 +34,7 @@
         url: ajaxurl,
         data: data,
         success: function() {
-          displayConnectButton();
+          RDSMGeneralSettings.displayConnectedAccountElements();
         }
       });
     })
@@ -58,7 +58,7 @@
         url: ajaxurl,
         data: data,
         success: function() {
-          displayDisconnectButton();
+          RDSMGeneralSettings.displayDisconnectedAccountElements();
           persistLegacyTokens(tokens.accessToken)
         }
       });
@@ -77,46 +77,8 @@
     });
   }
 
-  function toggleFeatures() {
-    jQuery.ajax({
-      url: ajaxurl,
-      method: 'POST',
-      data: { action: 'rdsm-authorization-check' },
-      success: function(data) {
-        if (data.token) {
-          displayDisconnectButton();
-        } else {
-          displayConnectButton();
-        }
-      }
-    });
-  }
-
-  function displayConnectButton() {
-    var connectButton = document.querySelector('.rd-oauth-integration');
-    var disconnectButton = document.querySelector('.rd-oauth-disconnect');
-    var checkbox = document.querySelector('.checkbox-switch input');
-    var warning = document.querySelector('small.warning');
-    jQuery(disconnectButton).addClass('hidden');
-    jQuery(connectButton).removeClass('hidden');
-    jQuery(checkbox).attr('checked', false);
-    jQuery(checkbox).attr('disabled', true);
-    jQuery(warning).removeClass('hidden');
-  }
-
-  function displayDisconnectButton() {
-    var connectButton = document.querySelector('.rd-oauth-integration');
-    var disconnectButton = document.querySelector('.rd-oauth-disconnect');
-    var checkbox = document.querySelector('.checkbox-switch input');
-    var warning = document.querySelector('small.warning');
-    jQuery(connectButton).addClass('hidden');
-    jQuery(disconnectButton).removeClass('hidden');
-    jQuery(checkbox).attr('disabled', false);
-    jQuery(warning).addClass('hidden');
-  }
-
   function init() {
-    toggleFeatures();
+    RDSMGeneralSettings.toggleElementsDisplay();
     bindConnectButton();
     bindDisconnectButton();
     listenForMessage();

@@ -23,11 +23,11 @@ function rdstation_settings_page_callback() {
   <h1>
     <?php echo __('RD Station Settings', 'integracao-rd-station') ?>
   </h1>
-    <button type="button" class="button rd-oauth-integration hidden">
+    <button type="button" class="button rd-oauth-integration hidden" id="rdsm-oauth-connect">
       <?php echo __('Connect to RD Station', 'integracao-rd-station') ?>
     </button>
 
-    <button type="button" class="button rd-oauth-disconnect hidden">
+    <button type="button" class="button rd-oauth-disconnect hidden" id="rdsm-oauth-disconnect">
       <?php echo __('Disconnect from RD Station', 'integracao-rd-station') ?>
     </button>
 
@@ -68,21 +68,14 @@ function rdsm_woocommerce_conversion_identifier_html() {
 
 function rdsm_enable_tracking_code_html() {
   $options = get_option( 'rdsm_general_settings' );
-  $access_token = get_option('rdsm_access_token');
-  $current_value = isset($options['enable_tracking_code']) ? $options['enable_tracking_code'] : '';
+  $current_value = isset($options['enable_tracking_code']) ? $options['enable_tracking_code'] : ''; ?>
 
-  if (empty($access_token)) { ?>
-    <label class="checkbox-switch">
-      <input type="checkbox" name="rdsm_general_settings[enable_tracking_code]" value="1" <?php checked($current_value, 1); ?> disabled>
-      <span class="checkbox-slider checkbox-slider-round"></span>
-    </label>
-    <small class="warning hidden"><?php echo __('You need to connect to RD Station before enable this feature.', 'integracao-rd-station')  ?></small>
-  <?php } else { ?>
-    <label class="checkbox-switch">
-      <input type="checkbox" name="rdsm_general_settings[enable_tracking_code]" value="1" <?php checked($current_value, 1); ?>>
-      <span class="checkbox-slider checkbox-slider-round"></span>
-    </label>
-  <?php }
+  <label class="checkbox-switch">
+    <input type="checkbox" id="rdsm-enable-tracking" name="rdsm_general_settings[enable_tracking_code]" value="1" <?php checked($current_value, 1); ?> >
+    <span class="checkbox-slider checkbox-slider-round"></span>
+  </label>
+  <small id="rdsm-tracking-warning" class="hidden"> <?php echo __('You need to connect to RD Station before enable this feature.', 'integracao-rd-station') ?> </small>
+  <?php
 }
 
 
