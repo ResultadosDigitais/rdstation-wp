@@ -16,7 +16,7 @@ class RDSMAPI {
     
     $response = wp_remote_get(sprintf("%s%s", $this->api_url, $resource), $args);
 
-    if ($this->handle_forbidden_request($response)) {
+    if ($this->handle_expired_token($response)) {
       return $this->get($resource, $args);
     }
 
@@ -30,7 +30,7 @@ class RDSMAPI {
 
     $respone = wp_remote_post(sprintf("%s%s", $this->api_url, $resource), $args);
 
-    if ($this->handle_forbidden_request($response)) {
+    if ($this->handle_expired_token($response)) {
       return $this->post($resource, $args);
     }
 
@@ -57,7 +57,7 @@ class RDSMAPI {
 
     $response = wp_remote_get(sprintf("%s/%s%s", REFRESH_TOKEN_URL, "refresh_token=", $refresh_token));
     
-    if ($response['response']['code'] == 200) {
+    if (wp_remote_retrieve_response_code($response) == 200) {
       $parsed_credentials = json_decode(wp_remote_retrieve_body($response));
       $this->update_user_credentials($parsed_credentials);
       
@@ -67,8 +67,8 @@ class RDSMAPI {
     return false;
   }
 
-  private function handle_forbidden_request($response) {
-    if ($response['response']['code'] != 401) {
+  private function handle_expired_token($response) {
+    if (wp_remote_retrieve_response_code($response) != 401) {
       return false;
     }
 
