@@ -2,7 +2,7 @@
 
 class RDSMAuthorizationCheck {
   public function check() {
-    $response = array('token' => get_option('rdsm_public_token'));
+    $response = array('token' => get_option('rdsm_access_token'));
     wp_send_json($response);
   }
 }
