@@ -4,7 +4,7 @@ require_once(__DIR__.'./../entities/rdsm_user_credentials.php');
 
 class RDSMTokens {
   public function __construct() {
-    add_action('wp_ajax_rd-persist-tokens',  array($this, 'save'), 1);
+    add_action('wp_ajax_rd-persist-tokens', array($this, 'save'), 1);
   }
 
   public static function save() {
@@ -19,4 +19,3 @@ class RDSMTokens {
     wp_die($user_credentials);
   }
 }
-

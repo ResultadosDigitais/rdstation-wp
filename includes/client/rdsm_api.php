@@ -13,8 +13,14 @@ class RDSMAPI {
     if ($this->user_credentials->access_token()) {
       $args['headers'] = $this->authorization_header($args);
     }
+    
+    $response = wp_remote_get(sprintf("%s%s", $this->api_url, $resource), $args);
 
-    return wp_remote_get(sprintf("%s%s", $this->api_url, $resource), $args);
+    if ($this->handle_forbidden_request($response)) {
+      return $this->get($resource, $args);
+    }
+
+    return $response;
   }
 
   public function post($resource, $args = array()) {
@@ -22,7 +28,13 @@ class RDSMAPI {
       $args['headers'] = $this->authorization_header($args);
     }
 
-    return wp_remote_post(sprintf("%s%s", $this->api_url, $resource), $args);
+    $respone = wp_remote_post(sprintf("%s%s", $this->api_url, $resource), $args);
+
+    if ($this->handle_forbidden_request($response)) {
+      return $this->post($resource, $args);
+    }
+
+    return $response;
   }
 
   private function authorization_header($args) {
@@ -35,11 +47,40 @@ class RDSMAPI {
     return $authorization_header;
   }
 
-  private function handle_refresh_token($response) {
-    $body = json_decode($response['body']);
 
-    if ($response->code == 401) {
+  private function refresh_token() {
+    $refresh_token = $this->user_credentials->refresh_token();
 
+    if (empty($refresh_token)) {
+      return false;
     }
+
+    $response = wp_remote_get(sprintf("%s/%s%s", REFRESH_TOKEN_URL, "refresh_token=", $refresh_token));
+    
+    if ($response['response']['code'] == 200) {
+      $parsed_credentials = json_decode(wp_remote_retrieve_body($response));
+      $this->update_user_credentials($parsed_credentials);
+      
+      return true;
+    }
+
+    return false;
+  }
+
+  private function handle_forbidden_request($response) {
+    if ($response['response']['code'] != 401) {
+      return false;
+    }
+
+    if ($this->refresh_token()) {
+      return true;
+    }
+
+    return false;
+  }
+
+  private function update_user_credentials($credentials) {
+    $this->user_credentials->save_access_token($credentials->access_token);
+    $this->user_credentials->save_refresh_token($credentials->refresh_token);
   }
 }
