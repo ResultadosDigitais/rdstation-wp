@@ -72,7 +72,15 @@ class RDSMAPI {
       return false;
     }
 
-    if ($this->refresh_token()) {
+    $authenticate_header = wp_remote_retrieve_header($response, 'www-authenticate');
+    
+    if (empty($authenticate_header)) {
+      return false;
+    }
+
+    $header_information = explode(", ", $authenticate_header);
+
+    if (in_array('error="expired_token"', $header_information) && $this->refresh_token()) {
       return true;
     }
 
