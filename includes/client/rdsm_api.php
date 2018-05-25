@@ -78,7 +78,9 @@ class RDSMAPI {
       return false;
     }
 
-    if ($header_information[1] == 'error="invalid_token"' && $this->refresh_token()) {
+    $header_information = explode(", ", $authenticate_header);
+
+    if (in_array('error="expired_token"', $header_information) && $this->refresh_token()) {
       return true;
     }
 
