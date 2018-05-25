@@ -40,7 +40,7 @@ class RDSMTrackingCodeHooks {
   }
   
   private function disable_tracking_code_on_site() {
-    remove_action('wp_fotter', array($this, 'tracking_code_hook'), 1);
+    remove_action('wp_footer', array($this, 'tracking_code_hook'), 1);
   }
   
   private function tracking_code_script_tag($path) {
