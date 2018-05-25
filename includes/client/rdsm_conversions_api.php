@@ -1,6 +1,7 @@
 <?php
 
 require_once('rdsm_api.php');
+require_once(SRC_DIR . '/entities/null-objects/rdsm_user_credentials.php');
 
 class RDSMConversionsAPI {
   private $api_client;
@@ -11,7 +12,9 @@ class RDSMConversionsAPI {
   );
 
   function __construct() {
-    $api = new RDSMAPI(LEGACY_API_URL);
+    $null_user_credentials = new RDSMUserCredentialsNullObject;
+
+    $api = new RDSMAPI(LEGACY_API_URL, $null_user_credentials);
     $this->api_client = $api;
   }
 
