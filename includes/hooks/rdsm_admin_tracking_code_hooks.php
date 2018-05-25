@@ -28,6 +28,13 @@ class RDSMAdminTrackingCodeHooks {
 
   public function persist_tracking_code() {
     $response = $this->api->tracking_code();
+
+    if (wp_remote_retrieve_response_code($response) == 401) {
+      $this->delete_access_token();
+
+      return false;
+    }
+
     $body = wp_remote_retrieve_body($response);
     $parsed_body = json_decode($body);
 
@@ -38,6 +45,10 @@ class RDSMAdminTrackingCodeHooks {
     }
 
     return false;
+  }
+
+  private function delete_access_token() {
+    delete_option('rdsm_access_token');
   }
 
   private function enable_tracking_code_opt_in() {
