@@ -1,12 +1,18 @@
 <?php
 
-class RDSMActivationHooks {
+require_once(RDSM_SRC_DIR . '/events/rdsm_events_interface.php');
+
+class RDSMPluginActivated implements RDSMEventsInterface {
   function __construct() {
     $this->legacy_options = get_option('rd_settings');
     $this->new_woocommerce_options = get_option('rdsm_woocommerce_settings');
   }
 
-  public function trigger() {
+  public function register_hooks() {
+    register_activation_hook(RDSM_PLUGIN_FILE, array($this, 'activation_hooks'));
+  }
+
+  public function activation_hooks() {
     $this->migrate_legacy_woocoommerce_identifier();
     $this->migrate_legacy_tokens();
   }

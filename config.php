@@ -1,7 +1,7 @@
 <?php
 
-define('ASSETS_URL', plugin_dir_url(__FILE__) . '/assets');
-define('SRC_DIR', dirname(__FILE__) . '/includes');
+define('RDSM_ASSETS_URL', plugin_dir_url(__FILE__) . '/assets');
+define('RDSM_SRC_DIR', dirname(__FILE__) . '/includes');
 
 // URIs
 define('LEGACY_API_URL', 'http://app.rdstation.com.br/api/1.3');
@@ -12,3 +12,5 @@ define('REFRESH_TOKEN_URL', 'https://je5ypxtc6b.execute-api.us-west-2.amazonaws.
 define('CONVERSIONS', '/conversions');
 define('CONTACTS', '/platform/contacts/');
 define('TRACKING_CODE', '/marketing/tracking_code');
+
+// RDSMPaths::ASSETS_URL
