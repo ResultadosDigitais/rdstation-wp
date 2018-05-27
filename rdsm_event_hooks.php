@@ -9,7 +9,7 @@ require_once(RDSM_SRC_DIR . '/events/rdsm_plugin_uninstalled.php');
 require_once(RDSM_SRC_DIR . '/events/rdsm_tracking_status_updated.php');
 
 class RDSMEventHooks {
-  public function register($events) {
+  public static function register($events) {
     foreach ($events as $event) {
       $event->register_hooks();
     }
@@ -19,11 +19,11 @@ class RDSMEventHooks {
 $plugin_events = array(
   new RDSMPluginActivated,
   new RDSMSiteInitialized,
+  new RDSMOauthConnected,
   new RDSMOauthDisconnected,
   new RDSMPluginUninstalled,
   new RDSMTrackingStatusUpdated,
   new RDSMSettingsPageLoaded
 );
 
-$event_hooks = new RDSMEventHooks();
-$event_hooks->register($plugin_events);
+RDSMEventHooks::register($plugin_events);

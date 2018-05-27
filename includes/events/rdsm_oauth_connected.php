@@ -23,11 +23,9 @@ class RDSMOauthConnected implements RDSMEventsInterface {
 
   public function persist_legacy_tokens() {
     $tokens = $_POST['tokens'][0];
-    $public_token = $tokens['public'];
-    $private_token = $tokens['private'];
-
-    update_option('rdsm_public_token', $public_token);
-    update_option('rdsm_private_token', $private_token);
+    $user_credentials = new RDSMLegacyUserCredentials();
+    $user_credentials->save_public_token($tokens['public']);
+    $user_credentials->save_private_token($tokens['private']);
 
     die();
   }
