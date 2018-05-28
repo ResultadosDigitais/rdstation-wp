@@ -31,10 +31,6 @@ class RDSMTrackingCodeHooks {
     return false;
   }
   
-  private function enable_tracking_code_opt_in() {
-    add_action('update_option_rdsm_general_settings', array($this, 'rdsm_handle_tracking_code_option'), 2);
-  }
-  
   private function enable_tracking_code_on_site() {
     add_action('wp_footer', array($this, 'tracking_code_hook'), 1);
   }
