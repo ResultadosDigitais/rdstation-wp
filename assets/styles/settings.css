@@ -35,6 +35,22 @@
   transition: .4s;
 }
 
+.checkbox-slider-on {
+  position: absolute;
+  right: 5px;
+  top: 7px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.checkbox-slider-off {
+  position: absolute;
+  left: 4px;
+  top: 7px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
 input:checked + .checkbox-slider {
   background-color: #31a2ff;
 }
