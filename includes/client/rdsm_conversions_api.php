@@ -1,7 +1,7 @@
 <?php
 
 require_once('rdsm_api.php');
-require_once(SRC_DIR . '/entities/null-objects/rdsm_user_credentials.php');
+require_once(RDSM_SRC_DIR . '/entities/null-objects/rdsm_user_credentials.php');
 
 class RDSMConversionsAPI {
   private $api_client;

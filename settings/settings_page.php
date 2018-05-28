@@ -4,7 +4,6 @@ require_once('settings_menu.php');
 require_once('settings_sections.php');
 require_once('settings_fields.php');
 
-add_action('admin_init', 'initialize_rdstation_settings_page');
 function initialize_rdstation_settings_page() {
   register_setting('rdsm_general_settings', 'rdsm_general_settings');
   register_setting('rdsm_woocommerce_settings', 'rdsm_woocommerce_settings');

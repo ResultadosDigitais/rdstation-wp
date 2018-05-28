@@ -1,6 +1,6 @@
 <?php
 
-require_once(SRC_DIR . '/integrations/rdsm_integrations.php');
+require_once(RDSM_SRC_DIR . '/integrations/rdsm_integrations.php');
 
 class RDContactForm7Integration {
   const PLUGIN_DESCRIPTION = 'Plugin Contact Form 7';

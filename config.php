@@ -1,7 +1,7 @@
 <?php
 
-define('ASSETS_URL', plugin_dir_url(__FILE__) . '/assets');
-define('SRC_DIR', dirname(__FILE__) . '/includes');
+define('RDSM_ASSETS_URL', plugin_dir_url(__FILE__) . '/assets');
+define('RDSM_SRC_DIR', dirname(__FILE__) . '/includes');
 
 // URIs
 define('LEGACY_API_URL', 'http://app.rdstation.com.br/api/1.3');
