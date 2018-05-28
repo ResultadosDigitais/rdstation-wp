@@ -8,7 +8,7 @@ class RDSMSiteInitialized implements RDSMEventsInterface {
   }
 
   public function register_hooks() {
-    if ($this->general_settings['enable_tracking_code']) {
+    if (!empty($this->general_settings['enable_tracking_code'])) {
       add_action('wp_footer', array($this, 'add_tracking_code_to_site'), 1);
     }
   }
