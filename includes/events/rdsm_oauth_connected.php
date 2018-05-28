@@ -1,6 +1,7 @@
 <?php
 
 require_once(RDSM_SRC_DIR . '/entities/rdsm_user_credentials.php');
+require_once(RDSM_SRC_DIR . '/entities/rdsm_legacy_user_credentials.php');
 require_once(RDSM_SRC_DIR . '/events/rdsm_events_interface.php');
 
 class RDSMOauthConnected implements RDSMEventsInterface {
