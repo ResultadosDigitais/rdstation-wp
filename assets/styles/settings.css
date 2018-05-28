@@ -37,7 +37,7 @@
 
 .checkbox-slider-on {
   position: absolute;
-  left: 4px;
+  right: 5px;
   top: 6px;
   font-size: 10px;
   font-weight: bold;
@@ -45,7 +45,7 @@
 
 .checkbox-slider-off {
   position: absolute;
-  right: 4px;
+  left: 4px;
   top: 6px;
   font-size: 10px;
   font-weight: bold;

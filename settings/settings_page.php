@@ -72,8 +72,8 @@ function rdsm_enable_tracking_code_html() {
   <label class="checkbox-switch">
     <input type="checkbox" id="rdsm-enable-tracking" name="rdsm_general_settings[enable_tracking_code]" value="1" <?php checked($current_value, 1); ?> >
     <span class="checkbox-slider checkbox-slider-round">
-      <span class="checkbox-slider-off">OFF</span>
       <span class="checkbox-slider-on">ON</span>
+      <span class="checkbox-slider-off">OFF</span>
     </span>
   </label>
   <small id="rdsm-tracking-warning" class="hidden"> <?php echo __('You need to connect to RD Station before enable this feature.', 'integracao-rd-station') ?> </small>
