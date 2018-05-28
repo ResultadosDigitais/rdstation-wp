@@ -12,5 +12,3 @@ define('REFRESH_TOKEN_URL', 'https://je5ypxtc6b.execute-api.us-west-2.amazonaws.
 define('CONVERSIONS', '/conversions');
 define('CONTACTS', '/platform/contacts/');
 define('TRACKING_CODE', '/marketing/tracking_code');
-
-// RDSMPaths::ASSETS_URL

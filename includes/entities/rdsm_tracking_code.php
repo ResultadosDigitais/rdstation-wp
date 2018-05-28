@@ -8,6 +8,12 @@ class RDSMTrackingCode {
 
   public function persist_tracking_code() {
     $response = $this->api->tracking_code();
+
+    if (wp_remote_retrieve_response_code($response) == 401) {
+      $this->delete_access_token();
+      return false;
+    }
+
     $body = wp_remote_retrieve_body($response);
     $parsed_body = json_decode($body);
 
@@ -30,5 +36,9 @@ class RDSMTrackingCode {
     $options = get_option('rdsm_general_settings');
     $options['enable_tracking_code'] = "";
     update_option('rdsm_general_settings', $options);
+  }
+
+  private function delete_access_token() {
+    delete_option('rdsm_access_token');
   }
 }
