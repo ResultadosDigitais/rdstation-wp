@@ -6,7 +6,7 @@ require_once(RDSM_SRC_DIR . '/entities/null-objects/rdsm_user_credentials.php');
 class RDSMConversionsAPI {
   private $api_client;
 
-  const DEFAULT_REQUEST_ARGS = array(
+  private $default_request_args = array(
     'timeout' => 10,
     'headers' => array('Content-Type' => 'application/json')
   );
@@ -21,7 +21,7 @@ class RDSMConversionsAPI {
   public function post($conversion) {
     if($conversion->valid_payload()) {
       $body = array('body' => json_encode($conversion->payload));
-      $args = array_merge(self::DEFAULT_REQUEST_ARGS, $body);
+      $args = array_merge($this->default_request_args, $body);
 
       $response = $this->api_client->post(CONVERSIONS, $args);
 
