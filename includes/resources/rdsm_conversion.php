@@ -2,7 +2,8 @@
 
 class RDSMConversion {
   const INTERNAL_SOURCE = 8;
-  const IGNORED_FIELDS = array(
+
+  private $ignored_fields = array(
     'password',
     'password_confirmation',
     'senha',
@@ -51,7 +52,7 @@ class RDSMConversion {
     );
 
     $payload = array_merge($form_data, $default_payload);
-    $this->payload = $this->filter_fields(self::IGNORED_FIELDS, $payload);
+    $this->payload = $this->filter_fields($this->ignored_fields, $payload);
   }
 
   private function filter_fields(array $ignored_fields, $form_fields){
