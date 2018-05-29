@@ -26,7 +26,6 @@ var RDSMGeneralSettings = (function RDSMGeneralSettings() {
   }
 
   function displayConnectedAccountElements() {
-    elements.trackingCodeCheckbox.removeAttribute('checked');
     elements.trackingCodeCheckbox.setAttribute('disabled', 'disabled');
     elements.trackingCodeWarning.classList.remove('hidden');
     elements.disconnectButton.classList.add('hidden');

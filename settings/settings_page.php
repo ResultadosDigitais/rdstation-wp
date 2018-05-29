@@ -76,7 +76,7 @@ function rdsm_enable_tracking_code_html() {
       <span class="checkbox-slider-off">OFF</span>
     </span>
   </label>
-  <small id="rdsm-tracking-warning" class="hidden"> <?php echo __('You need to connect to RD Station before enable this feature.', 'integracao-rd-station') ?> </small>
+  <small id="rdsm-tracking-warning" class="hidden"> <?php echo __('You need to connect to RD Station before enable/disable this feature.', 'integracao-rd-station') ?> </small>
   <?php
 }
 
