@@ -12,10 +12,9 @@ Integrate your contact forms with RD Station Marketing
 
 == Description ==
 
-This plugin aims to make the integration with RD Station Marketing easier.
-By installing it, you will be able to integrate your contact forms with RD Station Marketing.
+By installing it, you can activate the Tracking Code, which enables some important features of RD Station Marketing, besides integrating your contact forms in order to send the Leads converted in your website to the RD Station Marketing.
 
-Compatible with:
+Compatible with the following forms:
 
 * Contact Form 7
 * Gravity Forms
@@ -24,26 +23,20 @@ Compatible with:
 
 Features:
 
-* Allows you to integrate a single form with multiple RD Station Marketing accounts. Very useful for co-marketing campaigns.
-* Field mapping for Gravity Forms
+* Forms Integrations
+* Tracking code
 * As many integrations as you want
+* RD Station Marketing popups
 
 == Installation ==
 
 More info about the plugin setup: [https://github.com/ResultadosDigitais/rdstation-wp](https://github.com/ResultadosDigitais/rdstation-wp)
 
-== Frequently Asked Questions ==
-
-= Is it possible to integrate forms other than Contact Form 7, Gravity Forms and WooCommerce? =
-
-It is possible only by inserting a custom script in your pages.
-
-== Screenshots ==
-
-1. Contact Form 7
-2. Gravity Forms
-
 == Changelog ==
+
+= 4.0 =
+
+* Add tracking code, popups and new forms integrations
 
 = 3.2 =
 * Add new translation keys
