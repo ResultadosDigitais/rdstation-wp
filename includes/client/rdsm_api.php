@@ -7,13 +7,13 @@ class RDSMAPI {
   function __construct($server_url, $user_credentials) {
     $this->api_url = $server_url;
     $this->user_credentials = $user_credentials;
-  } 
+  }
 
   public function get($resource, $args = array()) {
     if ($this->user_credentials->access_token()) {
       $args['headers'] = $this->authorization_header($args);
     }
-    
+
     $response = wp_remote_get(sprintf("%s%s", $this->api_url, $resource), $args);
 
     if ($this->handle_expired_token($response)) {
@@ -28,7 +28,7 @@ class RDSMAPI {
       $args['headers'] = $this->authorization_header($args);
     }
 
-    $respone = wp_remote_post(sprintf("%s%s", $this->api_url, $resource), $args);
+    $response = wp_remote_post(sprintf("%s%s", $this->api_url, $resource), $args);
 
     if ($this->handle_expired_token($response)) {
       return $this->post($resource, $args);
@@ -56,11 +56,11 @@ class RDSMAPI {
     }
 
     $response = wp_remote_get(sprintf("%s/%s%s", REFRESH_TOKEN_URL, "refresh_token=", $refresh_token));
-    
+
     if (wp_remote_retrieve_response_code($response) == 200) {
       $parsed_credentials = json_decode(wp_remote_retrieve_body($response));
       $this->update_user_credentials($parsed_credentials);
-      
+
       return true;
     }
 
@@ -73,7 +73,7 @@ class RDSMAPI {
     }
 
     $authenticate_header = wp_remote_retrieve_header($response, 'www-authenticate');
-    
+
     if (empty($authenticate_header)) {
       return false;
     }
