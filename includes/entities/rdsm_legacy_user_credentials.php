@@ -9,7 +9,7 @@ class RDSMLegacyUserCredentials {
       return false;
     }
 
-    update_option('rdsm_public_token', $this->public_token);
+    update_option('rdsm_public_token', $public_token);
 
     return true;
   }
@@ -19,7 +19,7 @@ class RDSMLegacyUserCredentials {
       return false;
     }
 
-    update_option('rdsm_private_token', $this->private_token);
+    update_option('rdsm_private_token', $private_token);
 
     return true;
   }

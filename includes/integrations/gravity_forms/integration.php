@@ -65,11 +65,11 @@ class RDSMGravityFormsIntegration {
 
   private function apply_field_mapping($field_mapping) {
     foreach ($this->form_data as $field_id => $field_value) {
-      $field_name = $field_mapping[$field_id];
-      if(!empty($field_name)) {
+      if(!empty($field_mapping[$field_id])) {
+        $field_name = $field_mapping[$field_id];
         $this->form_data[$field_name] = $field_value;
+        unset($this->form_data[$field_id]);
       }
-      unset($this->form_data[$field_id]);
     }
   }
 

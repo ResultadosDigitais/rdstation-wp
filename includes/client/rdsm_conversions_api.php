@@ -28,7 +28,6 @@ class RDSMConversionsAPI {
       if (is_wp_error($response)) {
         unset($conversion->payload);
       }
-
       return $response;
     }
   }
