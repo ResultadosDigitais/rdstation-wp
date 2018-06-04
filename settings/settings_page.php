@@ -93,7 +93,7 @@ function rdsm_enable_tracking_code_html() {
 }
 
 function rdsm_tracking_code_warning_html() { ?>
-  <p class="rdsm-tracking-code-enabled">
+  <p class="rdsm-tracking-code-validation-warning">
     <?php _e('Warning: validate it on RD Station Marketing:', 'integracao-rd-station') ?>
     <a href="https://app.rdstation.com.br/configuracoes/analise-e-monitoramento" target="_blank">
       <?php _e('Validate', 'integracao-rd-station') ?>
