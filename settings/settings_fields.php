@@ -9,7 +9,7 @@ class RDSettingsFields {
   private function general_fields() {
     add_settings_field(
       'rdsm_enable_tracking_code',
-      __('Enable Tracking Code', 'integracao-rd-station'),
+      __('Tracking Code:', 'integracao-rd-station'),
       'rdsm_enable_tracking_code_html',
       'rdsm_general_settings',
       'rdsm_general_settings_section'

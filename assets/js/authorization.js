@@ -58,7 +58,7 @@
         url: ajaxurl,
         data: data,
         success: function() {
-          RDSMGeneralSettings.displayDisconnectedAccountElements();
+          RDSMGeneralSettings.displayConnectedAccountElements();
           persistLegacyTokens(tokens.accessToken)
         }
       });

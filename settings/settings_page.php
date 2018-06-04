@@ -20,23 +20,34 @@ function rdstation_settings_page_callback() {
   ?>
 
   <h1>
-    <?php echo __('RD Station Settings', 'integracao-rd-station') ?>
+    <?php _e('RD Station Integration Settings', 'integracao-rd-station') ?>
   </h1>
-    <button type="button" class="button rd-oauth-integration hidden" id="rdsm-oauth-connect">
-      <?php echo __('Connect to RD Station', 'integracao-rd-station') ?>
-    </button>
 
-    <button type="button" class="button rd-oauth-disconnect hidden" id="rdsm-oauth-disconnect">
-      <?php echo __('Disconnect from RD Station', 'integracao-rd-station') ?>
-    </button>
+  <div class="rd-oauth-connect-section">
+    <div class="rdsm-connected hidden">
+      <p>
+        <?php _e('The plugin is connected and allows the use of Tracking Code, pop-ups and form integrations. If you want to disconnect, just click the button below.', 'integracao-rd-station') ?>
+      </p>
+
+      <button type="button" class="button rd-oauth-disconnect" id="rdsm-oauth-disconnect">
+        <?php _e('Disconnect from RD Station', 'integracao-rd-station') ?>
+      </button>
+    </div>
+
+    <div class="rdsm-disconnected hidden">
+      <button type="button" class="button rd-oauth-integration" id="rdsm-oauth-connect">
+        <?php _e('Connect to RD Station', 'integracao-rd-station') ?>
+      </button>
+    </div>
+  </div>
 
   <p class="nav-tab-wrapper">
     <a href="?page=rdstation-settings-page&tab=general" class="nav-tab <?php echo rdsm_tab_class('general') ?>">
-      <?php echo __('General Settings', 'integracao-rd-station') ?>
+      <?php _e('General Settings', 'integracao-rd-station') ?>
     </a>
 
     <a href="?page=rdstation-settings-page&tab=woocommerce" class="nav-tab <?php echo rdsm_tab_class('woocommerce') ?>">
-      <?php echo __('WooCommerce', 'integracao-rd-station') ?>
+      <?php _e('WooCommerce', 'integracao-rd-station') ?>
     </a>
   </p>
 
@@ -46,6 +57,7 @@ function rdstation_settings_page_callback() {
         case 'general':
           settings_fields('rdsm_general_settings');
           do_settings_sections('rdsm_general_settings');
+          rdsm_tracking_code_warning_html();
           break;
         case 'woocommerce':
           settings_fields('rdsm_woocommerce_settings');
@@ -72,13 +84,22 @@ function rdsm_enable_tracking_code_html() {
   <label class="checkbox-switch">
     <input type="checkbox" id="rdsm-enable-tracking" name="rdsm_general_settings[enable_tracking_code]" value="1" <?php checked($current_value, 1); ?> >
     <span class="checkbox-slider checkbox-slider-round">
-      <span class="checkbox-slider-on">ON</span>
-      <span class="checkbox-slider-off">OFF</span>
+      <span class="checkbox-slider-off hidden"><?php _e('Off', 'integracao-rd-station') ?></span>
+      <span class="checkbox-slider-on hidden"><?php _e('On', 'integracao-rd-station') ?></span>
     </span>
   </label>
-  <small id="rdsm-tracking-warning" class="hidden"> <?php echo __('You need to connect to RD Station before enable/disable this feature.', 'integracao-rd-station') ?> </small>
+  <small id="rdsm-tracking-warning" class="hidden"> <?php _e('You need to connect to RD Station before enable/disable this feature.', 'integracao-rd-station') ?> </small>
   <?php
 }
+
+function rdsm_tracking_code_warning_html() { ?>
+  <p class="rdsm-tracking-code-enabled">
+    <?php _e('Warning: validate it on RD Station Marketing:', 'integracao-rd-station') ?>
+    <a href="https://app.rdstation.com.br/configuracoes/analise-e-monitoramento" target="_blank">
+      <?php _e('Validate', 'integracao-rd-station') ?>
+    </a>
+  </p>
+<?php }
 
 
 // HELPER METHODS
