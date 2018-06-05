@@ -12,6 +12,8 @@ Integrate your contact forms with RD Station Marketing
 
 == Description ==
 
+Hello! This is the most practical way to integrate RD Station Marketing with your WordPress site.
+
 It automatically activates the RD Station Marketing tracking code in your Wordpress pages, enabling features such as Lead Tracking and Pop ups. It also integrates the contact forms that capture Leads that convert in your website forms directly to RD Station Marketing.
 
 Compatible with the following forms:
