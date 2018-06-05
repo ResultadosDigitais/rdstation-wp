@@ -1,7 +1,7 @@
 (function RDStationIntegration() {
-  var SERVER_ORIGIN = 'https://je5ypxtc6b.execute-api.us-west-2.amazonaws.com';
+  var SERVER_ORIGIN = 'https://wp.rd.services';
   var CLIENT_ID = 'c9d14ec8-2671-404e-b337-ebae63906a8b';
-  var REDIRECT_URL = 'https://je5ypxtc6b.execute-api.us-west-2.amazonaws.com/dev/oauth/callback';
+  var REDIRECT_URL = 'https://wp.rd.services/prod/oauth/callback';
   var LEGACY_TOKENS_ENDPOINT = 'https://api.rd.services/platform/legacy/tokens';
   var AUTHENTICATION_ENDPOINT = 'https://api.rd.services/auth/dialog';
   var newWindowInstance = null;
