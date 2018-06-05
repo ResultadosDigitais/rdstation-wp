@@ -35,6 +35,9 @@ function rdstation_settings_page_callback() {
     </div>
 
     <div class="rdsm-disconnected hidden">
+      <p>
+        <?php _e('To continue to install the Tracking Code and enable forms integrations and pop-ups, we need to confirm your access permissions.', 'integracao-rd-station') ?>
+      </p>
       <button type="button" class="button rd-oauth-integration" id="rdsm-oauth-connect">
         <?php _e('Connect to RD Station', 'integracao-rd-station') ?>
       </button>
