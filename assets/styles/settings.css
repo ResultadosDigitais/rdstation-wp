@@ -3,7 +3,12 @@ span.hidden {
 }
 
 .rd-oauth-connect-section {
-  margin: 10px auto;
+  margin: 10px;
+  width: 60%;
+}
+
+.rd-oauth-connect-section p {
+  font-size: 15px;
 }
 
 .nav-tab-wrapper a {

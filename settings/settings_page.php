@@ -36,7 +36,10 @@ function rdstation_settings_page_callback() {
 
     <div class="rdsm-disconnected hidden">
       <p>
-        <?php _e('To continue to install the Tracking Code and enable forms integrations and pop-ups, we need to confirm your access permissions.', 'integracao-rd-station') ?>
+        <?php _e('It automatically activates the RD Station Marketing tracking code in your Wordpress pages, enabling features such as Lead Tracking and Pop ups. It also integrates the contact forms that capture Leads that convert in your website forms directly to RD Station Marketing.', 'integracao-rd-station') ?>
+      </p>
+      <p>
+        <?php _e('To continue to install the Tracking Code, we need first to confirm your access permissions.', 'integracao-rd-station') ?>
       </p>
       <button type="button" class="button rd-oauth-integration" id="rdsm-oauth-connect">
         <?php _e('Connect to RD Station', 'integracao-rd-station') ?>
