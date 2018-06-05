@@ -34,7 +34,7 @@
         url: ajaxurl,
         data: data,
         success: function() {
-          RDSMGeneralSettings.displayConnectedAccountElements();
+          RDSMGeneralSettings.displayDisconnectedAccountElements();
         }
       });
     })
