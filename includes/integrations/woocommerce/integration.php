@@ -1,18 +1,36 @@
 <?php
 
-class RDWoocommerceIntegration extends LeadConversion {
-  public function send_lead_conversion($order_id) {
+require_once(RDSM_SRC_DIR . '/integrations/rdsm_integrations.php');
+
+class RDSMWoocommerceIntegration {
+  const CHECKOUT_TRIGGER = 'woocommerce_checkout_order_processed';
+
+  public $conversion_data;
+
+  public function __construct($resource, $api_client) {
+    $this->resource = $resource;
+    $this->api_client = $api_client;
+    $this->integrations = new RDSMIntegrations;
+  }
+
+  public function setup() {
+    add_filter(self::CHECKOUT_TRIGGER, array($this, 'send_resource_to_rd'), 10, 2);
+  }
+
+  public function send_resource_to_rd($order_id) {
     $order = new WC_Order($order_id);
     $this->conversion_data = $this->build_conversion_data($_POST);
     $this->add_product_information($order);
-    parent::conversion($this->conversion_data);
+    $this->resource->build_payload($this->conversion_data);
+
+    $this->api_client->post($this->resource);
   }
 
   private function build_conversion_data($data) {
-    $options = get_option('rd_settings');
+    $options = get_option('rdsm_woocommerce_settings');
     $conversion_data = $this->map_rd_fields($data);
-    $conversion_data['identificador'] = $options['rd_woocommerce_conversion_identifier'];
-    $conversion_data['token_rdstation'] = $options['rd_public_token'];
+    $conversion_data['identificador'] = $options['conversion_identifier'];
+    $conversion_data['token_rdstation'] = get_option('rdsm_public_token');
     return $conversion_data;
   }
 

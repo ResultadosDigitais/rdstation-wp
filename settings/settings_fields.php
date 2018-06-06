@@ -2,28 +2,27 @@
 
 class RDSettingsFields {
   public function register_fields() {
-    add_settings_field(
-      'rd_public_token',
-      __('Public Token', 'integracao-rd-station'),
-      'rd_public_token_callback',
-      'rdstation-settings-page',
-      'rd_general_settings_section'
-    );
+    self::general_fields();
+    self::woocommerce_fields();
+  }
 
+  private function general_fields() {
     add_settings_field(
-      'rd_private_token',
-      __('Private Token', 'integracao-rd-station'),
-      'rd_private_token_callback',
-      'rdstation-settings-page',
-      'rd_general_settings_section'
+      'rdsm_enable_tracking_code',
+      __('Tracking Code:', 'integracao-rd-station'),
+      'rdsm_enable_tracking_code_html',
+      'rdsm_general_settings',
+      'rdsm_general_settings_section'
     );
+  }
 
+  private function woocommerce_fields() {
     add_settings_field(
-      'rd_woocommerce_conversion_identifier',
+      'rdsm_woocommerce_conversion_identifier',
       __('Identifier from checkout conversions', 'integracao-rd-station'),
-      'rd_woocommerce_conversion_identifier_callback',
-      'rdstation-settings-page',
-      'rd_woocommerce_settings_section'
+      'rdsm_woocommerce_conversion_identifier_html',
+      'rdsm_woocommerce_settings',
+      'rdsm_woocommerce_settings_section'
     );
   }
 }

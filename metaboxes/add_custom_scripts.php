@@ -5,7 +5,6 @@ add_filter('the_content', 'rdscript_display_hook',  10);
 add_action('wp_head', 'rdscript_display_hook_header');
 add_action('wp_footer', 'rdscript_display_hook_footer');
 
-
 // execute the scripts on page and single posts
 function rdscript_display_hook_header() {
   global $post;
