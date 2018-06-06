@@ -37,7 +37,6 @@ More info about the plugin setup: [https://github.com/ResultadosDigitais/rdstati
 == Changelog ==
 
 = 4.0 =
-
 * One-click RD Station integration
 * Add tracking code, popups and new forms integrations
 

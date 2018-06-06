@@ -24,6 +24,10 @@ function rdstation_settings_page_callback() {
   </h1>
 
   <div class="rd-oauth-connect-section">
+    <p>
+      <?php _e('It automatically activates the RD Station Marketing tracking code in your Wordpress pages, enabling features such as Lead Tracking and Pop ups. It also integrates the contact forms that capture Leads that convert in your website forms directly to RD Station Marketing.', 'integracao-rd-station') ?>
+    </p>
+
     <div class="rdsm-connected hidden">
       <p>
         <?php _e('The plugin is connected and allows the use of Tracking Code, pop-ups and form integrations. If you want to disconnect, just click the button below.', 'integracao-rd-station') ?>
@@ -35,9 +39,6 @@ function rdstation_settings_page_callback() {
     </div>
 
     <div class="rdsm-disconnected hidden">
-      <p>
-        <?php _e('It automatically activates the RD Station Marketing tracking code in your Wordpress pages, enabling features such as Lead Tracking and Pop ups. It also integrates the contact forms that capture Leads that convert in your website forms directly to RD Station Marketing.', 'integracao-rd-station') ?>
-      </p>
       <p>
         <?php _e('To continue to install the Tracking Code, we need first to confirm your access permissions.', 'integracao-rd-station') ?>
       </p>
