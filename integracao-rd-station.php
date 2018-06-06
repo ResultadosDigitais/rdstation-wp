@@ -4,9 +4,9 @@
 Plugin Name: 	Integração RD Station
 Plugin URI: 	https://wordpress.org/plugins/integracao-rdstation
 Description:  Integre seus formulários de contato do WordPress com o RD Station
-Version:      3.2.5
-Author:       Resultados Digitais
-Author URI:   http://resultadosdigitais.com.br
+Version:      4.0
+Author:       RD Station
+Author URI:   https://www.rdstation.com/
 License:      GPL2
 License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:  integracao-rd-station
@@ -26,24 +26,27 @@ along with Integração RD Station. If not, see https://www.gnu.org/licenses/gpl
 
 */
 
+define('RDSM_PLUGIN_FILE', __FILE__);
+
+require_once('config.php');
+
 require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 require_once('rd_custom_post_type.php');
 require_once('metaboxes/add_custom_scripts.php');
-require_once('lead-conversion.php');
 
 // plugin setup
-require_once('setup.php');
 require_once('initializers/contact_form7.php');
 require_once('initializers/gravity_forms.php');
 require_once('settings/settings_page.php');
 
 // setup available integrations
-require_once('integrations/woocommerce/setup.php');
-require_once('integrations/gravity_forms/setup.php');
-require_once('integrations/contact_form7/setup.php');
+require_once(RDSM_SRC_DIR . '/integrations/contact_form7/setup.php');
+require_once(RDSM_SRC_DIR . '/integrations/gravity_forms/setup.php');
+require_once(RDSM_SRC_DIR . '/integrations/woocommerce/setup.php');
 
-add_action( 'admin_enqueue_scripts', 'enqueue_rd_admin_style' );
-function enqueue_rd_admin_style($hook) {
-  if ( 'post.php' != $hook ) return;
-  wp_enqueue_style( 'rd_admin_style', plugin_dir_url( __FILE__ ) . 'assets/styles/admin.css' );
-}
+// Setup hooks
+require_once('rdsm_event_hooks.php');
+
+// Load assets and scripts
+require_once('rdsm_assets_loader.php');
+RDSMAssetsLoader::load_assets();
