@@ -103,18 +103,17 @@ function rdsm_tracking_code_warning_html() { ?>
   <div class="rdsm-tracking-code-validation-warning">
     <div class="notice notice-warning">
       <p>
-        <?php _e("Some custom themes don't include the WordPress global footer, causing the tracking code to not work.", 'integracao-rd-station'); ?>
-      </p>
-    </div>
-    <div class="notice notice-warning">
-      <p>
         <?php _e('Warning: validate it on RD Station Marketing:', 'integracao-rd-station') ?>
         <a href="https://app.rdstation.com.br/configuracoes/analise-e-monitoramento" target="_blank">
           <?php _e('Validate', 'integracao-rd-station') ?>
         </a>
       </p>
     </div>
-
+    <div class="notice notice-warning">
+      <p>
+        <?php _e("Some custom themes don't include the WordPress global footer, causing the tracking code to not work.", 'integracao-rd-station'); ?>
+      </p>
+    </div>
   </div>
 <?php }
 
