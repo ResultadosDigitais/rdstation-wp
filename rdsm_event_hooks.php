@@ -1,6 +1,5 @@
 <?php
 
-require_once(RDSM_SRC_DIR . '/events/rdsm_plugin_activated.php');
 require_once(RDSM_SRC_DIR . '/events/rdsm_site_initialized.php');
 require_once(RDSM_SRC_DIR . '/events/rdsm_admin_initialized.php');
 require_once(RDSM_SRC_DIR . '/events/rdsm_oauth_connected.php');
@@ -18,7 +17,6 @@ class RDSMEventHooks {
 }
 
 $rdsm_wp_events = array(
-  new RDSMPluginActivated,
   new RDSMAdminInitialized,
   new RDSMSiteInitialized,
   new RDSMOauthConnected,
