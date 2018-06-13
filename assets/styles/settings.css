@@ -15,6 +15,10 @@ span.hidden {
   border-radius: 5px 5px 0 0;
 }
 
+.rdsm-tracking-code-validation-warning div.notice {
+  margin-left: 0;
+}
+
 /* ROUNDED TOGGLE CHECKBOXES */
 
 .checkbox-switch {
