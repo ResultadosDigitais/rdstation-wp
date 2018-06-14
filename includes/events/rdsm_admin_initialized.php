@@ -15,8 +15,9 @@ class RDSMAdminInitialized implements RDSMEventsInterface {
 
   public function admin_init_hooks() {
     initialize_rdstation_settings_page();
+    $base_migrated = get_option('rdsm_base_migrated');
 
-    if (empty(get_option('rdsm_base_migrated'))) {
+    if (empty($base_migrated)) {
       $this->migrate_legacy_woocoommerce_identifier();
       $this->migrate_legacy_tokens();
       update_option('rdsm_base_migrated', true);
