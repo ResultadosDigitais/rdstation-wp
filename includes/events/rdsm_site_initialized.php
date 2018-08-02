@@ -17,7 +17,7 @@ class RDSMSiteInitialized implements RDSMEventsInterface {
     $tracking_code = get_option('rdsm_tracking_code');
 
     if (!empty($tracking_code)) {
-      if (is_home() || is_single() || is_page()) {
+      if (!is_admin()) {
         echo html_entity_decode($this->tracking_code_script_tag($tracking_code));
 
         return true;
