@@ -77,12 +77,17 @@
     });
   }
 
+  function setupSettings() {
+    settings = new RDSMGeneralSettings();
+    settings.toggleElementsDisplay();
+  }
+
   function init() {
-    RDSMGeneralSettings.toggleElementsDisplay();
+    setupSettings();
     bindConnectButton();
     bindDisconnectButton();
     listenForMessage();
   }
 
-  window.addEventListener('load', init);
+  window.addEventListener('DOMContentLoaded', init);
 })();

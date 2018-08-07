@@ -20,9 +20,9 @@ class RDSMAssetsLoader {
   public static function settings_page_scripts($hook) {
     global $rdsm_settings_page;
     if ($hook != $rdsm_settings_page) return;
-    wp_enqueue_script('rdsm_authorization_script', self::$src_url . '/js/authorization.js');
     wp_enqueue_script('rdsm_general_settings_script', self::$src_url . '/js/general_settings.js');
     wp_enqueue_script('rdsm_tracking_code_script', self::$src_url . '/js/tracking_code.js');
+    wp_enqueue_script('rdsm_authorization_script', self::$src_url . '/js/authorization.js');
   }
 
   public static function settings_page_style($hook) {
