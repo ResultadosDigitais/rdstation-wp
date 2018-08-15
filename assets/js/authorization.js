@@ -5,6 +5,7 @@
   var LEGACY_TOKENS_ENDPOINT = 'https://api.rd.services/platform/legacy/tokens';
   var AUTHENTICATION_ENDPOINT = 'https://api.rd.services/auth/dialog';
   var newWindowInstance = null;
+  var settings;
 
   function oauthIntegration(message) {
     if (message.origin === SERVER_ORIGIN) {
@@ -34,7 +35,7 @@
         url: ajaxurl,
         data: data,
         success: function() {
-          RDSMGeneralSettings.displayDisconnectedAccountElements();
+          settings.displayDisconnectedAccountElements();
         }
       });
     })
@@ -58,7 +59,7 @@
         url: ajaxurl,
         data: data,
         success: function() {
-          RDSMGeneralSettings.displayConnectedAccountElements();
+          settings.displayConnectedAccountElements();
           persistLegacyTokens(tokens.accessToken)
         }
       });
@@ -77,12 +78,17 @@
     });
   }
 
+  function setupSettings() {
+    settings = new RDSMGeneralSettings();
+    settings.toggleElementsDisplay();
+  }
+
   function init() {
-    RDSMGeneralSettings.toggleElementsDisplay();
+    setupSettings();
     bindConnectButton();
     bindDisconnectButton();
     listenForMessage();
   }
 
-  window.addEventListener('load', init);
+  window.addEventListener('DOMContentLoaded', init);
 })();

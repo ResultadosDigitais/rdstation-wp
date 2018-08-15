@@ -1,47 +1,40 @@
-var RDSMGeneralSettings = (function RDSMGeneralSettings() {
-  var elements = {};
+function RDSMGeneralSettings() {
+  this.elements = {
+    trackingCodeCheckbox: document.getElementById('rdsm-enable-tracking'),
+    trackingCodeWarning: document.getElementById('rdsm-tracking-warning'),
+    connectedAccount: document.querySelector('.rdsm-connected'),
+    disconnectedAccount: document.querySelector('.rdsm-disconnected')
+  };
 
-  window.onload = loadElements;
-
-  function loadElements() {
-    elements.trackingCodeCheckbox = document.getElementById('rdsm-enable-tracking')
-    elements.trackingCodeWarning = document.getElementById('rdsm-tracking-warning')
-    elements.connectedAccount = document.querySelector('.rdsm-connected');
-    elements.disconnectedAccount = document.querySelector('.rdsm-disconnected');
-  }
-
-  function toggleElementsDisplay() {
+  this.toggleElementsDisplay = function() {
+    var settingElements = this;
     jQuery.ajax({
       url: ajaxurl,
       method: 'POST',
       data: { action: 'rdsm-authorization-check' },
       success: function(data) {
         if (data.token) {
-          displayConnectedAccountElements();
+          settingElements.displayConnectedAccountElements();
         } else {
-          displayDisconnectedAccountElements();
+          settingElements.displayDisconnectedAccountElements();
         }
       }
     });
   }
 
-  function displayDisconnectedAccountElements() {
+  this.displayDisconnectedAccountElements = function() {
+    var elements = this.elements;
     elements.connectedAccount.classList.add('hidden');
     elements.disconnectedAccount.classList.remove('hidden');
     elements.trackingCodeCheckbox.setAttribute('disabled', 'disabled');
     elements.trackingCodeWarning.classList.remove('hidden');
   }
 
-  function displayConnectedAccountElements() {
+  this.displayConnectedAccountElements = function() {
+    var elements = this.elements;
     elements.connectedAccount.classList.remove('hidden');
     elements.disconnectedAccount.classList.add('hidden');
     elements.trackingCodeCheckbox.removeAttribute('disabled');
     elements.trackingCodeWarning.classList.add('hidden');
   }
-
-  return {
-    toggleElementsDisplay: toggleElementsDisplay,
-    displayConnectedAccountElements: displayConnectedAccountElements,
-    displayDisconnectedAccountElements: displayDisconnectedAccountElements
-  };
-})();
+}
