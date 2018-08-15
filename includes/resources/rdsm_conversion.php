@@ -27,7 +27,8 @@ class RDSMConversion {
     'cielo_credit_holder_name',
     'cielo_credit_expiry',
     'cielo_credit_cvc',
-    'cielo_credit_installments'
+    'cielo_credit_installments',
+    'cielo_webservice'
   );
 
   public $payload;
