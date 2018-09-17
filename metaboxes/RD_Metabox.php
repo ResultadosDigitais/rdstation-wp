@@ -16,6 +16,14 @@ class RD_Metabox {
       'normal'
 	  );
 
+		add_meta_box(
+      'token_rdstation_box',
+      __('RD Station Token', 'integracao-rd-station'),
+      array($this, 'token_rdstation_box_content'),
+      $this->plugin_prefix.'_integrations',
+      'normal'
+    );
+
 	  add_meta_box(
       'form_id_box',
       __('Select a form to integrate with RD Station', 'integracao-rd-station'),
@@ -23,6 +31,14 @@ class RD_Metabox {
       $this->plugin_prefix.'_integrations',
       'normal'
 	  );
+	}
+
+	public function token_rdstation_box_content(){
+	    $token = get_post_meta(get_the_ID(), 'token_rdstation', true); ?>
+	    <input type="text" name="token_rdstation" size="32" value="<?php echo $token ?>">
+	    <span class="rd-integration-tips">
+				<a href="https://app.rdstation.com.br/integracoes" target="blank"><?php _e('Click here to get your token', 'integracao-rd-station') ?></a></span>
+	    <?php
 	}
 
 	public function form_identifier_box_content() {
@@ -40,6 +56,7 @@ class RD_Metabox {
 		if ( isset( $_POST['use_post_title'] ) )  update_post_meta( $post_id, 'use_post_title', $_POST['use_post_title'] );
 		if ( isset( $_POST['form_id'] ) ) update_post_meta( $post_id, 'form_id', $_POST['form_id'] );
 		if ( isset( $_POST['gf_mapped_fields'] ) ) update_post_meta( $post_id, 'gf_mapped_fields', $_POST['gf_mapped_fields'] );
+		if ( isset( $_POST['token_rdstation'] ) ) update_post_meta( $post_id, 'token_rdstation', $_POST['token_rdstation'] );
 	}
 }
 
