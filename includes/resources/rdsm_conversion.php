@@ -63,12 +63,37 @@ class RDSMConversion {
 
   private function filter_fields(array $ignored_fields, $form_fields){
     foreach ($form_fields as $field => $value) {
-      if(in_array($field, $ignored_fields)){
+      if (in_array($field, $ignored_fields)) {
+        unset($form_fields[$field]);
+      }
+
+      if ($this->is_credit_card_number($value)) {
         unset($form_fields[$field]);
       }
     }
+
     return $form_fields;
   }
+
+  private function is_credit_card_number($number)  {
+    $number = preg_replace('/\D/', '', $number);
+
+    $cardtype = array(
+      "visa"       => "/^4[0-9]{12}(?:[0-9]{3})?$/",
+      "mastercard" => "/^5[1-5][0-9]{14}$/",
+      "amex"       => "/^3[47][0-9]{13}$/",
+      "discover"   => "/^6(?:011|5[0-9]{2})[0-9]{12}$/",
+    );
+
+    if (preg_match($cardtype['visa'], $number) ||
+        preg_match($cardtype['mastercard'], $number) ||
+        preg_match($cardtype['amex'], $number) ||
+        preg_match($cardtype['discover'], $number)) {
+      return true;
+    } else {
+      return false;
+    }
+ }
 
   private function set_utmz($form_data) {
     if (isset($form_data["c_utmz"])) return $form_data["c_utmz"];
