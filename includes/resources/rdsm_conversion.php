@@ -79,16 +79,20 @@ class RDSMConversion {
     $number = preg_replace('/\D/', '', $number);
 
     $cardtype = array(
-      "visa"       => "/^4[0-9]{12}(?:[0-9]{3})?$/",
-      "mastercard" => "/^5[1-5][0-9]{14}$/",
       "amex"       => "/^3[47][0-9]{13}$/",
+      "diners"     => "/^3(?:0[0-5]|[68][0-9])[0-9]{11}$/",
       "discover"   => "/^6(?:011|5[0-9]{2})[0-9]{12}$/",
+      "elo"        => "/^((((636368)|(438935)|(504175)|(451416)|(636297)(506699)|(636369))\d{0,10})|((5067)|(4576)|(4011))\d{0,12})/",
+      "mastercard" => "/^5[1-5][0-9]{14}$/",
+      "visa"       => "/^(5[1-5]|222[1-9]|22[3-9]|2[3-6]|27[01]|2720)[0-9]{14}$/"
     );
 
-    if (preg_match($cardtype['visa'], $number) ||
+    if (preg_match($cardtype['amex'], $number) ||
+        preg_match($cardtype['diners'], $number) ||
+        preg_match($cardtype['discover'], $number) ||
+        preg_match($cardtype['elo'], $number) ||
         preg_match($cardtype['mastercard'], $number) ||
-        preg_match($cardtype['amex'], $number) ||
-        preg_match($cardtype['discover'], $number)) {
+        preg_match($cardtype['visa'], $number)) {
       return true;
     } else {
       return false;
