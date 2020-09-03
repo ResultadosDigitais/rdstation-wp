@@ -78,7 +78,7 @@ class RDSMConversion {
   private function is_credit_card_number($number)  {
     $number = preg_replace('/\D/', '', $number);
 
-    $cardtype = array(
+    $cardtypes = array(
       "amex"       => "/^3[47][0-9]{13}$/",
       "diners"     => "/^3(?:0[0-5]|[68][0-9])[0-9]{11}$/",
       "discover"   => "/^6(?:011|5[0-9]{2})[0-9]{12}$/",
