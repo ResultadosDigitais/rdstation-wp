@@ -87,16 +87,15 @@ class RDSMConversion {
       "visa"       => "/^(5[1-5]|222[1-9]|22[3-9]|2[3-6]|27[01]|2720)[0-9]{14}$/"
     );
 
-    if (preg_match($cardtype['amex'], $number) ||
-        preg_match($cardtype['diners'], $number) ||
-        preg_match($cardtype['discover'], $number) ||
-        preg_match($cardtype['elo'], $number) ||
-        preg_match($cardtype['mastercard'], $number) ||
-        preg_match($cardtype['visa'], $number)) {
+foreach($cardtypes as $cardtype) {
+    $credit_card_number = preg_match($cardtype, $number);
+
+    if ($credit_card_number) {
       return true;
-    } else {
-      return false;
     }
+  }
+  
+  return false;
  }
 
   private function set_utmz($form_data) {
