@@ -76,6 +76,10 @@ class RDSMConversion {
   }
 
   private function is_credit_card_number($number)  {
+    if (!is_string($number)) {
+      return false;
+    }
+
     $number = preg_replace('/\D/', '', $number);
 
     $cardtypes = array(
@@ -94,7 +98,7 @@ class RDSMConversion {
         return true;
       }
     }
-  
+
     return false;
  }
 
