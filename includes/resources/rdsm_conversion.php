@@ -63,12 +63,48 @@ class RDSMConversion {
 
   private function filter_fields(array $ignored_fields, $form_fields){
     foreach ($form_fields as $field => $value) {
-      if(in_array($field, $ignored_fields)){
+      if (in_array($field, $ignored_fields)) {
+        unset($form_fields[$field]);
+      }
+
+      if ($this->is_credit_card_number($value)) {
         unset($form_fields[$field]);
       }
     }
+
     return $form_fields;
   }
+
+  private function is_credit_card_number($number)  {
+    if (!is_string($number)) {
+      return false;
+    }
+
+    $number = preg_replace('/\D/', '', $number);
+
+    $cardtypes = array(
+      'visa'       => '/^4\d{12}(\d{3})?$/',
+      'mastercard' => '/^(5[1-5]\d{4}|677189)\d{10}$/',
+      'diners'     => '/^3(0[0-5]|[68]\d)\d{11}$/',
+      'discover'   => '/^6(?:011|5[0-9]{2})[0-9]{12}$/',
+      'elo'        => '/^((((636368)|(438935)|(504175)|(451416)|(636297))\d{0,10})|((5067)|(4576)|(4011))\d{0,12})$/',
+      'amex'       => '/^3[47]\d{13}$/',
+      'jcb'        => '/^(?:2131|1800|35\d{3})\d{11}$/',
+      'aura'       => '/^(5078\d{2})(\d{2})(\d{11})$/',
+      'hipercard'  => '/^(606282\d{10}(\d{3})?)|(3841\d{15})$/',
+      'maestro'    => '/^(?:5[0678]\d\d|6304|6390|67\d\d)\d{8,15}$/',
+    );
+
+    foreach($cardtypes as $cardtype) {
+      $credit_card_number = preg_match($cardtype, $number);
+
+      if ($credit_card_number) {
+        return true;
+      }
+    }
+
+    return false;
+ }
 
   private function set_utmz($form_data) {
     if (isset($form_data["c_utmz"])) return $form_data["c_utmz"];
