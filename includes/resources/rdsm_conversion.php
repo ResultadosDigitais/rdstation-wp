@@ -33,7 +33,15 @@ class RDSMConversion {
     'rede_credit_holder_name',
     'rede_credit_expiry',
     'rede_credit_cvc',
-    'rede_credit_installments'
+    'rede_credit_installments',
+    'erede_api',
+    'erede_api_cvv',
+    'erede_api_validade',
+    'erede_api_titular',
+    'erede_api_devicefingerprintid',
+    'erede_api_bandeira',
+    'erede_api_fiscal',
+    'erede_api_parcela'
   );
 
   public $payload;
