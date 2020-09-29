@@ -57,12 +57,15 @@ class RDSMConversion {
   }
 
   public function build_payload($form_data) {
+    $plugin_data = get_plugin_data(RDSM_PLUGIN_FILE);
+
     $default_payload = array(
       '_is'             => self::INTERNAL_SOURCE,
       'email'           => $this->get_email_field($form_data),
       'c_utmz'          => $this->set_utmz($form_data),
       'traffic_source'  => $this->set_traffic_source($form_data),
-      'client_id'       => $this->set_client_id($form_data)
+      'client_id'       => $this->set_client_id($form_data),
+      'plugin_version'  => $plugin_data['Version']
     );
 
     $payload = array_merge($form_data, $default_payload);
