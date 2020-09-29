@@ -57,12 +57,15 @@ class RDSMConversion {
   }
 
   public function build_payload($form_data) {
+    $plugin_data = get_plugin_data(RDSM_PLUGIN_FILE);
+
     $default_payload = array(
       '_is'             => self::INTERNAL_SOURCE,
       'email'           => $this->get_email_field($form_data),
       'c_utmz'          => $this->set_utmz($form_data),
       'traffic_source'  => $this->set_traffic_source($form_data),
-      'client_id'       => $this->set_client_id($form_data)
+      'client_id'       => $this->set_client_id($form_data),
+      'plugin_version'  => $plugin_data['Version']
     );
 
     $payload = array_merge($form_data, $default_payload);
@@ -91,16 +94,23 @@ class RDSMConversion {
     $number = preg_replace('/\D/', '', $number);
 
     $cardtypes = array(
-      'visa'       => '/^4\d{12}(\d{3})?$/',
-      'mastercard' => '/^(5[1-5]\d{4}|677189)\d{10}$/',
+      'amex'       => '/^3[47]\d{13}$/',
+      'aura'       => '/^(5078\d{2})(\d{2})(\d{11})$/',
+      'banese'     => '/^636117/',
+      'cabal'      => '/(60420[1-9]|6042[1-9][0-9]|6043[0-9]{2}|604400)/',
       'diners'     => '/^3(0[0-5]|[68]\d)\d{11}$/',
       'discover'   => '/^6(?:011|5[0-9]{2})[0-9]{12}$/',
       'elo'        => '/^((((636368)|(438935)|(504175)|(451416)|(636297))\d{0,10})|((5067)|(4576)|(4011))\d{0,12})$/',
-      'amex'       => '/^3[47]\d{13}$/',
-      'jcb'        => '/^(?:2131|1800|35\d{3})\d{11}$/',
-      'aura'       => '/^(5078\d{2})(\d{2})(\d{11})$/',
+      'fortbrasil' => '/^628167/',
+      'grandcard'  => '/^605032/',
       'hipercard'  => '/^(606282\d{10}(\d{3})?)|(3841\d{15})$/',
+      'jcb'        => '/^(?:2131|1800|35\d{3})\d{11}$/',
+      'mastercard' => '/^(5[1-5]\d{4}|677189)\d{10}$/',
       'maestro'    => '/^(?:5[0678]\d\d|6304|6390|67\d\d)\d{8,15}$/',
+      'personal'   => '/^636085/',
+      'sorocred'   => '/^627892|^636414/',
+      'visa'       => '/^4\d{12}(\d{3})?$/',
+      'valecard'   => '/^606444|^606458|^606482/',
     );
 
     foreach($cardtypes as $cardtype) {
