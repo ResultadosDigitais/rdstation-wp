@@ -41,7 +41,10 @@ class RDSMConversion {
     'erede_api_devicefingerprintid',
     'erede_api_bandeira',
     'erede_api_fiscal',
-    'erede_api_parcela'
+    'erede_api_parcela',
+    'musixe_credit_card_cvc',
+    'musixe_credit_card_expiry',
+    'musixe_credit_card_holder_name'
   );
 
   public $payload;
