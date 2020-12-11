@@ -27,3 +27,4 @@ services:
     working_dir: /var/www/html
     volumes:
       - ./wp-content/:/var/www/html/wp-content
+      - ./integracao-rd-station/:/var/www/html/wp-content/plugins/integracao-rd-station
