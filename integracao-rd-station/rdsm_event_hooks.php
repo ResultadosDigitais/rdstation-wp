@@ -7,6 +7,7 @@ require_once(RDSM_SRC_DIR . '/events/rdsm_oauth_disconnected.php');
 require_once(RDSM_SRC_DIR . '/events/rdsm_settings_page_loaded.php');
 require_once(RDSM_SRC_DIR . '/events/rdsm_plugin_uninstalled.php');
 require_once(RDSM_SRC_DIR . '/events/rdsm_tracking_status_updated.php');
+require_once(RDSM_SRC_DIR . '/events/rdsm_integration_form_changed.php');
 
 class RDSMEventHooks {
   public static function register($events) {
@@ -23,7 +24,8 @@ $rdsm_wp_events = array(
   new RDSMOauthDisconnected,
   new RDSMPluginUninstalled,
   new RDSMTrackingStatusUpdated,
-  new RDSMSettingsPageLoaded
+  new RDSMSettingsPageLoaded,
+  new RDSMIntegrationFormChanged
 );
 
 RDSMEventHooks::register($rdsm_wp_events);
