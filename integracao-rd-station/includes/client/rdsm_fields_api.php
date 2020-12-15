@@ -2,7 +2,7 @@
 
 require_once('rdsm_api.php');
 
-class RDSMIntegrationFormChangedAPI {
+class RDSMFieldsAPI {
   private $api_client;
   
   function __construct($user_credentials) {
