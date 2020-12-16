@@ -12,7 +12,7 @@
 		    if ( !$cf7Forms ) : ?>
 		    <p><?php _e("No forms have been found. <a href='admin.php?page=wpcf7-new'>Click here to create a new one.</a>", 'integracao-rd-station')?></p>
 		    <?php else : ?>
-		        <select name="form_id">
+		        <select id="forms_select" name="form_id">
 		            <option value=""></option>
 		                <?php
 		                foreach($cf7Forms as $cf7Form) {
@@ -20,10 +20,13 @@
 		                }
 		                ?>
 		        </select>
-		    <?php
+		        <?php if (!empty($form_id)) { ?>
+		        	<h4><?php _e('Map the fields below according to their names in RD Station.', 'integracao-rd-station') ?></h4>
+		        <?php } ?>
+		        <div id="custom_fields"></div>
+		    <?php		    
 		    endif;
 		}
 
 	}
-
 ?>
