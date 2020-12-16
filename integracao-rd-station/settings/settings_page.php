@@ -69,6 +69,7 @@ function rdstation_settings_page_callback() {
         case 'woocommerce':
           settings_fields('rdsm_woocommerce_settings');
           do_settings_sections('rdsm_woocommerce_settings');
+          include 'fields_mapping.php';
           break;
       }
 
