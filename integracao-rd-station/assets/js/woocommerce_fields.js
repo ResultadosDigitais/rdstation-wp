@@ -6,16 +6,19 @@ function RDSMWooCommerceFields() {
       method: 'POST',
       data: { action: 'rdsm-woocommerce-fields' },
       success: function(data) {
-        var html = "";
-        var select = "";
-
-        for (i = 0; i < data["select_items"].length; i++) {
-          select += "<option value=" + data["select_items"][i]["value"] + ">" + data["select_items"][i]["value"] + "</option>";
-        }
-
-        document.getElementById("rdsm_fields").innerHTML = getWooCommerceHTML(data, select);
+        renderFieldMapping(data);
       }
     });
+  }
+
+  function renderFieldMapping(fieldMapping) {
+    var select = "";
+
+    for (i = 0; i < fieldMapping["select_items"].length; i++) {
+      select += "<option value=" + fieldMapping["select_items"][i]["value"] + ">" + fieldMapping["select_items"][i]["value"] + "</option>";
+    }
+
+    document.getElementById("rdsm_fields").innerHTML = getWooCommerceHTML(fieldMapping, select);
   }
 
   function getWooCommerceHTML(data, select) {
