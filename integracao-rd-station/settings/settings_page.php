@@ -69,7 +69,6 @@ function rdstation_settings_page_callback() {
         case 'woocommerce':
           settings_fields('rdsm_woocommerce_settings');
           do_settings_sections('rdsm_woocommerce_settings');
-          include 'fields_mapping.php';
           break;
       }
 
@@ -82,6 +81,15 @@ function rdstation_settings_page_callback() {
 function rdsm_woocommerce_conversion_identifier_html() {
   $options = get_option( 'rdsm_woocommerce_settings' ); ?>
   <input type='text' name='rdsm_woocommerce_settings[conversion_identifier]' size="32" value='<?php echo $options['conversion_identifier']; ?>'>
+  <?php
+}
+
+function rdsm_woocommerce_field_mapping_html() {
+  $options = get_option( 'rdsm_woocommerce_settings' );
+  $field_mapping = $options['field_mapping'];
+  ?>
+  <h4><?php _e('Map the fields below according to their names in RD Station.', 'integracao-rd-station') ?></h4>
+  <div id="rdsm_fields"></div>
   <?php
 }
 

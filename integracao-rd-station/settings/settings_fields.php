@@ -24,5 +24,13 @@ class RDSettingsFields {
       'rdsm_woocommerce_settings',
       'rdsm_woocommerce_settings_section'
     );
+
+    add_settings_field(
+      'rdsm_woocommerce_field_mapping',
+      __('Field Mapping', 'integracao-rd-station'),
+      'rdsm_woocommerce_field_mapping_html',
+      'rdsm_woocommerce_settings',
+      'rdsm_woocommerce_settings_section'
+    );
   }
 }
