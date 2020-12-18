@@ -12,7 +12,7 @@
 		    if ( !$cf7Forms ) : ?>
 		    <p><?php _e("No forms have been found. <a href='admin.php?page=wpcf7-new'>Click here to create a new one.</a>", 'integracao-rd-station')?></p>
 		    <?php else : ?>
-		        <select id="forms_select" name="form_id">
+		        <select id="forms_select" name="form_id" data-integration-type="contact_form_7" data-post-id="">
 		            <option value=""></option>
 		                <?php
 		                foreach($cf7Forms as $cf7Form) {
