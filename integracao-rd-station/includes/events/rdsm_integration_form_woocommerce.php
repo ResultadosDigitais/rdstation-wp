@@ -13,16 +13,18 @@ class RDSMIntegrationFormWooCommerce implements RDSMEventsInterface {
   public function get_fields() {   
     $select_items = array();
     $contacts_fields = $this->rdstation_fields();
+    $fields = $contacts_fields["fields"];
+    array_multisort(array_column($fields, 'name'), SORT_ASC, $fields);
     
-    foreach ($contacts_fields["fields"] as $contact_field) {
-      array_push($select_items, array("id" => $contact_field["uuid"], "value" => $contact_field["name"]["default"]));
+    foreach ($fields as $contact_field) {
+      array_push($select_items, array("api_identifier" => $contact_field["api_identifier"], "value" => $contact_field["name"]["default"]));
     }
 
     wp_send_json(array( 'select_items' => $select_items, 'fields_woocommerce' => $this->contact_woocommerce_fields()));
   }
 
   public function contact_woocommerce_fields() {
-    $fields = array(
+    $form_fields = array(
       'billing_first_name',
       'billing_last_name',
       'billing_email',
@@ -35,7 +37,8 @@ class RDSMIntegrationFormWooCommerce implements RDSMEventsInterface {
       'billing_state',
       'billing_postcode'
     );
-    return $fields;
+    
+    return $form_fields;
   }
 
   public function rdstation_fields() {
