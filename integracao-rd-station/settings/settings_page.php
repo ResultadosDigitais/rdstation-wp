@@ -89,6 +89,7 @@ function rdsm_woocommerce_field_mapping_html() {
   $field_mapping = $options['field_mapping'];
   ?>
   <h4><?php _e('Map the fields below according to their names in RD Station.', 'integracao-rd-station') ?></h4>
+  <h3 id="info_create_fields" class="hidden"><?php _e('To see the fields created in RDSM reload page.', 'integracao-rd-station') ?></h3>
   <?php echo "<div id=\"rdsm_fields\" 
                 data-billing_first_name=\"" .$field_mapping["billing_first_name"]."\"
                 data-billing_last_name=\""  .$field_mapping["billing_last_name"]."\"

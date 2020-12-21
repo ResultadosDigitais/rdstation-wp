@@ -38,6 +38,8 @@ function RDSMCustomFields() {
       document.getElementById("custom_fields").innerHTML = getIntegrationFormHTML(fieldMapping, select, type, "gf", form_id);
       setSelectedItems(fieldMapping, type, "gf", form_id);
     }
+
+    // createFieldsRDSM();    
   }
 
   function getIntegrationFormHTML(data, select, integrationType, initials, form_id) {
@@ -45,7 +47,8 @@ function RDSMCustomFields() {
     var fields = data["fields_" + integrationType];
     for (i = 0; i < fields.length; i++) {
       html += "<p class=\"rd-fields-mapping\"><span class=\"rd-fields-mapping-label\">" + fields[i]["label"] + 
-              "</span> <span class=\"dashicons dashicons-arrow-right-alt\"></span><select name=\""+initials+"_mapped_fields["+fields[i]["id"]+"]\"><option value=\"\"></option>" + select + "</select></p>";
+              "</span> <span class=\"dashicons dashicons-arrow-right-alt\"></span><select onchange=\"createFieldsRDSM(this.value)\" name=\""+initials+"_mapped_fields["+fields[i]["id"]+"]\"><option value=\"\"></option>\
+              <option value=\"https://app.rdstation.com.br/campos-personalizados/novo\"><span>Criar campo personalizado no RDSM</span></option>" + select + "</select></p>";
     }
     return html;
   }
@@ -56,7 +59,15 @@ function RDSMCustomFields() {
       select = document.getElementsByName(initials + "_mapped_fields["+fields[i]["id"]+"]")[0];
       select.value = fields[i]["value"];
     }
-  }  
+  }
+}
+
+function createFieldsRDSM(value) {
+  if (value.includes("https")) {
+    var info_box = document.getElementById("info_create_fields");
+    info_box.classList.remove("hidden");
+    window.open(value, '_blank');
+  }
 }
 
 function load() {

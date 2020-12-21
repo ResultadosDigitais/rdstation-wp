@@ -20,6 +20,7 @@
 	            ?>
 	        </select>	
 	        <h4><?php _e('Map the fields below according to their names in RD Station.', 'integracao-rd-station') ?></h4>
+	        <h3 id="info_create_fields" class="hidden"><?php _e('To see the fields created in RDSM reload page.', 'integracao-rd-station') ?></h3>
 	        <div id="custom_fields"></div>
 		    <?php
 			endif;
