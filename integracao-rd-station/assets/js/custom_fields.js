@@ -1,14 +1,19 @@
 function RDSMCustomFields() {
-  
-  this.formsSelectChanged = function() {
-    var selectedForm = document.getElementById("forms_select");
-    var type = selectedForm.dataset.integrationType;
-    var post_id = selectedForm.dataset.postId;
 
-    getCustomFieldsByFormId(selectedForm.value, type, post_id);
-    selectedForm.onchange = function() {
-      getCustomFieldsByFormId(selectedForm.value, type, post_id);
-    }
+  this.checkAuthenticationRDSM = function() {
+    jQuery.ajax({
+      url: ajaxurl,
+      method: 'POST',
+      data: { action: 'rdsm-authorization-check' },
+      success: function(data) {
+        if (data.token) {
+          displayConnectedAccountElements();
+          loadMappingFields();
+        } else {
+          displayDisconnectedAccountElements();
+        }
+      }
+    });
   }
 
   function getCustomFieldsByFormId(form_id, type, post_id) {
@@ -24,6 +29,27 @@ function RDSMCustomFields() {
     });
   }
 
+  function loadMappingFields() {
+    var selectedForm = document.getElementById("forms_select");
+    var type = selectedForm.dataset.integrationType;
+    var post_id = selectedForm.dataset.postId;
+
+    getCustomFieldsByFormId(selectedForm.value, type, post_id);
+    selectedForm.onchange = function() {
+      getCustomFieldsByFormId(selectedForm.value, type, post_id);
+    }
+  }
+
+  function displayDisconnectedAccountElements() {
+    document.getElementById('map_fields_title').classList.add('hidden');
+    document.getElementById('info_check_login').classList.remove('hidden');
+  }
+
+  function displayConnectedAccountElements() {
+    document.getElementById('map_fields_title').classList.remove('hidden');
+    document.getElementById('info_check_login').classList.add('hidden');
+  }
+
   function renderFieldMapping(fieldMapping, type, form_id) {
     var select = "";
 
@@ -37,9 +63,7 @@ function RDSMCustomFields() {
     }else if (type == "gravity_forms") {
       document.getElementById("custom_fields").innerHTML = getIntegrationFormHTML(fieldMapping, select, type, "gf", form_id);
       setSelectedItems(fieldMapping, type, "gf", form_id);
-    }
-
-    // createFieldsRDSM();    
+    } 
   }
 
   function getIntegrationFormHTML(data, select, integrationType, initials, form_id) {
@@ -47,8 +71,7 @@ function RDSMCustomFields() {
     var fields = data["fields_" + integrationType];
     for (i = 0; i < fields.length; i++) {
       html += "<p class=\"rd-fields-mapping\"><span class=\"rd-fields-mapping-label\">" + fields[i]["label"] + 
-              "</span> <span class=\"dashicons dashicons-arrow-right-alt\"></span><select onchange=\"createFieldsRDSM(this.value)\" name=\""+initials+"_mapped_fields["+fields[i]["id"]+"]\"><option value=\"\"></option>\
-              <option value=\"https://app.rdstation.com.br/campos-personalizados/novo\"><span>Criar campo personalizado no RDSM</span></option>" + select + "</select></p>";
+              "</span> <span class=\"dashicons dashicons-arrow-right-alt\"></span><select name=\""+initials+"_mapped_fields["+fields[i]["id"]+"]\"><option value=\"\"></option>" + select + "</select></p>";
     }
     return html;
   }
@@ -62,17 +85,14 @@ function RDSMCustomFields() {
   }
 }
 
-function createFieldsRDSM(value) {
-  if (value.includes("https")) {
-    var info_box = document.getElementById("info_create_fields");
-    info_box.classList.remove("hidden");
-    window.open(value, '_blank');
-  }
+function showInfoCreateFieldRDSM(value) {
+  var info_box = document.getElementById("info_create_fields");
+  info_box.classList.remove("hidden");    
 }
 
 function load() {
   customFields = new RDSMCustomFields();  
-  customFields.formsSelectChanged();
+  customFields.checkAuthenticationRDSM();
 }
 
 window.addEventListener('DOMContentLoaded', load);

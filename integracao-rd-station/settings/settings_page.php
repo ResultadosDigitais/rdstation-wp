@@ -88,21 +88,33 @@ function rdsm_woocommerce_field_mapping_html() {
   $options = get_option( 'rdsm_woocommerce_settings' );
   $field_mapping = $options['field_mapping'];
   ?>
-  <h4><?php _e('Map the fields below according to their names in RD Station.', 'integracao-rd-station') ?></h4>
-  <h3 id="info_create_fields" class="hidden"><?php _e('To see the fields created in RDSM reload page.', 'integracao-rd-station') ?></h3>
-  <?php echo "<div id=\"rdsm_fields\" 
-                data-billing_first_name=\"" .$field_mapping["billing_first_name"]."\"
-                data-billing_last_name=\""  .$field_mapping["billing_last_name"]."\"
-                data-billing_email=\""      .$field_mapping["billing_email"]."\"
-                data-billing_phone=\""      .$field_mapping["billing_phone"]."\"
-                data-billing_company=\""    .$field_mapping["billing_company"]."\"
-                data-billing_country=\""    .$field_mapping["billing_country"]."\"
-                data-billing_address_1=\""  .$field_mapping["billing_address_1"]."\"
-                data-billing_address_2=\""  .$field_mapping["billing_address_2"]."\"
-                data-billing_city=\""       .$field_mapping["billing_city"]."\"
-                data-billing_state=\""      .$field_mapping["billing_state"]."\"
-                data-billing_postcode=\""   .$field_mapping["billing_postcode"]."\"
-              ></div>" ?>
+  <div class="rdsm-disconnected-box hidden">
+    <h3 id="info_check_login">
+      <?php _e('You need to connect to RD Station to map the fields, click in \'Connect to RD Station\' to login', 'integracao-rd-station') ?>
+    </h3>
+  </div>
+
+  <div class="rdsm-connected-box hidden">
+    <h4 id="map_fields_title">
+      <?php _e('Map the fields below according to their names in RD Station.', 'integracao-rd-station') ?>
+    </h4>
+    <a class="button" style="margin-left: 314px;" onclick="showInfoCreateFieldRDSM()" href="https://app.rdstation.com.br/campos-personalizados/novo" target="_blank">Criar campo no RDSM</a>
+    <h3 id="info_create_fields" class="hidden"><?php _e('To see the fields created in RDSM reload page.', 'integracao-rd-station') ?></h3>  
+    <?php echo "<div id=\"rdsm_fields\" 
+                  data-billing_first_name=\"" .$field_mapping["billing_first_name"]."\"
+                  data-billing_last_name=\""  .$field_mapping["billing_last_name"]."\"
+                  data-billing_email=\""      .$field_mapping["billing_email"]."\"
+                  data-billing_phone=\""      .$field_mapping["billing_phone"]."\"
+                  data-billing_company=\""    .$field_mapping["billing_company"]."\"
+                  data-billing_country=\""    .$field_mapping["billing_country"]."\"
+                  data-billing_address_1=\""  .$field_mapping["billing_address_1"]."\"
+                  data-billing_address_2=\""  .$field_mapping["billing_address_2"]."\"
+                  data-billing_city=\""       .$field_mapping["billing_city"]."\"
+                  data-billing_state=\""      .$field_mapping["billing_state"]."\"
+                  data-billing_postcode=\""   .$field_mapping["billing_postcode"]."\"
+                ></div>" 
+    ?>    
+  </div>
   <?php
 }
 
