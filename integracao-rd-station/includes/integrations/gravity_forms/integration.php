@@ -41,7 +41,7 @@ class RDSMGravityFormsIntegration {
 
       $this->apply_integration_fields($integration->ID);
 
-      $this->resource->build_payload(array_merge($this->form_data, $this->default_payload));
+      $this->resource->build_payload(array_merge($this->form_data, $this->default_payload), $integration->ID, 'gravity_forms');
 
       $this->api_client->post($this->resource);
     }

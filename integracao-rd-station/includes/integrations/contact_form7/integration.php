@@ -37,7 +37,7 @@ class RDContactForm7Integration {
 
     foreach ($current_form_integrations as $integration) {
       $this->apply_integration_fields($integration->ID);
-      $this->resource->build_payload($this->form_data);
+      $this->resource->build_payload($this->form_data, $integration->ID, 'contact_form_7');
       $this->api_client->post($this->resource);
     }
   }
