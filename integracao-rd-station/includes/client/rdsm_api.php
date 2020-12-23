@@ -33,7 +33,7 @@ class RDSMAPI {
     if ($this->handle_expired_token($response)) {
       return $this->post($resource, $args);
     }
-
+    
     return $response;
   }
 

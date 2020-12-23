@@ -8,10 +8,6 @@ class RDSMGravityFormsIntegration {
 
   public $form_data;
 
-  public $default_payload = array(
-    'form_origem' => self::PLUGIN_DESCRIPTION
-  );
-
   private $submitted_form_id;
 
   public function __construct($resource, $api_client) {
@@ -41,7 +37,7 @@ class RDSMGravityFormsIntegration {
 
       $this->apply_integration_fields($integration->ID);
 
-      $this->resource->build_payload(array_merge($this->form_data, $this->default_payload), $integration->ID, 'gravity_forms');
+      $this->resource->build_payload($this->form_data, $integration->ID, 'gravity_forms');
 
       $this->api_client->post($this->resource);
     }

@@ -88,8 +88,6 @@ class RDSMEvent {
     $contact_form = WPCF7_ContactForm::get_instance( $form_id );
     $form_fields = $contact_form->scan_form_tags();
 
-    $response += array('conversion_identifier' => $conversion_identifier);
-
     foreach ($form_fields as $field) {
       if ($field['type'] != "submit") {
         if(!empty($form_map[$field['name']])){
@@ -108,12 +106,12 @@ class RDSMEvent {
     $form_map = get_post_meta($post_id, 'gf_mapped_fields_'.$form_id, true);
 
     $response += array('conversion_identifier' => $conversion_identifier);
-    
+
     foreach ($gf_forms as $form) {
       if ($form['id'] == $form_id) {
         foreach ($form['fields'] as $field) {
           if(!empty($form_map[$field['id']])){
-            $response += array($form_map[$field['id']] => $form_data[$field['name']]);
+            $response += array($form_map[$field['id']] => $form_data[$field['id']]);
           }
         }
       }
