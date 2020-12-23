@@ -22,17 +22,17 @@ function RDSMWooCommerceFields() {
     rdsmFields.innerHTML = getWooCommerceHTML(fieldMapping, select);    
 
     var fieldsMappingSelected = {
-      "billing_first_name": rdsmFields.dataset.billing_first_name,
-      "billing_last_name": rdsmFields.dataset.billing_last_name,
-      "billing_email": rdsmFields.dataset.billing_email,
-      "billing_phone": rdsmFields.dataset.billing_phone,
-      "billing_company": rdsmFields.dataset.billing_company,
-      "billing_country": rdsmFields.dataset.billing_country,
-      "billing_address_1": rdsmFields.dataset.billing_address_1,
-      "billing_address_2": rdsmFields.dataset.billing_address_2,
-      "billing_city": rdsmFields.dataset.billing_city,
-      "billing_state": rdsmFields.dataset.billing_state,
-      "billing_postcode": rdsmFields.dataset.billing_postcode
+      "nome":         rdsmFields.dataset.nome,
+      "sobrenome":    rdsmFields.dataset.sobrenome,
+      "email":        rdsmFields.dataset.email,
+      "telefone":     rdsmFields.dataset.telefone,
+      "empresa":      rdsmFields.dataset.empresa,
+      "país":         rdsmFields.dataset.país,
+      "endereço":     rdsmFields.dataset.endereço,
+      "endereço2":    rdsmFields.dataset.endereço2,
+      "cidade":       rdsmFields.dataset.cidade,
+      "estado":       rdsmFields.dataset.estado,
+      "cep":          rdsmFields.dataset.cep
     };
 
     setSelectedItems(fieldMapping, fieldsMappingSelected);

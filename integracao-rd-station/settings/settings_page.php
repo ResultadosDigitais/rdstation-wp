@@ -101,17 +101,17 @@ function rdsm_woocommerce_field_mapping_html() {
     <a class="button" style="margin-left: 314px;" onclick="showInfoCreateFieldRDSM()" href="https://app.rdstation.com.br/campos-personalizados/novo" target="_blank">Criar campo no RDSM</a>
     <h3 id="info_create_fields" class="hidden"><?php _e('To see the fields created in RDSM reload page.', 'integracao-rd-station') ?></h3>  
     <?php echo "<div id=\"rdsm_fields\" 
-                  data-billing_first_name=\"" .$field_mapping["billing_first_name"]."\"
-                  data-billing_last_name=\""  .$field_mapping["billing_last_name"]."\"
-                  data-billing_email=\""      .$field_mapping["billing_email"]."\"
-                  data-billing_phone=\""      .$field_mapping["billing_phone"]."\"
-                  data-billing_company=\""    .$field_mapping["billing_company"]."\"
-                  data-billing_country=\""    .$field_mapping["billing_country"]."\"
-                  data-billing_address_1=\""  .$field_mapping["billing_address_1"]."\"
-                  data-billing_address_2=\""  .$field_mapping["billing_address_2"]."\"
-                  data-billing_city=\""       .$field_mapping["billing_city"]."\"
-                  data-billing_state=\""      .$field_mapping["billing_state"]."\"
-                  data-billing_postcode=\""   .$field_mapping["billing_postcode"]."\"
+                  data-nome=\""       .$field_mapping["nome"]."\"
+                  data-sobrenome=\""  .$field_mapping["sobrenome"]."\"
+                  data-email=\""      .$field_mapping["email"]."\"
+                  data-telefone=\""   .$field_mapping["telefone"]."\"
+                  data-empresa=\""    .$field_mapping["empresa"]."\"
+                  data-país=\""       .$field_mapping["país"]."\"
+                  data-endereço=\""   .$field_mapping["endereço"]."\"
+                  data-endereço2=\""  .$field_mapping["endereço2"]."\"
+                  data-cidade=\""     .$field_mapping["cidade"]."\"
+                  data-estado=\""     .$field_mapping["estado"]."\"
+                  data-cep=\""        .$field_mapping["cep"]."\"
                 ></div>" 
     ?>    
   </div>

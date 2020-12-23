@@ -127,20 +127,19 @@ class RDSMEvent {
     $field_mapping = $options['field_mapping'];
 
     $response += array(
-      'conversion_identifier' => $options['conversion_identifier'],
-      'billing_first_name'    => $field_mapping['billing_first_name'],
-      'billing_last_name'     => $field_mapping['billing_last_name'],
-      'billing_email'         => $field_mapping['billing_email'],
-      'billing_phone'         => $field_mapping['billing_phone'],
-      'billing_company'       => $field_mapping['billing_company'],
-      'billing_country'       => $field_mapping['billing_country'],
-      'billing_address_1'     => $field_mapping['billing_address_1'],
-      'billing_address_2'     => $field_mapping['billing_address_2'],
-      'billing_city'          => $field_mapping['billing_city'],
-      'billing_state'         => $field_mapping['billing_state'],
-      'billing_postcode'      => $field_mapping['billing_postcode']
+      'conversion_identifier'       => $options['conversion_identifier'],
+      $field_mapping['nome']        => $form_data['nome'],
+      $field_mapping['sobrenome']   => $form_data['sobrenome'],
+      $field_mapping['email']       => $form_data['email'],
+      $field_mapping['telefone']    => $form_data['telefone'],
+      $field_mapping['empresa']     => $form_data['empresa'],
+      $field_mapping['país']        => $form_data['país'],
+      $field_mapping['endereço']    => $form_data['endereço'],
+      $field_mapping['endereço2']   => $form_data['endereço2'],
+      $field_mapping['cidade']      => $form_data['cidade'],
+      $field_mapping['estado']      => $form_data['estado'],
+      $field_mapping['cep']         => $form_data['cep'] 
     );
-
     return $response;
   }
 

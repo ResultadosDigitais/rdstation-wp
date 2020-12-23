@@ -25,17 +25,17 @@ class RDSMIntegrationFormWooCommerce implements RDSMEventsInterface {
 
   public function contact_woocommerce_fields() {
     $form_fields = array(
-      'billing_first_name',
-      'billing_last_name',
-      'billing_email',
-      'billing_phone',
-      'billing_company',
-      'billing_country',
-      'billing_address_1',
-      'billing_address_2',
-      'billing_city',
-      'billing_state',
-      'billing_postcode'
+      'nome',
+      'sobrenome',
+      'email',
+      'telefone',
+      'empresa',
+      'país',
+      'endereço',
+      'endereço2',
+      'cidade',
+      'estado',
+      'cep'
     );
     
     return $form_fields;
