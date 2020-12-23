@@ -88,6 +88,8 @@ class RDSMEvent {
     $contact_form = WPCF7_ContactForm::get_instance( $form_id );
     $form_fields = $contact_form->scan_form_tags();
 
+    $response += array('conversion_identifier' => $conversion_identifier);
+
     foreach ($form_fields as $field) {
       if ($field['type'] != "submit") {
         if(!empty($form_map[$field['name']])){

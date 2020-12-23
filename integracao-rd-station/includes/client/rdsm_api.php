@@ -29,7 +29,7 @@ class RDSMAPI {
     }
 
     $response = wp_remote_post(sprintf("%s%s", $this->api_url, $resource), $args);
-
+    
     if ($this->handle_expired_token($response)) {
       return $this->post($resource, $args);
     }
