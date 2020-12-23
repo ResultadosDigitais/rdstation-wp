@@ -51,25 +51,14 @@ class RDSMEvent {
 
   public $payload;
 
-  public function valid_payload() {
-    $required_fields = array('email', 'token_rdstation', 'identificador');
-    foreach ($required_fields as $field) {
-      if(empty($this->payload[$field]) || is_null($this->payload[$field])){
-        return false;
-      }
-    }
-    return strlen($this->payload['token_rdstation']) == 32 ? true : false;
-  }
-
   public function build_payload($form_data, $post_id, $integration_type) {    
     $default_payload = array(
       'event_type'      => 'CONVERSION',
       'event_family'    => 'CDP',
       'payload'         => $this->get_payload($form_data, $post_id, $integration_type)
     );
-
-    $payload = array_merge($form_data, $default_payload);
-    $this->payload = $this->filter_fields($this->ignored_fields, $payload);
+    
+    $this->payload = $this->filter_fields($this->ignored_fields, $default_payload);
   }
 
   private function get_payload($form_data, $post_id, $integration_type) {
@@ -79,50 +68,52 @@ class RDSMEvent {
     );
 
     switch ($integration_type) {
-      case 'contact_form_7':
-        return contact_form7_payload($form_data, $post_id, $response);
+      case 'contact_form_7':        
+        return $response + $this->contact_form7_payload($form_data, $post_id);
         break;
       case 'gravity_forms':
-        return gravity_forms_payload($form_data, $post_id, $response);
+        return $this->gravity_forms_payload($form_data, $post_id);
         break;
       case 'woo_commerce':
-        return woo_commerce_payload($form_data, $post_id, $response);
+        return $this->woo_commerce_payload($form_data, $post_id);
         break;      
     }
   }
 
-  private function contact_form7_payload($form_data, $post_id, $response) {
+  private function contact_form7_payload($form_data, $post_id) {
+    $response = array();
     $conversion_identifier = get_post_meta($post_id, 'form_identifier', true);
     $form_id = get_post_meta($post_id, 'form_id', true);
     $form_map = get_post_meta($post_id, 'cf7_mapped_fields_'.$form_id, true);    
     $contact_form = WPCF7_ContactForm::get_instance( $form_id );
     $form_fields = $contact_form->scan_form_tags();
 
-    array_push($response, array('conversion_identifier' => $conversion_identifier));
+    $response += array('conversion_identifier' => $conversion_identifier);
 
     foreach ($form_fields as $field) {
       if ($field['type'] != "submit") {
         if(!empty($form_map[$field['name']])){
-          array_push($response, array($form_map[$field['name']] => $form_data[$field['name']]));
+          $response += array($form_map[$field['name']] => $form_data[$field['name']]);
         }
       }
     }
     return $response;
   }
 
-  private function gravity_forms_payload($form_data, $post_id, $response) {
+  private function gravity_forms_payload($form_data, $post_id) {
+    $response = array();
     $conversion_identifier = get_post_meta($post_id, 'form_identifier', true);
     $form_id = get_post_meta($post_id, 'form_id', true);
     $gf_forms = GFAPI::get_forms();    
     $form_map = get_post_meta($post_id, 'gf_mapped_fields_'.$form_id, true);
 
-    array_push($response, array('conversion_identifier' => $conversion_identifier));
+    $response += array('conversion_identifier' => $conversion_identifier);
     
     foreach ($gf_forms as $form) {
       if ($form['id'] == $form_id) {
         foreach ($form['fields'] as $field) {
           if(!empty($form_map[$field['id']])){
-            array_push($response, array($form_map[$field['id']] => $form_data[$field['name']]));
+            $response += array($form_map[$field['id']] => $form_data[$field['name']]);
           }
         }
       }
@@ -130,11 +121,12 @@ class RDSMEvent {
     return $response;
   }
 
-  private function woo_commerce_payload($form_data, $post_id, $response) {
+  private function woo_commerce_payload($form_data, $post_id) {
+    $response = array();
     $options = get_option( 'rdsm_woocommerce_settings' );
     $field_mapping = $options['field_mapping'];
 
-    array_push($response, array(
+    $response += array(
       'conversion_identifier' => $options['conversion_identifier'],
       'billing_first_name'    => $field_mapping['billing_first_name'],
       'billing_last_name'     => $field_mapping['billing_last_name'],
@@ -147,7 +139,7 @@ class RDSMEvent {
       'billing_city'          => $field_mapping['billing_city'],
       'billing_state'         => $field_mapping['billing_state'],
       'billing_postcode'      => $field_mapping['billing_postcode']
-    ));
+    );
 
     return $response;
   }
