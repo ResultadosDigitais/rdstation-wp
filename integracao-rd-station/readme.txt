@@ -1,5 +1,5 @@
-=== Integração RD Station ===
-Contributors: Filipe Mateus do Nascimento
+=== RD Station ===
+Contributors: Filipe Mateus do Nascimento, Anderson Artur da Costa Oliveira
 Donate link: -
 Tags: integrations, forms, contact form, rd station, resultados digitais
 Requires at least: 4.7
@@ -35,6 +35,10 @@ Features:
 More info about the plugin setup: [https://github.com/ResultadosDigitais/rdstation-wp](https://github.com/ResultadosDigitais/rdstation-wp)
 
 == Changelog ==
+
+= 5.0 =
+* Mapping fields RD Station
+* API v2 RD Station
 
 = 4.0 =
 * One-click RD Station integration
