@@ -72,10 +72,10 @@ class RDSMEvent {
         return $response + $this->contact_form7_payload($form_data, $post_id);
         break;
       case 'gravity_forms':
-        return $this->gravity_forms_payload($form_data, $post_id);
+        return $response + $this->gravity_forms_payload($form_data, $post_id);
         break;
       case 'woo_commerce':
-        return $this->woo_commerce_payload($form_data, $post_id);
+        return $response + $this->woo_commerce_payload($form_data, $post_id);
         break;      
     }
   }
@@ -92,8 +92,17 @@ class RDSMEvent {
 
     foreach ($form_fields as $field) {
       if ($field['type'] != "submit") {
-        if(!empty($form_map[$field['name']])){
-          $response += array($form_map[$field['name']] => $form_data[$field['name']]);
+        $name = $form_map[$field['name']];
+        if(!empty($name)){          
+          $value = $form_data[$field['name']];
+
+          if ($name == "communications") {
+            if ($value == "1") {
+              $response += array('legal_bases' => array(array('category' => 'communications', 'type' => 'consent', 'status' => 'granted')));
+            }
+          }else {
+            $response += array($name => $value);
+          }
         }
       }
     }
@@ -112,8 +121,26 @@ class RDSMEvent {
     foreach ($gf_forms as $form) {
       if ($form['id'] == $form_id) {
         foreach ($form['fields'] as $field) {
-          if(!empty($form_map[$field['id']])){
-            $response += array($form_map[$field['id']] => $form_data[$field['id']]);
+          if ($field['type'] == "checkbox") {            
+            foreach ($field['inputs'] as $input) {
+              $name = $form_map[$input['id']];              
+              if(!empty($name)){
+                $value = $form_data[$input['id']];
+                if ($name == "communications") {
+                  if (!empty($value)) {
+                    $response += array('legal_bases' => array(array('category' => 'communications', 'type' => 'consent', 'status' => 'granted')));
+                  }
+                }else {
+                  $response += array($name => $value);
+                }
+              }
+            }
+          }else {
+            $name = $form_map[$field['id']];
+            if(!empty($name)){
+              $value = $form_data[$field['id']];              
+              $response += array($name => $value);              
+            }
           }
         }
       }

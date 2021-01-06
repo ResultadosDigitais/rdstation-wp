@@ -71,7 +71,7 @@ function RDSMCustomFields() {
     var fields = data["fields_" + integrationType];
     for (i = 0; i < fields.length; i++) {
       html += "<p class=\"rd-fields-mapping\"><span class=\"rd-fields-mapping-label\">" + fields[i]["label"] + 
-              "</span> <span class=\"dashicons dashicons-arrow-right-alt\"></span><select name=\""+initials+"_mapped_fields["+fields[i]["id"]+"]\"><option value=\"\"></option>" + select + "</select></p>";
+              "</span> <span class=\"dashicons dashicons-arrow-right-alt\"></span><select name=\""+initials+"_mapped_fields["+fields[i]["id"]+"]\"><option value=\"\"></option>" + select + "<option value=\"communications\">Consentimento de Comunicação</option></select></p>";
     }
     return html;
   }
