@@ -43,15 +43,10 @@ class RDSMIntegrationFormChanged implements RDSMEventsInterface {
 
     foreach ($form_fields as $field) {
       if ($field['type'] != "submit") {
-        if(!empty($form_map[$field['name']])){
-          $value = $form_map[$field['name']];
-        }else {
-          $value = '';
-        }
-        array_push($fields, array("label" => $field['name'], "id" => $field['name'], "value" => $value));
+        $fields = $this->get_value($form_map, $fields, $field, 'name', 'name');
       }
     }
-    return $fields;
+    return $fields;    
   }
 
   public function gravity_forms_fields($form_id, $post_id) {
@@ -64,24 +59,25 @@ class RDSMIntegrationFormChanged implements RDSMEventsInterface {
         foreach ($form['fields'] as $field) {
           if ($field['type'] == "checkbox") {
             foreach ($field['inputs'] as $input) {
-              if(!empty($form_map[$input['id']])){
-                $value = $form_map[$input['id']];
-              }else {
-                $value = '';
-              }
-              array_push($fields, array("label" => $input['label'], "id" => $input['id'], "value" => $value));
+              $fields = $this->get_value($form_map, $fields, $input, 'id', 'label');
             }
           }else {
-            if(!empty($form_map[$field['id']])){
-              $value = $form_map[$field['id']];
-            }else {
-              $value = '';
-            }
-            array_push($fields, array("label" => $field['label'], "id" => $field['id'], "value" => $value));
+            $fields = $this->get_value($form_map, $fields, $field, 'id', 'label');
           }          
         }
       }
     }
+    return $fields;
+  }
+
+  public function get_value($form_map, $fields, $field, $identifier, $label) {
+    if(!empty($form_map[$field[$identifier]])){
+      $value = $form_map[$field[$identifier]];
+    }else {
+      $value = '';
+    }
+    array_push($fields, array("label" => $field[$label], "id" => $field[$identifier], "value" => $value));
+
     return $fields;
   }
 

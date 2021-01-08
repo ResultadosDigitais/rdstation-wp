@@ -57,7 +57,7 @@ class RDSMEvent {
       'event_family'    => 'CDP',
       'payload'         => $this->get_payload($form_data, $post_id, $integration_type)
     );
-    
+
     $this->payload = $this->filter_fields($this->ignored_fields, $default_payload);
   }
 
@@ -92,18 +92,7 @@ class RDSMEvent {
 
     foreach ($form_fields as $field) {
       if ($field['type'] != "submit") {
-        $name = $form_map[$field['name']];
-        if(!empty($name)){          
-          $value = $form_data[$field['name']];
-
-          if ($name == "communications") {
-            if ($value == "1") {
-              $response += array('legal_bases' => array(array('category' => 'communications', 'type' => 'consent', 'status' => 'granted')));
-            }
-          }else {
-            $response += array($name => $value);
-          }
-        }
+        $response = $this->get_value($response, $form_map, $form_data, $field, 'name', true);
       }
     }
     return $response;
@@ -123,28 +112,31 @@ class RDSMEvent {
         foreach ($form['fields'] as $field) {
           if ($field['type'] == "checkbox") {            
             foreach ($field['inputs'] as $input) {
-              $name = $form_map[$input['id']];              
-              if(!empty($name)){
-                $value = $form_data[$input['id']];
-                if ($name == "communications") {
-                  if (!empty($value)) {
-                    $response += array('legal_bases' => array(array('category' => 'communications', 'type' => 'consent', 'status' => 'granted')));
-                  }
-                }else {
-                  $response += array($name => $value);
-                }
-              }
+              $response = $this->get_value($response, $form_map, $form_data, $input, 'id', true);
             }
           }else {
-            $name = $form_map[$field['id']];
-            if(!empty($name)){
-              $value = $form_data[$field['id']];              
-              $response += array($name => $value);              
-            }
+            $response = $this->get_value($response, $form_map, $form_data, $field, 'id', false);
           }
         }
       }
     }
+    return $response;
+  }
+
+  private function get_value($response, $form_map, $form_data, $field, $identifier, $is_checkbox) {
+    $name = $form_map[$field[$identifier]];
+    if(!empty($name)){          
+      $value = $form_data[$field[$identifier]];
+
+      if ($name == "communications" && $is_checkbox) {
+        if (!empty($value)) {
+          $response += array('legal_bases' => array(array('category' => 'communications', 'type' => 'consent', 'status' => 'granted')));
+        }
+      }else {
+        $response += array($name => $value);
+      }
+    }
+
     return $response;
   }
 
