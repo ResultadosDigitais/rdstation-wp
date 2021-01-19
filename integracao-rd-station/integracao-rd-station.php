@@ -2,9 +2,9 @@
 
 /*
 Plugin Name: 	RD Station
-Plugin URI: 	https://wordpress.org/plugins/rd-station
+Plugin URI: 	https://wordpress.org/plugins/integracao-rdstation
 Description:  Integre seus formulários de contato do WordPress com o RD Station
-Version:      0.1.0
+Version:      5.0.0
 Author:       RD Station
 Author URI:   https://www.rdstation.com/
 License:      GPL2

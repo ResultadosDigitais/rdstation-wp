@@ -22,6 +22,7 @@ function RDSMCustomFields() {
       method: 'POST',
       data: { action: 'rdsm-custom-fields', form_id: form_id, type: type, post_id: post_id },
       success: function(data) {
+        debugger;
         if (data != null){
           renderFieldMapping(data, type, form_id);
         }

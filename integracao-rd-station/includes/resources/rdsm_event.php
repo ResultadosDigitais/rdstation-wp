@@ -87,12 +87,17 @@ class RDSMEvent {
     $form_map = get_post_meta($post_id, 'cf7_mapped_fields_'.$form_id, true);    
     $contact_form = WPCF7_ContactForm::get_instance( $form_id );
     $form_fields = $contact_form->scan_form_tags();
+    $identifier = 'name';
 
     $response += array('conversion_identifier' => $conversion_identifier);
 
-    foreach ($form_fields as $field) {
-      if ($field['type'] != "submit") {
-        $response = $this->get_value($response, $form_map, $form_data, $field, 'name', true);
+    if (empty($form_map)) {      
+      $response += array('email' => $this->get_email_field($form_data));
+    }else {
+      foreach ($form_fields as $field) {
+        if ($field['type'] != "submit") {
+          $response = $this->get_value($response, $form_map, $form_data, $field, $identifier, true);
+        }
       }
     }
     return $response;
@@ -104,6 +109,10 @@ class RDSMEvent {
     $form_id = get_post_meta($post_id, 'form_id', true);
     $gf_forms = GFAPI::get_forms();    
     $form_map = get_post_meta($post_id, 'gf_mapped_fields_'.$form_id, true);
+    
+    if (empty($form_map)) {      
+      $form_map = get_post_meta($post_id, 'gf_mapped_fields', true);      
+    }
 
     $response += array('conversion_identifier' => $conversion_identifier);
 
@@ -124,7 +133,7 @@ class RDSMEvent {
   }
 
   private function get_value($response, $form_map, $form_data, $field, $identifier, $is_checkbox) {
-    $name = $form_map[$field[$identifier]];
+    $name = $form_map[$field[$identifier]];    
     if(!empty($name)){          
       $value = $form_data[$field[$identifier]];
 
@@ -145,6 +154,10 @@ class RDSMEvent {
     $options = get_option( 'rdsm_woocommerce_settings' );
     $field_mapping = $options['field_mapping'];
 
+    if (empty($field_mapping)) {
+      $field_mapping = $this->map_rd_default_fields();      
+    }
+
     $response += array(
       'conversion_identifier'       => $options['conversion_identifier'],
       $field_mapping['nome']        => $form_data['nome'],
@@ -160,6 +173,24 @@ class RDSMEvent {
       $field_mapping['cep']         => $form_data['cep'] 
     );
     return $response;
+  }
+
+  private function map_rd_default_fields() {
+    $field_mapping = array(
+      'name'         => 'nome',
+      'last_name'    => 'sobrenome',
+      'email'        => 'email',
+      'mobile_phone' => 'telefone',
+      'company_name' => 'empresa',
+      'country'      => 'país',
+      'address_1'    => 'endereço',
+      'address_2'    => 'endereço2',
+      'city'         => 'cidade',
+      'state'        => 'estado',
+      'postcode'     => 'cep'
+    );
+
+    return $field_mapping;
   }
 
   private function filter_fields(array $ignored_fields, $form_fields){
