@@ -67,8 +67,7 @@ class RDSMIntegrationFormChanged implements RDSMEventsInterface {
         }
       }
     }
-    // return $fields;
-    return get_post_meta(123, 'debug', true);
+    return $fields;
   }
 
   public function get_value($form_map, $fields, $field, $identifier, $label) {
