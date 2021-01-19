@@ -153,12 +153,18 @@ class RDSMEvent {
     $response = array();
     $options = get_option( 'rdsm_woocommerce_settings' );
     $field_mapping = $options['field_mapping'];
-
+    
     if (empty($field_mapping)) {
-      $field_mapping = $this->map_rd_default_fields();      
+      $response += $this->map_rd_default_fields($options, $form_data);      
+    }else {
+      $response += $this->map_rd_custom_fields($field_mapping, $options, $form_data);
     }
 
-    $response += array(
+    return $response;
+  }
+
+  private function map_rd_custom_fields($field_mapping, $options, $form_data) {
+    $response = array(
       'conversion_identifier'       => $options['conversion_identifier'],
       $field_mapping['nome']        => $form_data['nome'],
       $field_mapping['sobrenome']   => $form_data['sobrenome'],
@@ -172,25 +178,23 @@ class RDSMEvent {
       $field_mapping['estado']      => $form_data['estado'],
       $field_mapping['cep']         => $form_data['cep'] 
     );
+
     return $response;
   }
 
-  private function map_rd_default_fields() {
-    $field_mapping = array(
-      'name'         => 'nome',
-      'last_name'    => 'sobrenome',
-      'email'        => 'email',
-      'mobile_phone' => 'telefone',
-      'company_name' => 'empresa',
-      'country'      => 'país',
-      'address_1'    => 'endereço',
-      'address_2'    => 'endereço2',
-      'city'         => 'cidade',
-      'state'        => 'estado',
-      'postcode'     => 'cep'
+  private function map_rd_default_fields($options, $form_data) {
+    $response = array(
+      'conversion_identifier' => $options['conversion_identifier'],
+      'name'                  => $form_data['nome']." ".$form_data['sobrenome'],
+      'email'                 => $form_data['email'],
+      'mobile_phone'          => $form_data['telefone'],
+      'company_name'          => $form_data['empresa'],
+      'country'               => $form_data['país'],
+      'city'                  => $form_data['cidade'],
+      'state'                 => $form_data['estado']
     );
 
-    return $field_mapping;
+    return $response;
   }
 
   private function filter_fields(array $ignored_fields, $form_fields){
