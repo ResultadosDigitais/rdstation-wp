@@ -24,6 +24,12 @@ function RDSMCustomFields() {
       success: function(data) {
         if (data != null){
           renderFieldMapping(data, type, form_id);
+          
+          if (data["mapped_fields"]) {
+            hideMappedFieldsAlert();
+          }else {
+            showMappedFieldsAlert();
+          }
         }
       }
     });
@@ -48,6 +54,14 @@ function RDSMCustomFields() {
   function displayConnectedAccountElements() {
     document.getElementById('map_fields_title').classList.remove('hidden');
     document.getElementById('info_check_login').classList.add('hidden');
+  }
+
+  function showMappedFieldsAlert() {
+    document.getElementById('info_mapped_fields').classList.remove('hidden');
+  }
+
+  function hideMappedFieldsAlert() {
+    document.getElementById('info_mapped_fields').classList.add('hidden');
   }
 
   function renderFieldMapping(fieldMapping, type, form_id) {

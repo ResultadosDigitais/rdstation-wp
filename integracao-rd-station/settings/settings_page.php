@@ -87,7 +87,14 @@ function rdsm_woocommerce_conversion_identifier_html() {
 function rdsm_woocommerce_field_mapping_html() {
   $options = get_option( 'rdsm_woocommerce_settings' );
   $field_mapping = $options['field_mapping'];
-  ?>
+  
+  if (empty($field_mapping)) { 
+    $hidden = "";
+  }else {
+    $hidden = "hidden";
+  }
+  
+  ?>  
   <div class="rdsm-disconnected-box hidden">
     <h3 id="info_check_login">
       <?php _e('You need to connect to RD Station to map the fields, click in \'Connect to RD Station\' to login', 'integracao-rd-station') ?>
@@ -98,6 +105,12 @@ function rdsm_woocommerce_field_mapping_html() {
     <h4 id="map_fields_title">
       <?php _e('Map the fields below according to their names in RD Station.', 'integracao-rd-station') ?>
     </h4>
+    <?php echo "<h3 id=\"info_mapped_fields\" class=\"".$hidden."\">" ?>
+      <?php _e('The fields on this form have not yet been mapped, you can configure them below or ', 'integracao-rd-station') ?>
+      <a href="https://ajuda.rdstation.com.br/hc/pt-br/articles/360054981272" target="_blank" style="color: white;">
+        <?php _e('click here for more information', 'integracao-rd-station') ?>
+      </a>
+    </h3>
     <a class="button" style="margin-left: 314px;" onclick="showInfoCreateFieldRDSM()" href="https://app.rdstation.com.br/campos-personalizados/novo" target="_blank">Criar campo no RDSM</a>
     <h3 id="info_create_fields" class="hidden"><?php _e('To see the fields created in RDSM reload page.', 'integracao-rd-station') ?></h3>  
     <?php echo "<div id=\"rdsm_fields\" 

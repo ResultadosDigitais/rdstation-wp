@@ -17,6 +17,7 @@ class RDSMIntegrationFormChanged implements RDSMEventsInterface {
     $select_items = array();
     $contacts_fields = $this->rdstation_fields();
     $fields = $contacts_fields["fields"];
+    $mapped_fields = true;
 
     array_multisort(array_column($fields, 'name'), SORT_ASC, $fields);
 
@@ -26,19 +27,27 @@ class RDSMIntegrationFormChanged implements RDSMEventsInterface {
       }
 
       if ($integrationType == "contact_form_7") {
-        $json_result = array( 'select_items' => $select_items, 'fields_contact_form_7' => $this->contact_form7_fields($form_id, $post_id));
+        $form_map = get_post_meta($post_id, 'cf7_mapped_fields_'.$form_id, true);
+        $json_result = array( 'select_items' => $select_items, 'fields_contact_form_7' => $this->contact_form7_fields($form_id, $post_id, $form_map), 'mapped_fields' => $this->has_mapped_fields($form_map));
       } elseif ($integrationType == "gravity_forms") {
-        $json_result = array( 'select_items' => $select_items, 'fields_gravity_forms' => $this->gravity_forms_fields($form_id, $post_id));
+        $form_map = get_post_meta($post_id, 'gf_mapped_fields_'.$form_id, true);           
+        $json_result = array( 'select_items' => $select_items, 'fields_gravity_forms' => $this->gravity_forms_fields($form_id, $post_id, $form_map), 'mapped_fields' => $this->has_mapped_fields($form_map));
       }
     }
 
     wp_send_json($json_result);
   }
 
-  public function contact_form7_fields($form_id, $post_id) {
+  public function has_mapped_fields($form_map){
+    if (empty($form_map)) {
+      return false;
+    }
+    return true;
+  }
+
+  public function contact_form7_fields($form_id, $post_id, $form_map) {
     $contact_form = WPCF7_ContactForm::get_instance( $form_id );
-    $form_fields = $contact_form->scan_form_tags();
-    $form_map = get_post_meta($post_id, 'cf7_mapped_fields_'.$form_id, true);
+    $form_fields = $contact_form->scan_form_tags();    
     $fields = array();
 
     foreach ($form_fields as $field) {
@@ -49,11 +58,10 @@ class RDSMIntegrationFormChanged implements RDSMEventsInterface {
     return $fields;    
   }
 
-  public function gravity_forms_fields($form_id, $post_id) {
+  public function gravity_forms_fields($form_id, $post_id, $form_map) {
     $gf_forms = GFAPI::get_forms();    
-    $form_map = get_post_meta($post_id, 'gf_mapped_fields_'.$form_id, true);
     $fields = array();
-    
+
     foreach ($gf_forms as $form) {
       if ($form['id'] == $form_id) {
         foreach ($form['fields'] as $field) {
