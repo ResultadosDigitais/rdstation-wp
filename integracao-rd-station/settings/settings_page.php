@@ -86,13 +86,8 @@ function rdsm_woocommerce_conversion_identifier_html() {
 
 function rdsm_woocommerce_field_mapping_html() {
   $options = get_option( 'rdsm_woocommerce_settings' );
-  $field_mapping = $options['field_mapping'];
-  
-  if (empty($field_mapping)) { 
-    $hidden = "";
-  }else {
-    $hidden = "hidden";
-  }
+  $field_mapping = $options['field_mapping'];  
+  $hidden = (empty($field_mapping)) ? "" : "hidden";
   
   ?>  
   <div class="rdsm-disconnected-box hidden">

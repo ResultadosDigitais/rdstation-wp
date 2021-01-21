@@ -39,10 +39,7 @@ class RDSMIntegrationFormChanged implements RDSMEventsInterface {
   }
 
   public function has_mapped_fields($form_map){
-    if (empty($form_map)) {
-      return false;
-    }
-    return true;
+    return !empty($form_map);
   }
 
   public function contact_form7_fields($form_id, $post_id, $form_map) {
