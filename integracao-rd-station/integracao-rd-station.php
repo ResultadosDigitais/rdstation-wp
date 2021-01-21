@@ -9,7 +9,7 @@ Author:       RD Station
 Author URI:   https://www.rdstation.com/
 License:      GPL2
 License URI:  https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain:  rd-station
+Text Domain:  integracao-rd-station
 
 RD Station is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

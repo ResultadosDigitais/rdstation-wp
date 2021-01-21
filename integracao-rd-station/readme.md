@@ -39,13 +39,11 @@ O plugin **RD Station** atualmente é compatível com os seguintes plugins de fo
 
 ### Instalação
 
-Caso o seu site utilize a versão anterior do plugin "Integração RD Station(legacy)" você precisa removê-la antes de instalar o novo plugin.
-
 Se o seu site ou blog foi desenvolvido pela Resultados Digitais, este plugin já está instalado e você pode pular para a parte de [configuração](#configuração). Caso contrário, siga estes passos:  
 
 Você pode instalar o plugin diretamente pelo seu painel do WordPress, clicando em **Plugins**, **Adicionar novo** e pesquise por **RD Station**. Provavelmente será o único plugin a aparecer nos resultados da pesquisa. Basta clicar em **Instalar** e depois em **Ativar**. Seu plugin está funcionando e você já pode pular para a parte de configuração.
 
-Caso você prefira instalar o plugin manualmente, você pode baixá-lo [clicando neste link](https://github.com/ResultadosDigitais/rdstation-wp/archive/master.zip) ou baixando o arquivo ZIP diretamente pelo [endereço oficial](https://wordpress.org/plugins/rd-station/).
+Caso você prefira instalar o plugin manualmente, você pode baixá-lo [clicando neste link](https://github.com/ResultadosDigitais/rdstation-wp/archive/master.zip) ou baixando o arquivo ZIP diretamente pelo [endereço oficial](https://wordpress.org/plugins/integracao-rd-station/).
 
 Para instalá-lo no seu site, você precisa entrar no seu painel do WordPress, clicar em **Plugins**, **Adicionar novo** e depois em **Fazer upload do plugin**. Então selecione o arquivo que você baixou e clique em **Instalar agora**. Se o plugin foi instalado com sucesso, clique em **Ativar plugin**.
 
