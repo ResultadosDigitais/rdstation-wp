@@ -14,7 +14,7 @@ class RDSMAssetsLoader {
   public static function form_integrations_style($hook) {
     $screen = get_current_screen();
 
-    if ( 'post.php' != $hook ) return;
+    if ( 'post.php' != $hook && 'post-new.php' != $hook ) return;
     wp_enqueue_style( 'rd_admin_style', self::$src_url . '/styles/admin.css' );
   }
 
@@ -24,6 +24,7 @@ class RDSMAssetsLoader {
     wp_enqueue_script('rdsm_general_settings_script', self::$src_url . '/js/general_settings.js');
     wp_enqueue_script('rdsm_tracking_code_script', self::$src_url . '/js/tracking_code.js');
     wp_enqueue_script('rdsm_authorization_script', self::$src_url . '/js/authorization.js');
+    wp_enqueue_script('rdsm_woocommerce_fields_script', self::$src_url . '/js/woocommerce_fields.js');
   }
 
   public static function settings_page_style($hook) {
@@ -33,7 +34,7 @@ class RDSMAssetsLoader {
   }
 
   public static function post_page_scripts($hook) {
-    if ( 'post.php' != $hook ) return;
+    if ( 'post.php' != $hook && 'post-new.php' != $hook ) return;
     wp_enqueue_script('rdsm_custom_fields_page_script', self::$src_url . '/js/custom_fields.js');
   }
 }

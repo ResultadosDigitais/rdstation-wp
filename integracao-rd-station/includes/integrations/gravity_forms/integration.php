@@ -8,10 +8,6 @@ class RDSMGravityFormsIntegration {
 
   public $form_data;
 
-  public $default_payload = array(
-    'form_origem' => self::PLUGIN_DESCRIPTION
-  );
-
   private $submitted_form_id;
 
   public function __construct($resource, $api_client) {
@@ -36,12 +32,9 @@ class RDSMGravityFormsIntegration {
     $this->build_default_payload($submitted_fields);
 
     foreach ($current_form_integrations as $integration) {
-      $field_mapping = get_post_meta($integration->ID, 'gf_mapped_fields', true);
-      $this->apply_field_mapping($field_mapping);
-
       $this->apply_integration_fields($integration->ID);
 
-      $this->resource->build_payload(array_merge($this->form_data, $this->default_payload));
+      $this->resource->build_payload($this->form_data, $integration->ID, 'gravity_forms');
 
       $this->api_client->post($this->resource);
     }

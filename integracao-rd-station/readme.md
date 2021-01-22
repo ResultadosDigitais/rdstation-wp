@@ -1,4 +1,4 @@
-# Integração RD Station - WordPress
+# RD Station - WordPress
 
 Dúvidas e Sugestões? [https://github.com/ResultadosDigitais/rdstation-wp/issues](https://github.com/ResultadosDigitais/rdstation-wp/issues)
 
@@ -29,7 +29,7 @@ Endereço oficial: [https://wordpress.org/plugins/integracao-rd-station/](https:
 
 ### Compatibilidade
 
-O plugin **Integração RD Station** atualmente é compatível com os seguintes plugins de formulário:
+O plugin **RD Station** atualmente é compatível com os seguintes plugins de formulário:
 
 * VIA API
 ** [Contact Form 7](#contact-form-7)
@@ -39,11 +39,13 @@ O plugin **Integração RD Station** atualmente é compatível com os seguintes 
 
 ### Instalação
 
+Caso o seu site utilize a versão anterior do plugin "Integração RD Station(legacy)" você precisa removê-la antes de instalar o novo plugin.
+
 Se o seu site ou blog foi desenvolvido pela Resultados Digitais, este plugin já está instalado e você pode pular para a parte de [configuração](#configuração). Caso contrário, siga estes passos:  
 
-Você pode instalar o plugin diretamente pelo seu painel do WordPress, clicando em **Plugins**, **Adicionar novo** e pesquise por **Integração RD Station**. Provavelmente será o único plugin a aparecer nos resultados da pesquisa. Basta clicar em **Instalar** e depois em **Ativar**. Seu plugin está funcionando e você já pode pular para a parte de configuração.
+Você pode instalar o plugin diretamente pelo seu painel do WordPress, clicando em **Plugins**, **Adicionar novo** e pesquise por **RD Station**. Provavelmente será o único plugin a aparecer nos resultados da pesquisa. Basta clicar em **Instalar** e depois em **Ativar**. Seu plugin está funcionando e você já pode pular para a parte de configuração.
 
-Caso você prefira instalar o plugin manualmente, você pode baixá-lo [clicando neste link](https://github.com/ResultadosDigitais/rdstation-wp/archive/master.zip) ou baixando o arquivo ZIP diretamente pelo [endereço oficial](https://wordpress.org/plugins/integracao-rd-station/).
+Caso você prefira instalar o plugin manualmente, você pode baixá-lo [clicando neste link](https://github.com/ResultadosDigitais/rdstation-wp/archive/master.zip) ou baixando o arquivo ZIP diretamente pelo [endereço oficial](https://wordpress.org/plugins/rd-station/).
 
 Para instalá-lo no seu site, você precisa entrar no seu painel do WordPress, clicar em **Plugins**, **Adicionar novo** e depois em **Fazer upload do plugin**. Então selecione o arquivo que você baixou e clique em **Instalar agora**. Se o plugin foi instalado com sucesso, clique em **Ativar plugin**.
 
@@ -56,14 +58,14 @@ No entanto, dentro das páginas e posts será aberto uma área para inserção d
 
 #### Contact Form 7
 
-A integração no Contact Form 7 só irá funcionar com formulários que possuem um campo chamado **email** ou **your-email**. Sem esse campo, a API do RD Station não realiza a conversão dos leads.
+A integração no Contact Form 7 só irá funcionar com formulários que possuem um campo de **email** mapeado com o campo de email do RD Station. Sem esse campo, a API do RD Station não realiza a conversão dos leads.
 
 Para fazer uma integração, clique no item **RD Station CF7** que apareceu no menu do seu painel. Para criar uma nova integração, basta clicar em **Criar integração** e preencher os dados solicitados no formulário.
 
 Crie um título para sua integração, apenas para organizar suas integrações e encontrá-la posteriormente no seu painel.
 
 No campo **Identificador**, crie um Identificador para seu formulário. Isso é importante para você saber qual o formulário de origem do *lead*.  
-Preencha o campo **Token RD Station** com o seu **Token Público** do RD Station. Este token, você pode encontrar em: http://rdstation.com.br/integracoes  
+
 Por último, selecione qual formulário você deseja integrar. Este campo traz uma lista com todos os formulários criados no Contact Form 7.  
 
 Clique em **Integrar**. Pronto, seu formulário escolhido está integrado ao RD Station.
@@ -99,7 +101,7 @@ Para que os dados de um campo do formulário sejam enviados como campo personali
 
 ### Mapeamento de campos
 
-Se você usa o Gravity Forms, deve ter percebido que quando um formulário é criado, os campos são gerados com nomes não amigáveis, por exemplo: input_1, input_2, input_3... Em consequencia disto, os leads chegam no RD Station de uma forma difícil de ser identificada.
+Quando um formulário é criado, os campos são gerados com nomes não amigáveis, por exemplo: input_1, input_2, input_3... Em consequencia disto, os leads chegam no RD Station de uma forma difícil de ser identificada.
 
 Na página de configuração das integrações, você pode definir o nome de cada campo do seu formulário. Você pode dizer, por exemplo, que o campo `input_1` vai se chamar `nome` e o `input_2` será cidade.
 

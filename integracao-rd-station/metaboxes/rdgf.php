@@ -18,10 +18,26 @@
                   echo "<option value=".$gForm->id.selected( $form_id, $gForm->id, false) .">".$gForm->title."</option>";
                 }
 	            ?>
-	        </select>	
-	        <?php if (!empty($form_id)) { ?>
-	        	<h4><?php _e('Map the fields below according to their names in RD Station.', 'integracao-rd-station') ?></h4>
-	        <?php } ?>
+	        </select>
+	        <h4 id="map_fields_title" class="hidden">
+	        	<?php _e('Map the fields below according to their names in RD Station.', 'integracao-rd-station') ?>
+	        	<a class="button pull-right" onclick="showInfoCreateFieldRDSM()" href="https://app.rdstation.com.br/campos-personalizados/novo" target="_blank">
+	        		Criar campo no RDSM
+	        	</a>
+	        </h4>
+	        <h3 id="info_mapped_fields" class="hidden">
+	        	<?php _e('The fields on this form have not yet been mapped, you can configure them below or ', 'integracao-rd-station') ?>
+	        	<a href="https://ajuda.rdstation.com.br/hc/pt-br/articles/360054981272" target="_blank" style="color: white;">
+	        		<?php _e('click here for more information', 'integracao-rd-station') ?>
+	        	</a>
+	        </h3>
+	        <h3 id="info_check_login" class="hidden">
+	        	<?php _e('You need to connect to RD Station to map the fields, ', 'integracao-rd-station') ?>
+	        	<a href="options-general.php?page=rdstation-settings-page" style="color: white;">
+	        		<?php _e('click here to go to Settings page and than \'Connect to RD Station\'', 'integracao-rd-station') ?>
+	        	</a>
+	        </h3>
+	        <h3 id="info_create_fields" class="hidden"><?php _e('To see the fields created in RDSM reload page.', 'integracao-rd-station') ?></h3>	        
 	        <div id="custom_fields"></div>
 		    <?php
 			endif;
