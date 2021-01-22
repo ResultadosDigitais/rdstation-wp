@@ -1,1 +1,4 @@
 .data
+
+/wp-content/languages/*
+/wp-content/uploads/*

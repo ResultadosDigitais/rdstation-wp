@@ -149,3 +149,15 @@ body {
   left: 100%;
   margin-left: -1.4em;
 }
+
+#info_create_fields, #info_check_login{
+  background: antiquewhite;
+  padding: 15px;
+  color: #4f6d83;
+  border-radius: 5px;
+}
+
+#info_check_login{
+  background: indianred;    
+  color: white;
+}

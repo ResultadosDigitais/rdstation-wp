@@ -11,34 +11,29 @@
 			if( !$gForms ) : ?>
 				<p><?php _e("No forms have been found. <a href='admin.php?page=gf_new_form'>Click here to create a new one.</a>", 'integracao-rd-station')?></p>
 		  <?php else : ?>
-				<div class="rd-select-form">
-					<select name="form_id">
-						<option value=""> </option>
+				<?php echo "<select id=\"forms_select\" name=\"form_id\" data-integration-type=\"gravity_forms\" data-post-id=\"" . get_the_ID() . "\">" ?>
+					<option value=""> </option>
 	            <?php
                 foreach($gForms as $gForm){
                   echo "<option value=".$gForm->id.selected( $form_id, $gForm->id, false) .">".$gForm->title."</option>";
                 }
 	            ?>
 	        </select>
-		    </div>
+	        <h4 id="map_fields_title" class="hidden">
+	        	<?php _e('Map the fields below according to their names in RD Station.', 'integracao-rd-station') ?>
+	        	<a class="button pull-right" onclick="showInfoCreateFieldRDSM()" href="https://app.rdstation.com.br/campos-personalizados/novo" target="_blank">
+	        		Criar campo no RDSM
+	        	</a>
+	        </h4>
+	        <h3 id="info_check_login" class="hidden">
+	        	<?php _e('You need to connect to RD Station to map the fields, ', 'integracao-rd-station') ?>
+	        	<a href="options-general.php?page=rdstation-settings-page" style="color: white;">
+	        		<?php _e('click here to go to Settings page and than \'Connect to RD Station\'', 'integracao-rd-station') ?>
+	        	</a>
+	        </h3>
+	        <h3 id="info_create_fields" class="hidden"><?php _e('To see the fields created in RDSM reload page.', 'integracao-rd-station') ?></h3>	        
+	        <div id="custom_fields"></div>
 		    <?php
-		    $gf_forms = GFAPI::get_forms();
-				$form_map = get_post_meta(get_the_ID(), 'gf_mapped_fields', true);
-
-				foreach ($gf_forms as $form) {
-					if ($form['id'] == $form_id) { ?>
-						<h4><?php _e('Map the fields below according to their names in RD Station.', 'integracao-rd-station') ?></h4>
-						<?php foreach ($form['fields'] as $field) {
-							if(!empty($form_map[$field['id']])){
-								$value = $form_map[$field['id']];
-							}
-							else {
-								$value = '';
-							}
-							echo '<p class="rd-fields-mapping"><span class="rd-fields-mapping-label">' . $field['label'] . '</span> <span class="dashicons dashicons-arrow-right-alt"></span> <input type="text" name="gf_mapped_fields['.$field['id'].']" value="'.$value.'">';
-						}
-					}
-				}
 			endif;
 		}
 	}

@@ -1,11 +1,9 @@
 <?php
 
 require_once(RDSM_SRC_DIR . '/events/rdsm_events_interface.php');
-require_once(RDSM_SRC_DIR . '/entities/rdsm_legacy_user_credentials.php');
 
 class RDSMAdminInitialized implements RDSMEventsInterface {
   function __construct() {
-    $this->legacy_options = get_option('rd_settings');
     $this->new_woocommerce_options = get_option('rdsm_woocommerce_settings');
   }
 
@@ -16,26 +14,12 @@ class RDSMAdminInitialized implements RDSMEventsInterface {
   public function admin_init_hooks() {
     initialize_rdstation_settings_page();
     $base_migrated = get_option('rdsm_base_migrated');
-
-    if (empty($base_migrated)) {
-      $this->migrate_legacy_woocoommerce_identifier();
-      $this->migrate_legacy_tokens();
-      update_option('rdsm_base_migrated', true);
-    }
   }
 
   private function migrate_legacy_woocoommerce_identifier() {
     if ($this->should_migrate_identifier()) {
       $this->new_woocommerce_options['conversion_identifier'] = $this->legacy_options['rd_woocommerce_conversion_identifier'];
       update_option('rdsm_woocommerce_settings', $this->new_woocommerce_options);
-    }
-  }
-
-  private function migrate_legacy_tokens() {
-    if ($this->should_migrate_tokens()) {
-      $legacy_credentials = new RDSMLegacyUserCredentials;
-      $legacy_credentials->save_public_token($this->legacy_options['rd_public_token']);
-      $legacy_credentials->save_private_token($this->legacy_options['rd_private_token']);
     }
   }
 
