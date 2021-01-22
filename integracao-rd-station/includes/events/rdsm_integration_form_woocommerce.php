@@ -13,29 +13,32 @@ class RDSMIntegrationFormWooCommerce implements RDSMEventsInterface {
   public function get_fields() {   
     $select_items = array();
     $contacts_fields = $this->rdstation_fields();
+    $fields = $contacts_fields["fields"];
+    array_multisort(array_column($fields, 'name'), SORT_ASC, $fields);
     
-    foreach ($contacts_fields["fields"] as $contact_field) {
-      array_push($select_items, array("id" => $contact_field["uuid"], "value" => $contact_field["name"]["default"]));
+    foreach ($fields as $contact_field) {
+      array_push($select_items, array("api_identifier" => $contact_field["api_identifier"], "value" => $contact_field["name"]["default"]));
     }
 
     wp_send_json(array( 'select_items' => $select_items, 'fields_woocommerce' => $this->contact_woocommerce_fields()));
   }
 
   public function contact_woocommerce_fields() {
-    $fields = array(
-      'billing_first_name',
-      'billing_last_name',
-      'billing_email',
-      'billing_phone',
-      'billing_company',
-      'billing_country',
-      'billing_address_1',
-      'billing_address_2',
-      'billing_city',
-      'billing_state',
-      'billing_postcode'
+    $form_fields = array(
+      'nome',
+      'sobrenome',
+      'email',
+      'telefone',
+      'empresa',
+      'país',
+      'endereço',
+      'endereço2',
+      'cidade',
+      'estado',
+      'cep'
     );
-    return $fields;
+    
+    return $form_fields;
   }
 
   public function rdstation_fields() {

@@ -21,8 +21,7 @@ class RDSMWoocommerceIntegration {
     $order = new WC_Order($order_id);
     $this->conversion_data = $this->build_conversion_data($_POST);
     $this->add_product_information($order);
-    $this->resource->build_payload($this->conversion_data);
-
+    $this->resource->build_payload($this->conversion_data, $order_id, 'woo_commerce');
     $this->api_client->post($this->resource);
   }
 

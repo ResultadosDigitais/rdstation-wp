@@ -10,6 +10,7 @@ define('REFRESH_TOKEN_URL', 'https://wp.rd.services/prod/oauth/refresh');
 
 // Endpoints
 define('CONVERSIONS', '/conversions');
+define('EVENTS', '/platform/events');
 define('CONTACTS', '/platform/contacts/');
 define('TRACKING_CODE', '/marketing/tracking_code');
 define('CONTACTS_FIELDS', '/platform/contacts/fields');

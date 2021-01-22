@@ -66,18 +66,6 @@
     });
   }
 
-  function persistLegacyTokens(accessToken) {
-    jQuery.ajax({
-      url: LEGACY_TOKENS_ENDPOINT,
-      headers: { 'Authorization':'Bearer ' + accessToken },
-      method: 'GET',
-      success: function(data) {
-        data.action = 'rd-persist-legacy-tokens';
-        jQuery.post(ajaxurl, data);
-      }
-    });
-  }
-
   function setupSettings() {
     settings = new RDSMGeneralSettings();
     settings.toggleElementsDisplay();

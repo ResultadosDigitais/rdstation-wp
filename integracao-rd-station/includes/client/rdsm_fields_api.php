@@ -15,7 +15,7 @@ class RDSMFieldsAPI {
   }
 
   public function contacts_fields() {
-    $response = $this->api_client->get(CONTACTS_FIELDS);
+    $response = $this->api_client->get(CONTACTS_FIELDS);    
     return $response;
   }
 }
