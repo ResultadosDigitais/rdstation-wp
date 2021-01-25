@@ -2,3 +2,6 @@
 
 /wp-content/languages/*
 /wp-content/uploads/*
+
+!/wp-content/languages/plugins/integracao-rd-station-pt_BR.mo
+!/wp-content/languages/plugins/integracao-rd-station-pt_BR.po
