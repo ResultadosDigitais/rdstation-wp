@@ -16,6 +16,8 @@ Hello! This is the most practical way to integrate RD Station Marketing with you
 
 It automatically activates the RD Station Marketing tracking code in your Wordpress pages, enabling features such as Lead Tracking and Pop ups. It also integrates the contact forms that capture Leads that convert in your website forms directly to RD Station Marketing.
 
+More info about the version 5.0.0: [https://ajuda.rdstation.com.br/hc/pt-br/articles/360054981272](https://ajuda.rdstation.com.br/hc/pt-br/articles/360054981272)
+
 Compatible with the following forms:
 
 * Contact Form 7
@@ -34,11 +36,14 @@ Features:
 
 More info about the plugin setup: [https://github.com/ResultadosDigitais/rdstation-wp](https://github.com/ResultadosDigitais/rdstation-wp)
 
+More info about the version 5.0.0: [https://ajuda.rdstation.com.br/hc/pt-br/articles/360054981272](https://ajuda.rdstation.com.br/hc/pt-br/articles/360054981272)
+
 == Changelog ==
 
 = 5.0 =
 * Mapping fields RD Station
 * API v2 RD Station
+* More info about the version 5.0.0: [https://ajuda.rdstation.com.br/hc/pt-br/articles/360054981272](https://ajuda.rdstation.com.br/hc/pt-br/articles/360054981272)
 
 = 4.0 =
 * One-click RD Station integration
