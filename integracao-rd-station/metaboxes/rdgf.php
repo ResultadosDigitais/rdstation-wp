@@ -22,7 +22,7 @@
 	        <h4 id="map_fields_title" class="hidden">
 	        	<?php _e('Map the fields below according to their names in RD Station.', 'integracao-rd-station') ?>
 	        	<a class="button pull-right" onclick="showInfoCreateFieldRDSM()" href="https://app.rdstation.com.br/campos-personalizados/novo" target="_blank">
-	        		Criar campo no RDSM
+	        		<?php _e("Create field in RDSM", 'integracao-rd-station')?>
 	        	</a>
 	        </h4>
 	        <h3 id="info_mapped_fields" class="hidden">

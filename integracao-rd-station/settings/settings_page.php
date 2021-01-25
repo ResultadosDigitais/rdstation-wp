@@ -106,7 +106,7 @@ function rdsm_woocommerce_field_mapping_html() {
         <?php _e('click here for more information', 'integracao-rd-station') ?>
       </a>
     </h3>
-    <a class="button" style="margin-left: 314px;" onclick="showInfoCreateFieldRDSM()" href="https://app.rdstation.com.br/campos-personalizados/novo" target="_blank">Criar campo no RDSM</a>
+    <a class="button" style="margin-left: 314px;" onclick="showInfoCreateFieldRDSM()" href="https://app.rdstation.com.br/campos-personalizados/novo" target="_blank"><?php _e("Create field in RDSM", 'integracao-rd-station')?></a>
     <h3 id="info_create_fields" class="hidden"><?php _e('To see the fields created in RDSM reload page.', 'integracao-rd-station') ?></h3>  
     <?php echo "<div id=\"rdsm_fields\" 
                   data-nome=\""       .$field_mapping["nome"]."\"
