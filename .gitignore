@@ -2,14 +2,3 @@
 
 /wp-content/languages/*
 /wp-content/uploads/*
-
-!/wp-content/languages/plugins/integracao-rd-station-pt_BR.mo
-!/wp-content/languages/plugins/integracao-rd-station-pt_BR.po
-!/wp-content/languages/plugins/integracao-rd-station-es.mo
-!/wp-content/languages/plugins/integracao-rd-station-es.po
-!/wp-content/languages/plugins/integracao-rd-station-es_ES.mo
-!/wp-content/languages/plugins/integracao-rd-station-es_ES.po
-!/wp-content/languages/plugins/integracao-rd-station-es_CO.mo
-!/wp-content/languages/plugins/integracao-rd-station-es_CO.po
-!/wp-content/languages/plugins/integracao-rd-station-es_MX.mo
-!/wp-content/languages/plugins/integracao-rd-station-es_MX.po
