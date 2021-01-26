@@ -24,6 +24,12 @@ function RDSMCustomFields() {
       success: function(data) {
         if (data != null){
           renderFieldMapping(data, type, form_id);
+          
+          if (data["mapped_fields"]) {
+            hideMappedFieldsAlert();
+          }else {
+            showMappedFieldsAlert();
+          }
         }
       }
     });
@@ -50,6 +56,14 @@ function RDSMCustomFields() {
     document.getElementById('info_check_login').classList.add('hidden');
   }
 
+  function showMappedFieldsAlert() {
+    document.getElementById('info_mapped_fields').classList.remove('hidden');
+  }
+
+  function hideMappedFieldsAlert() {
+    document.getElementById('info_mapped_fields').classList.add('hidden');
+  }
+
   function renderFieldMapping(fieldMapping, type, form_id) {
     var select = "";
 
@@ -71,7 +85,7 @@ function RDSMCustomFields() {
     var fields = data["fields_" + integrationType];
     for (i = 0; i < fields.length; i++) {
       html += "<p class=\"rd-fields-mapping\"><span class=\"rd-fields-mapping-label\">" + fields[i]["label"] + 
-              "</span> <span class=\"dashicons dashicons-arrow-right-alt\"></span><select name=\""+initials+"_mapped_fields["+fields[i]["id"]+"]\"><option value=\"\"></option>" + select + "</select></p>";
+              "</span> <span class=\"dashicons dashicons-arrow-right-alt\"></span><select name=\""+initials+"_mapped_fields["+fields[i]["id"]+"]\"><option value=\"\"></option>" + select + "<option value=\"communications\">Consentimento de Comunicação</option></select></p>";
     }
     return html;
   }

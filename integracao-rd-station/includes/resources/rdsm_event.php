@@ -57,7 +57,7 @@ class RDSMEvent {
       'event_family'    => 'CDP',
       'payload'         => $this->get_payload($form_data, $post_id, $integration_type)
     );
-    
+
     $this->payload = $this->filter_fields($this->ignored_fields, $default_payload);
   }
 
@@ -72,10 +72,10 @@ class RDSMEvent {
         return $response + $this->contact_form7_payload($form_data, $post_id);
         break;
       case 'gravity_forms':
-        return $this->gravity_forms_payload($form_data, $post_id);
+        return $response + $this->gravity_forms_payload($form_data, $post_id);
         break;
       case 'woo_commerce':
-        return $this->woo_commerce_payload($form_data, $post_id);
+        return $response + $this->woo_commerce_payload($form_data, $post_id);
         break;      
     }
   }
@@ -87,13 +87,16 @@ class RDSMEvent {
     $form_map = get_post_meta($post_id, 'cf7_mapped_fields_'.$form_id, true);    
     $contact_form = WPCF7_ContactForm::get_instance( $form_id );
     $form_fields = $contact_form->scan_form_tags();
+    $identifier = 'name';
 
     $response += array('conversion_identifier' => $conversion_identifier);
 
-    foreach ($form_fields as $field) {
-      if ($field['type'] != "submit") {
-        if(!empty($form_map[$field['name']])){
-          $response += array($form_map[$field['name']] => $form_data[$field['name']]);
+    if (empty($form_map)) {      
+      $response += array('email' => $this->get_email_field($form_data));
+    }else {
+      foreach ($form_fields as $field) {
+        if ($field['type'] != "submit") {
+          $response = $this->get_value($response, $form_map, $form_data, $field, $identifier, true);
         }
       }
     }
@@ -106,14 +109,22 @@ class RDSMEvent {
     $form_id = get_post_meta($post_id, 'form_id', true);
     $gf_forms = GFAPI::get_forms();    
     $form_map = get_post_meta($post_id, 'gf_mapped_fields_'.$form_id, true);
+    
+    if (empty($form_map)) {      
+      $form_map = get_post_meta($post_id, 'gf_mapped_fields', true);      
+    }
 
     $response += array('conversion_identifier' => $conversion_identifier);
 
     foreach ($gf_forms as $form) {
       if ($form['id'] == $form_id) {
         foreach ($form['fields'] as $field) {
-          if(!empty($form_map[$field['id']])){
-            $response += array($form_map[$field['id']] => $form_data[$field['id']]);
+          if ($field['type'] == "checkbox") {            
+            foreach ($field['inputs'] as $input) {
+              $response = $this->get_value($response, $form_map, $form_data, $input, 'id', true);
+            }
+          }else {
+            $response = $this->get_value($response, $form_map, $form_data, $field, 'id', false);
           }
         }
       }
@@ -121,12 +132,39 @@ class RDSMEvent {
     return $response;
   }
 
+  private function get_value($response, $form_map, $form_data, $field, $identifier, $is_checkbox) {
+    $name = $form_map[$field[$identifier]];    
+    if(!empty($name)){          
+      $value = $form_data[$field[$identifier]];
+
+      if ($name == "communications" && $is_checkbox) {
+        if (!empty($value)) {
+          $response += array('legal_bases' => array(array('category' => 'communications', 'type' => 'consent', 'status' => 'granted')));
+        }
+      }else {
+        $response += array($name => $value);
+      }
+    }
+
+    return $response;
+  }
+
   private function woo_commerce_payload($form_data, $post_id) {
     $response = array();
     $options = get_option( 'rdsm_woocommerce_settings' );
     $field_mapping = $options['field_mapping'];
+    
+    if (empty($field_mapping)) {
+      $response += $this->map_rd_default_fields($options, $form_data);      
+    }else {
+      $response += $this->map_rd_custom_fields($field_mapping, $options, $form_data);
+    }
 
-    $response += array(
+    return $response;
+  }
+
+  private function map_rd_custom_fields($field_mapping, $options, $form_data) {
+    $response = array(
       'conversion_identifier'       => $options['conversion_identifier'],
       $field_mapping['nome']        => $form_data['nome'],
       $field_mapping['sobrenome']   => $form_data['sobrenome'],
@@ -140,6 +178,22 @@ class RDSMEvent {
       $field_mapping['estado']      => $form_data['estado'],
       $field_mapping['cep']         => $form_data['cep'] 
     );
+
+    return $response;
+  }
+
+  private function map_rd_default_fields($options, $form_data) {
+    $response = array(
+      'conversion_identifier' => $options['conversion_identifier'],
+      'name'                  => $form_data['nome']." ".$form_data['sobrenome'],
+      'email'                 => $form_data['email'],
+      'mobile_phone'          => $form_data['telefone'],
+      'company_name'          => $form_data['empresa'],
+      'country'               => $form_data['país'],
+      'city'                  => $form_data['cidade'],
+      'state'                 => $form_data['estado']
+    );
+
     return $response;
   }
 

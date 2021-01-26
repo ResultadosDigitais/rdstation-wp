@@ -17,6 +17,7 @@ class RDSMIntegrationFormChanged implements RDSMEventsInterface {
     $select_items = array();
     $contacts_fields = $this->rdstation_fields();
     $fields = $contacts_fields["fields"];
+    $mapped_fields = true;
 
     array_multisort(array_column($fields, 'name'), SORT_ASC, $fields);
 
@@ -26,51 +27,62 @@ class RDSMIntegrationFormChanged implements RDSMEventsInterface {
       }
 
       if ($integrationType == "contact_form_7") {
-        $json_result = array( 'select_items' => $select_items, 'fields_contact_form_7' => $this->contact_form7_fields($form_id, $post_id));
+        $form_map = get_post_meta($post_id, 'cf7_mapped_fields_'.$form_id, true);
+        $json_result = array( 'select_items' => $select_items, 'fields_contact_form_7' => $this->contact_form7_fields($form_id, $post_id, $form_map), 'mapped_fields' => $this->has_mapped_fields($form_map));
       } elseif ($integrationType == "gravity_forms") {
-        $json_result = array( 'select_items' => $select_items, 'fields_gravity_forms' => $this->gravity_forms_fields($form_id, $post_id));
+        $form_map = get_post_meta($post_id, 'gf_mapped_fields_'.$form_id, true);           
+        $json_result = array( 'select_items' => $select_items, 'fields_gravity_forms' => $this->gravity_forms_fields($form_id, $post_id, $form_map), 'mapped_fields' => $this->has_mapped_fields($form_map));
       }
     }
 
     wp_send_json($json_result);
   }
 
-  public function contact_form7_fields($form_id, $post_id) {
+  public function has_mapped_fields($form_map){
+    return !empty($form_map);
+  }
+
+  public function contact_form7_fields($form_id, $post_id, $form_map) {
     $contact_form = WPCF7_ContactForm::get_instance( $form_id );
-    $form_fields = $contact_form->scan_form_tags();
-    $form_map = get_post_meta($post_id, 'cf7_mapped_fields_'.$form_id, true);
+    $form_fields = $contact_form->scan_form_tags();    
     $fields = array();
 
     foreach ($form_fields as $field) {
       if ($field['type'] != "submit") {
-        if(!empty($form_map[$field['name']])){
-          $value = $form_map[$field['name']];
-        }else {
-          $value = '';
+        $fields = $this->get_value($form_map, $fields, $field, 'name', 'name');
+      }
+    }
+    return $fields;    
+  }
+
+  public function gravity_forms_fields($form_id, $post_id, $form_map) {
+    $gf_forms = GFAPI::get_forms();    
+    $fields = array();
+
+    foreach ($gf_forms as $form) {
+      if ($form['id'] == $form_id) {
+        foreach ($form['fields'] as $field) {
+          if ($field['type'] == "checkbox") {
+            foreach ($field['inputs'] as $input) {
+              $fields = $this->get_value($form_map, $fields, $input, 'id', 'label');
+            }
+          }else {
+            $fields = $this->get_value($form_map, $fields, $field, 'id', 'label');
+          }          
         }
-        array_push($fields, array("label" => $field['name'], "id" => $field['name'], "value" => $value));
       }
     }
     return $fields;
   }
 
-  public function gravity_forms_fields($form_id, $post_id) {
-    $gf_forms = GFAPI::get_forms();    
-    $form_map = get_post_meta($post_id, 'gf_mapped_fields_'.$form_id, true);
-    $fields = array();
-    
-    foreach ($gf_forms as $form) {
-      if ($form['id'] == $form_id) {
-        foreach ($form['fields'] as $field) {
-          if(!empty($form_map[$field['id']])){
-            $value = $form_map[$field['id']];
-          }else {
-            $value = '';
-          }
-          array_push($fields, array("label" => $field['label'], "id" => $field['id'], "value" => $value));
-        }
-      }
+  public function get_value($form_map, $fields, $field, $identifier, $label) {
+    if(!empty($form_map[$field[$identifier]])){
+      $value = $form_map[$field[$identifier]];
+    }else {
+      $value = '';
     }
+    array_push($fields, array("label" => $field[$label], "id" => $field[$identifier], "value" => $value));
+
     return $fields;
   }
 

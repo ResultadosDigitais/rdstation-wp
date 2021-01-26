@@ -1,5 +1,5 @@
 function RDSMWooCommerceFields() {
-  
+
   this.getFields = function() {
     jQuery.ajax({
       url: ajaxurl,
@@ -63,7 +63,7 @@ function showInfoCreateFieldRDSM(value) {
 }
 
 function load() {
-  wooCommerceFields = new RDSMWooCommerceFields();  
+  wooCommerceFields = new RDSMWooCommerceFields();
   wooCommerceFields.getFields();
 }
 

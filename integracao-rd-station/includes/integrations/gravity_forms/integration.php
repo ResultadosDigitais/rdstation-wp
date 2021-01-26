@@ -32,9 +32,6 @@ class RDSMGravityFormsIntegration {
     $this->build_default_payload($submitted_fields);
 
     foreach ($current_form_integrations as $integration) {
-      $field_mapping = get_post_meta($integration->ID, 'gf_mapped_fields', true);
-      $this->apply_field_mapping($field_mapping);
-
       $this->apply_integration_fields($integration->ID);
 
       $this->resource->build_payload($this->form_data, $integration->ID, 'gravity_forms');
