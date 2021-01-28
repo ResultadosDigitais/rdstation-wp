@@ -89,21 +89,9 @@ function RDSMCustomFields() {
                 <span class=\"dashicons dashicons-arrow-right-alt\"></span>\
                 <select name=\""+initials+"_mapped_fields["+fields[i]["id"]+"]\">\
                   <option value=\"\"></option>\
-                  <option value=\"name\">Nome</option>\
-                  <option value=\"email\">E-mail</option>\
-                  <option value=\"job_title\">Profissão</option>\
-                  <option value=\"state\">Estado</option>\
-                  <option value=\"city\">Cidade</option>\
-                  <option value=\"country\">País</option>\
-                  <option value=\"personal_phone\">Telefone</option>\
-                  <option value=\"mobile_phone\">Celular</option>\
-                  <option value=\"twitter\">Twitter</option>\
-                  <option value=\"facebook\">Facebook</option>\
-                  <option value=\"linkedin\">Linkedin</option>\
-                  <option value=\"website\">Website</option>\
                   <option value=\"company_name\">Nome da Empresa</option>\
                   <option value=\"company_site\">Site da Empresa</option>\
-                  <option value=\"company_address\">Endereço da Empresa</option>"
+                  <option value=\"company_address\">Endereço da Empresa</option>"                  
                   + select + 
                   "<option value=\"communications\">Consentimento de Comunicação</option>\
                 </select>\
