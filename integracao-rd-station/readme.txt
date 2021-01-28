@@ -1,10 +1,10 @@
 === RD Station ===
-Contributors: Filipe Mateus do Nascimento, Anderson Artur da Costa Oliveira
+Contributors: Filipe Mateus do Nascimento
 Donate link: -
 Tags: integrations, forms, contact form, rd station, resultados digitais
 Requires at least: 4.7
 Tested up to: 5.5.3
-Stable tag: 4.9
+Stable tag: 5.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
