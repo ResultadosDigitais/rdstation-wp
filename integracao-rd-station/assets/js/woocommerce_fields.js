@@ -42,8 +42,16 @@ function RDSMWooCommerceFields() {
     var html = "";
     var fields = data["fields_woocommerce"];
     for (i = 0; i < fields.length; i++) {
-      html += "<p class=\"rd-fields-mapping\"><span class=\"rd-fields-mapping-label\" style=\"float: left; width: 200px; color: #4f6d83; font-weight: bold; margin-top: 4px;\">" + fields[i] +
-              "</span> <span class=\"dashicons dashicons-arrow-right-alt\" style=\"line-height: unset; margin-right: 15px;\"></span><select onchange=\"createFieldsRDSM(this.value)\" name=\"rdsm_woocommerce_settings[field_mapping]["+fields[i]+"]\"><option value=\"\"></option>" + select + "</select></p>";
+      html += "<p class=\"rd-fields-mapping\">\
+                <span class=\"rd-fields-mapping-label\" style=\"float: left; width: 200px; color: #4f6d83; font-weight: bold; margin-top: 4px;\">" + fields[i] + "</span> \
+                <span class=\"dashicons dashicons-arrow-right-alt\" style=\"line-height: unset; margin-right: 15px;\"></span>\
+                <select onchange=\"createFieldsRDSM(this.value)\" name=\"rdsm_woocommerce_settings[field_mapping]["+fields[i]+"]\">\
+                  <option value=\"\"></option>\
+                  <option value=\"company_name\">Nome da Empresa</option>\
+                  <option value=\"company_site\">Site da Empresa</option>\
+                  <option value=\"company_address\">Endereço da Empresa</option>"
+                  + select + 
+                  "</select></p>";
     }
     return html;
   }
