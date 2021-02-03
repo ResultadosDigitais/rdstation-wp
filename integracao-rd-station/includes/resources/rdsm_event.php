@@ -96,7 +96,11 @@ class RDSMEvent {
     }else {
       foreach ($form_fields as $field) {
         if ($field['type'] != "submit") {
-          $response = $this->get_value($response, $form_map, $form_data, $field, $identifier, true);
+          if (($field['type'] == "select") && (!in_array("multiple", $field['options']))) {
+            $response = $this->get_value($response, $form_map, $form_data, $field, $identifier, true, true);
+          }else {
+            $response = $this->get_value($response, $form_map, $form_data, $field, $identifier, true, false);
+          }
         }
       }
     }
@@ -121,10 +125,10 @@ class RDSMEvent {
         foreach ($form['fields'] as $field) {
           if ($field['type'] == "checkbox") {            
             foreach ($field['inputs'] as $input) {
-              $response = $this->get_value($response, $form_map, $form_data, $input, 'id', true);
+              $response = $this->get_value($response, $form_map, $form_data, $input, 'id', true, false);
             }
           }else {
-            $response = $this->get_value($response, $form_map, $form_data, $field, 'id', false);
+            $response = $this->get_value($response, $form_map, $form_data, $field, 'id', false, false);
           }
         }
       }
@@ -132,7 +136,7 @@ class RDSMEvent {
     return $response;
   }
 
-  private function get_value($response, $form_map, $form_data, $field, $identifier, $is_checkbox) {
+  private function get_value($response, $form_map, $form_data, $field, $identifier, $is_checkbox, $parse_to_string) {
     $name = $form_map[$field[$identifier]];    
     if(!empty($name)){          
       $value = $form_data[$field[$identifier]];
@@ -142,6 +146,12 @@ class RDSMEvent {
           $response += array('legal_bases' => array(array('category' => 'communications', 'type' => 'consent', 'status' => 'granted')));
         }
       }else {
+        if ($parse_to_string) {
+          $value = $value[0];
+          if (empty($value)) {
+            return $response;
+          }
+        }
         $response += array($name => $value);
       }
     }
