@@ -148,6 +148,9 @@ class RDSMEvent {
       }else {
         if ($parse_to_string) {
           $value = $value[0];
+          if (empty($value)) {
+            return $response;
+          }
         }
         $response += array($name => $value);
       }
