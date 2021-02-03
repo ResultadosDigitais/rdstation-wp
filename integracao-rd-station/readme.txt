@@ -4,7 +4,7 @@ Donate link: -
 Tags: integrations, forms, contact form, rd station, resultados digitais
 Requires at least: 4.7
 Tested up to: 5.5.3
-Stable tag: 5.0.2
+Stable tag: 5.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,10 +40,19 @@ More info about the version 5.0.0: [https://ajuda.rdstation.com.br/hc/pt-br/arti
 
 == Changelog ==
 
-= 5.0 =
-* Mapping fields RD Station
-* API v2 RD Station
-* More info about the version 5.0.0: [https://ajuda.rdstation.com.br/hc/pt-br/articles/360054981272](https://ajuda.rdstation.com.br/hc/pt-br/articles/360054981272)
+5.0.3
+Sending drop-down menu from Contact Forms 7 as single text when Allow multiple selections aren't checked
+More info about the version 5.0.2: https://ajuda.rdstation.com.br/hc/pt-br/articles/360054981272
+
+5.0.2
+Adding company fields to the field mapping list
+
+5.0.1
+Fixing problem with corrupted files in version 5.0.0
+
+5.0
+Mapping fields RD Station
+API v2 RD Station
 
 = 4.0 =
 * One-click RD Station integration
