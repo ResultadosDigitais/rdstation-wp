@@ -55,7 +55,7 @@ class RDSMAPI {
       return false;
     }
 
-    $response = wp_remote_get(sprintf("%s/%s%s", REFRESH_TOKEN_URL, "refresh_token=", $refresh_token));
+    $response = wp_remote_get(sprintf("%s/%s%s", REFRESH_TOKEN_URL, "?refresh_token=", $refresh_token));
 
     if (wp_remote_retrieve_response_code($response) == 200) {
       $parsed_credentials = json_decode(wp_remote_retrieve_body($response));
