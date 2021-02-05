@@ -96,10 +96,10 @@ class RDSMEvent {
     }else {
       foreach ($form_fields as $field) {
         if ($field['type'] != "submit") {
-          if (($field['type'] == "select") && (!in_array("multiple", $field['options']))) {
-            $response = $this->get_value($response, $form_map, $form_data, $field, $identifier, true, true);
+          if ((strpos($field['type'], "select") !== false) && (!in_array("multiple", $field['options']))) {
+            $response = $this->get_value($response, $form_map, $form_data, $field, $identifier, true, true, false, false);
           }else {
-            $response = $this->get_value($response, $form_map, $form_data, $field, $identifier, true, false);
+            $response = $this->get_value($response, $form_map, $form_data, $field, $identifier, true, false, false, false);
           }
         }
       }
@@ -120,15 +120,15 @@ class RDSMEvent {
 
     $response += array('conversion_identifier' => $conversion_identifier);
 
-    foreach ($gf_forms as $form) {
+    foreach ($gf_forms as $form) {      
       if ($form['id'] == $form_id) {
         foreach ($form['fields'] as $field) {
-          if ($field['type'] == "checkbox") {            
-            foreach ($field['inputs'] as $input) {
-              $response = $this->get_value($response, $form_map, $form_data, $input, 'id', true, false);
-            }
+          if ($field['type'] == "checkbox") {                        
+            $response = $this->get_value($response, $form_map, $form_data, $field, 'id', true, false, true, true);            
+          }else if ($field['type'] == "multiselect") {            
+            $response = $this->get_value($response, $form_map, $form_data, $field, 'id', false, false, true, true);
           }else {
-            $response = $this->get_value($response, $form_map, $form_data, $field, 'id', false, false);
+            $response = $this->get_value($response, $form_map, $form_data, $field, 'id', false, false, false, true);
           }
         }
       }
@@ -136,7 +136,7 @@ class RDSMEvent {
     return $response;
   }
 
-  private function get_value($response, $form_map, $form_data, $field, $identifier, $is_checkbox, $parse_to_string) {
+  private function get_value($response, $form_map, $form_data, $field, $identifier, $is_checkbox, $parse_to_string, $parse_to_array, $is_gravity_forms) {
     $name = $form_map[$field[$identifier]];    
     if(!empty($name)){          
       $value = $form_data[$field[$identifier]];
@@ -144,6 +144,14 @@ class RDSMEvent {
       if ($name == "communications" && $is_checkbox) {
         if (!empty($value)) {
           $response += array('legal_bases' => array(array('category' => 'communications', 'type' => 'consent', 'status' => 'granted')));
+        }else if ($is_gravity_forms){
+          foreach ($field['inputs'] as $input) {
+            $value = $form_data[$input[$identifier]];
+            if (!empty($value)) {
+              $response += array('legal_bases' => array(array('category' => 'communications', 'type' => 'consent', 'status' => 'granted')));
+              continue;
+            }
+          }
         }
       }else {
         if ($parse_to_string) {
@@ -152,6 +160,25 @@ class RDSMEvent {
             return $response;
           }
         }
+
+        if ($parse_to_array) {
+          $value = str_replace("\"", "", $value);
+          $value = str_replace("[", "", $value);
+          $value = str_replace("]", "", $value);    
+          $value = explode(",", $value);
+          
+          if ($is_checkbox && $is_gravity_forms) {
+            $values = array();
+            foreach ($field['inputs'] as $input) {
+              $item_value = $form_data[$input[$identifier]];
+              if (!empty($item_value)) {
+                array_push($values, $item_value);
+              }
+            }
+            $value = $values;
+          }
+        }
+
         $response += array($name => $value);
       }
     }
