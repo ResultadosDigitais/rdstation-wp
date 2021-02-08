@@ -61,18 +61,12 @@ class RDSMIntegrationFormChanged implements RDSMEventsInterface {
 
     foreach ($gf_forms as $form) {
       if ($form['id'] == $form_id) {
-        foreach ($form['fields'] as $field) {
-          if ($field['type'] == "checkbox") {
-            foreach ($field['inputs'] as $input) {
-              $fields = $this->get_value($form_map, $fields, $input, 'id', 'label');
-            }
-          }else {
-            $fields = $this->get_value($form_map, $fields, $field, 'id', 'label');
-          }          
+        foreach ($form['fields'] as $field) {          
+          $fields = $this->get_value($form_map, $fields, $field, 'id', 'label');
         }
       }
     }
-    return $fields;
+    return $fields;    
   }
 
   public function get_value($form_map, $fields, $field, $identifier, $label) {
