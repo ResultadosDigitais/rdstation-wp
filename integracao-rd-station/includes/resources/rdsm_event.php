@@ -213,7 +213,8 @@ class RDSMEvent {
       $field_mapping['endereço2']   => $form_data['endereço2'],
       $field_mapping['cidade']      => $form_data['cidade'],
       $field_mapping['estado']      => $form_data['estado'],
-      $field_mapping['cep']         => $form_data['cep'] 
+      $field_mapping['cep']         => $form_data['cep'],
+      $field_mapping['produtos']    => $form_data['produtos']
     );
 
     return $response;

@@ -120,6 +120,7 @@ function rdsm_woocommerce_field_mapping_html() {
                   data-cidade=\""     .$field_mapping["cidade"]."\"
                   data-estado=\""     .$field_mapping["estado"]."\"
                   data-cep=\""        .$field_mapping["cep"]."\"
+                  data-produtos=\""   .$field_mapping["produtos"]."\"
                 ></div>" 
     ?>    
   </div>

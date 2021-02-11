@@ -32,7 +32,8 @@ function RDSMWooCommerceFields() {
       "endereço2":    rdsmFields.dataset.endereço2,
       "cidade":       rdsmFields.dataset.cidade,
       "estado":       rdsmFields.dataset.estado,
-      "cep":          rdsmFields.dataset.cep
+      "cep":          rdsmFields.dataset.cep,
+      "produtos":     rdsmFields.dataset.produtos
     };
 
     setSelectedItems(fieldMapping, fieldsMappingSelected);
