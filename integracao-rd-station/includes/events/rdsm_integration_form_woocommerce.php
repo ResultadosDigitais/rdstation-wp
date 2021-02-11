@@ -35,9 +35,10 @@ class RDSMIntegrationFormWooCommerce implements RDSMEventsInterface {
       'endereço2',
       'cidade',
       'estado',
-      'cep'
+      'cep',
+      'produtos'
     );
-    
+
     return $form_fields;
   }
 

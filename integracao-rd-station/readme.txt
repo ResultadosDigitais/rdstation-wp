@@ -4,7 +4,7 @@ Donate link: -
 Tags: integrations, forms, contact form, rd station, resultados digitais
 Requires at least: 4.7
 Tested up to: 5.5.3
-Stable tag: 5.0.4
+Stable tag: 5.0.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,10 +40,13 @@ More info about the version 5.0.0: [https://ajuda.rdstation.com.br/hc/pt-br/arti
 
 == Changelog ==
 
+= 5.0.5 =
+* Adding products to WooCommerce mapping fields list
+* More info about the version 5.0.5: [https://ajuda.rdstation.com.br/hc/pt-br/articles/360054981272](https://ajuda.rdstation.com.br/hc/pt-br/articles/360054981272)
+
 = 5.0.4 =
 * Sending drop-down menu from Contact Forms 7 as single text when Allow multiple selections aren't checked
 * Fixing invalid data type errors
-* More info about the version 5.0.4: [https://ajuda.rdstation.com.br/hc/pt-br/articles/360054981272](https://ajuda.rdstation.com.br/hc/pt-br/articles/360054981272)
 
 = 5.0.3 =
 * Sending drop-down menu from Contact Forms 7 as single text when Allow multiple selections aren't checked
