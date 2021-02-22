@@ -2,6 +2,7 @@
 
 define('RDSM_ASSETS_URL', plugin_dir_url(__FILE__) . '/assets');
 define('RDSM_SRC_DIR', dirname(__FILE__) . '/includes');
+define('RDSM_LOG_FILE_PATH', plugin_dir_path( __FILE__ ) . '/log.txt');
 
 // URIs
 define('LEGACY_API_URL', 'https://app.rdstation.com.br/api/1.3');

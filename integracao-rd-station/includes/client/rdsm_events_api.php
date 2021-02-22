@@ -1,6 +1,7 @@
 <?php
 
 require_once('rdsm_api.php');
+require_once(RDSM_SRC_DIR . '/helpers/rdsm_log_file_helper.php');
 
 class RDSMEventsAPI {
   private $api_client;
@@ -24,9 +25,10 @@ class RDSMEventsAPI {
     $args = array_merge($this->default_request_args, $body);
     
     $response = $this->api_client->post(EVENTS, $args);
+    RDSMLogFileHelper::write_to_log_file($response['body']);
 
     if (is_wp_error($response)) {
-      unset($event->payload);
+      unset($event->payload);      
     }
     return $response;
   }
