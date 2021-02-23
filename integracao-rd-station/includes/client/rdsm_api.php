@@ -1,5 +1,7 @@
 <?php
 
+require_once(RDSM_SRC_DIR . '/helpers/rdsm_log_file_helper.php');
+
 class RDSMAPI {
   private $api_url;
   private $user_credentials;
@@ -15,7 +17,8 @@ class RDSMAPI {
     }
 
     $response = wp_remote_get(sprintf("%s%s", $this->api_url, $resource), $args);
-    
+    RDSMLogFileHelper::write_to_log_file($response['body']);
+
     if ($this->handle_expired_token($response)) {
       return $this->get($resource, $args);
     }
@@ -29,7 +32,8 @@ class RDSMAPI {
     }
 
     $response = wp_remote_post(sprintf("%s%s", $this->api_url, $resource), $args);
-    
+    RDSMLogFileHelper::write_to_log_file($response['body']);
+
     if ($this->handle_expired_token($response)) {
       return $this->post($resource, $args);
     }
@@ -56,6 +60,7 @@ class RDSMAPI {
     }
 
     $response = wp_remote_get(sprintf("%s/%s%s", REFRESH_TOKEN_URL, "?refresh_token=", $refresh_token));
+    RDSMLogFileHelper::write_to_log_file($response['body']);
 
     if (wp_remote_retrieve_response_code($response) == 200) {
       $parsed_credentials = json_decode(wp_remote_retrieve_body($response));
