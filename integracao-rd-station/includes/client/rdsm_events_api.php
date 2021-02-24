@@ -26,7 +26,7 @@ class RDSMEventsAPI {
     $response = $this->api_client->post(EVENTS, $args);
 
     if (is_wp_error($response)) {
-      unset($event->payload);      
+      unset($event->payload);
     }
     return $response;
   }
