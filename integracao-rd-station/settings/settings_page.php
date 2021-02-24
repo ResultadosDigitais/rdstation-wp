@@ -56,6 +56,10 @@ function rdstation_settings_page_callback() {
     <a href="?page=rdstation-settings-page&tab=woocommerce" class="nav-tab <?php echo rdsm_tab_class('woocommerce') ?>">
       <?php _e('WooCommerce', 'integracao-rd-station') ?>
     </a>
+
+    <a href="?page=rdstation-settings-page&tab=integrations_log" class="nav-tab <?php echo rdsm_tab_class('integrations_log') ?>">
+      <?php _e('Integrations Log', 'integracao-rd-station') ?>
+    </a>
   </p>
 
   <form action='options.php' method='post'>
@@ -65,16 +69,26 @@ function rdstation_settings_page_callback() {
           settings_fields('rdsm_general_settings');
           do_settings_sections('rdsm_general_settings');
           rdsm_tracking_code_warning_html();
+          submit_button();
           break;
         case 'woocommerce':
           settings_fields('rdsm_woocommerce_settings');
           do_settings_sections('rdsm_woocommerce_settings');
+          submit_button();
+          break;
+        case 'integrations_log':
+          do_settings_sections('rdsm_integrations_log_settings');
           break;
       }
-
-      submit_button(); ?>
+    ?>
   </form>
 
+  <?php
+}
+
+function rdsm_integrations_log_html() {
+  $options = get_option( 'rdsm_integrations_log_settings' ); ?>
+  <input type='text' name='rdsm_woocommerce_settings[conversion_identifier]' size="32" value='<?php echo $options['conversion_identifier']; ?>'>
   <?php
 }
 

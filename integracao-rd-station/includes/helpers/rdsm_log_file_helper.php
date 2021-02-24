@@ -12,6 +12,11 @@ class RDSMLogFileHelper {
 	    fclose( $open );
   	}
 
+  	public static function get_log_file() {
+  		$file = (file_exists(RDSM_LOG_FILE_PATH)) ? file(RDSM_LOG_FILE_PATH) : null;
+		return $file;
+  	}
+
   	private static function clear_log_file($file_path) {  	
 		$file = file($file_path);
 		for ($i = 0;count($file) > RDSM_LOG_FILE_LIMIT;$i++) {

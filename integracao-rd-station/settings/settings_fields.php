@@ -4,6 +4,7 @@ class RDSettingsFields {
   public function register_fields() {
     self::general_fields();
     self::woocommerce_fields();
+    self::integrations_log_fields();
   }
 
   private function general_fields() {
@@ -31,6 +32,16 @@ class RDSettingsFields {
       'rdsm_woocommerce_field_mapping_html',
       'rdsm_woocommerce_settings',
       'rdsm_woocommerce_settings_section'
+    );
+  }
+
+  private function integrations_log_fields() {
+    add_settings_field(
+      'rdsm_show_integrations_log',
+      __('Integrations Log:', 'integracao-rd-station'),
+      'rdsm_integrations_log_html',
+      'rdsm_integrations_log_settings',
+      'rdsm_integrations_log_settings_section'
     );
   }
 }
