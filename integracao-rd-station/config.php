@@ -17,4 +17,4 @@ define('CONTACTS_FIELDS', '/platform/contacts/fields');
 
 // File
 define('RDSM_LOG_FILE_PATH', plugin_dir_path( __FILE__ ) . '/log.txt');
-define('RDSM_LOG_FILE_LIMIT', 10);
+define('RDSM_LOG_FILE_LIMIT', 1000);
