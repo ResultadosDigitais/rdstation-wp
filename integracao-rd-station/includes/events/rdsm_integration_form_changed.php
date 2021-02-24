@@ -3,6 +3,7 @@
 require_once(RDSM_SRC_DIR . '/entities/rdsm_user_credentials.php');
 require_once(RDSM_SRC_DIR . '/client/rdsm_fields_api.php');
 require_once(RDSM_SRC_DIR . '/events/rdsm_events_interface.php');
+require_once(RDSM_SRC_DIR . '/helpers/rdsm_log_file_helper.php');
 
 class RDSMIntegrationFormChanged implements RDSMEventsInterface {
   
