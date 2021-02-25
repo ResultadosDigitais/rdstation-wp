@@ -58,7 +58,7 @@ function rdstation_settings_page_callback() {
     </a>
 
     <a href="?page=rdstation-settings-page&tab=integrations_log" class="nav-tab <?php echo rdsm_tab_class('integrations_log') ?>">
-      <?php _e('Integrations Log', 'integracao-rd-station') ?>
+      <?php _e('Log', 'integracao-rd-station') ?>
     </a>
   </p>
 
@@ -88,7 +88,8 @@ function rdstation_settings_page_callback() {
 
 function rdsm_integrations_log_html() {
   $options = get_option( 'rdsm_integrations_log_settings' ); ?>
-  <input type='text' name='rdsm_woocommerce_settings[conversion_identifier]' size="32" value='<?php echo $options['conversion_identifier']; ?>'>
+  <a class="button" href="<?php echo RDSM_LOG_FILE_PATH ?>" target="_blank"><?php _e("Download", 'integracao-rd-station')?></a>
+  <textarea readonly id="rdsm_log_screen" rows="50"></textarea>
   <?php
 }
 
@@ -100,7 +101,7 @@ function rdsm_woocommerce_conversion_identifier_html() {
 
 function rdsm_woocommerce_field_mapping_html() {
   $options = get_option( 'rdsm_woocommerce_settings' );
-  $field_mapping = $options['field_mapping'];  
+  $field_mapping = $options['field_mapping'];
   $hidden = (empty($field_mapping)) ? "" : "hidden";
   
   ?>  

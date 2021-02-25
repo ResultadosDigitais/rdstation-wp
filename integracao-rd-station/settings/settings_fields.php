@@ -38,7 +38,7 @@ class RDSettingsFields {
   private function integrations_log_fields() {
     add_settings_field(
       'rdsm_show_integrations_log',
-      __('Integrations Log:', 'integracao-rd-station'),
+      __('Log:', 'integracao-rd-station'),
       'rdsm_integrations_log_html',
       'rdsm_integrations_log_settings',
       'rdsm_integrations_log_settings_section'

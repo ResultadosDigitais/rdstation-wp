@@ -161,3 +161,9 @@ body {
   background: indianred;    
   color: white;
 }
+
+#rdsm_log_screen {
+  width: 100%;
+  color: white;
+  background-color: black;
+}

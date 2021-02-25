@@ -17,7 +17,10 @@ class RDSMAPI {
     }
 
     $response = wp_remote_get(sprintf("%s%s", $this->api_url, $resource), $args);
-    RDSMLogFileHelper::write_to_log_file($response['body']);
+
+    if (strpos($response['body'], "errors") !== false) {
+      RDSMLogFileHelper::write_to_log_file($response['body']);
+    }
 
     if ($this->handle_expired_token($response)) {
       return $this->get($resource, $args);
@@ -33,7 +36,7 @@ class RDSMAPI {
 
     $response = wp_remote_post(sprintf("%s%s", $this->api_url, $resource), $args);
     RDSMLogFileHelper::write_to_log_file($response['body']);
-
+    
     if ($this->handle_expired_token($response)) {
       return $this->post($resource, $args);
     }
