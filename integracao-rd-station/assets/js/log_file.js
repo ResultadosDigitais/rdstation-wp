@@ -7,6 +7,7 @@ function RDSMLogFile() {
       method: 'POST',
       data: { action: 'rdsm-log-file' },
       success: function(data) {
+        debugger;
         data.forEach(renderLogScreen);
       }
     });
