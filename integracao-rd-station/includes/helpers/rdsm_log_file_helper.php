@@ -23,11 +23,11 @@ class RDSMLogFileHelper {
 		return false;
   	}
 
-  	private static function clear_log_file($file_path) {  	
+  	private static function clear_log_file($file_path) {
 		$file = file($file_path);
 		for ($i = 0;count($file) > RDSM_LOG_FILE_LIMIT;$i++) {
 		  	unset($file[$i]);
-		  	file_put_contents($file_path, $file);
 		}
+		file_put_contents($file_path, $file);
   	}
 }
