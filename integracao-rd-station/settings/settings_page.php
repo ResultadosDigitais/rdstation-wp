@@ -88,7 +88,7 @@ function rdstation_settings_page_callback() {
 
 function rdsm_integrations_log_html() {
   $options = get_option( 'rdsm_integrations_log_settings' ); ?>
-  <a class="button" href="<?php echo '../wp-content/plugins/integracao-rd-station/log.txt' ?>" target="_blank"><?php _e("Download", 'integracao-rd-station')?></a>
+  <a class="button" href="#" onclick="copyLogToClipboard()"><?php _e("Copy", 'integracao-rd-station')?></a>
   <textarea readonly id="rdsm_log_screen" rows="50"></textarea>
   <?php
 }

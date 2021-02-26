@@ -6,7 +6,7 @@ function RDSMLogFile() {
       url: ajaxurl,
       method: 'POST',
       data: { action: 'rdsm-log-file' },
-      success: function(data) {        
+      success: function(data) {
         data.forEach(renderLogScreen);
       }
     });
@@ -15,6 +15,13 @@ function RDSMLogFile() {
   function renderLogScreen(log) {    
     rdsm_log_screen.value += log;
   }
+}
+
+function copyLogToClipboard() {
+  var copyLog = document.getElementById("rdsm_log_screen");
+  copyLog.select();
+  copyLog.setSelectionRange(0, 99999);
+  document.execCommand("copy");
 }
 
 function load() {
