@@ -87,7 +87,10 @@ function rdstation_settings_page_callback() {
 }
 
 function rdsm_integrations_log_html() {
-  $options = get_option( 'rdsm_integrations_log_settings' ); ?>
+  $options = get_option( 'rdsm_integrations_log_settings' ); 
+  if (RDSMLogFileHelper::has_error()) { ?>
+    <h3 class="alert-box"><?php _e('There are conversions that returned an error, check the log for more information', 'integracao-rd-station') ?></h3>
+  <?php } ?>
   <a class="button" href="#" onclick="copyLogToClipboard()"><?php _e("Copy", 'integracao-rd-station')?></a>
   <textarea readonly id="rdsm_log_screen" rows="50"></textarea>
   <?php
@@ -112,6 +115,9 @@ function rdsm_woocommerce_field_mapping_html() {
   </div>
 
   <div class="rdsm-connected-box hidden">
+    <?php if (RDSMLogFileHelper::has_error()) { ?>
+      <h3 class="alert-box"><?php _e('There are conversions that returned an error, check the log for more information', 'integracao-rd-station') ?></h3>
+    <?php } ?>
     <h4 id="map_fields_title">
       <?php _e('Map the fields below according to their names in RD Station.', 'integracao-rd-station') ?>
     </h4>

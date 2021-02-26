@@ -31,14 +31,14 @@
 	width: 200px;
 	margin-top: 20px;
 }
-#info_create_fields, #info_check_login, #info_mapped_fields{
+#info_create_fields, #info_check_login, #info_mapped_fields, .alert-box{
 	background: antiquewhite;
     padding: 15px;
     color: #4f6d83;
     border-radius: 5px;
 }
 
-#info_check_login, #info_mapped_fields{
+#info_check_login, #info_mapped_fields, .alert-box{
 	background: indianred;    
     color: white;
 }
