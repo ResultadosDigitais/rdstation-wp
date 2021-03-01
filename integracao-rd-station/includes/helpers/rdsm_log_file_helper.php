@@ -17,10 +17,7 @@ class RDSMLogFileHelper {
   	}
 
   	public static function has_error() {
-  		if (strpos(file_get_contents(RDSM_LOG_FILE_PATH), "errors") !== false) {
-	        return true;
-	    }
-		return false;
+  		return (strpos(file_get_contents(RDSM_LOG_FILE_PATH), "errors") !== false);
   	}
 
   	private static function clear_log_file($file_path) {
