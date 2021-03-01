@@ -19,10 +19,12 @@ function RDSMLogFile() {
 
 function copyLogToClipboard() {
   var copyLog = document.getElementById("rdsm_log_screen");
-  copyLog.value = btoa(copyLog.value);
+  var value = copyLog.value;
+  copyLog.value = btoa(value);
   copyLog.select();
   copyLog.setSelectionRange(0, 99999);
   document.execCommand("copy");
+  copyLog.value = value;
 }
 
 function load() {
