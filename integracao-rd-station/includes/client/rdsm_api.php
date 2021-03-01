@@ -35,11 +35,14 @@ class RDSMAPI {
     }
 
     $response = wp_remote_post(sprintf("%s%s", $this->api_url, $resource), $args);
-    RDSMLogFileHelper::write_to_log_file($response['body']);
+    $log = $response['body'];
 
     if ($this->is_response_error($response)) {
-      RDSMLogFileHelper::write_to_log_file($args['body']);
+      $payload = $args['body'];
+      $log .= "\r\n$payload";
     }
+
+    RDSMLogFileHelper::write_to_log_file($log);
     
     if ($this->handle_expired_token($response)) {
       return $this->post($resource, $args);
