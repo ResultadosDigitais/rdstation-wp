@@ -81,7 +81,7 @@ class RDSMIntegrationFormChanged implements RDSMEventsInterface {
   }
 
   public function rdstation_fields() {
-    $access_token = get_option('rdsm_access_token');    
+    $access_token = get_option('rdsm_access_token');
     $refresh_token = get_option('rdsm_refresh_token');
     $user_credentials = new RDSMUserCredentials($access_token, $refresh_token);
     $api_instance = new RDSMFieldsAPI($user_credentials);

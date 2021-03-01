@@ -91,7 +91,7 @@ function rdsm_integrations_log_html() {
   if (RDSMLogFileHelper::has_error()) { ?>
     <h3 class="alert-box"><?php _e('There are conversions that returned an error, check the log for more information', 'integracao-rd-station') ?></h3>
   <?php } ?>
-  <a class="button" href="#" onclick="copyLogToClipboard()"><?php _e("Copy", 'integracao-rd-station')?></a>
+  <a class="button" href="#" onclick="copyLogToClipboard()"><?php _e("Encrypt and Copy", 'integracao-rd-station')?></a>
   <textarea readonly id="rdsm_log_screen" rows="50"></textarea>
   <?php
 }

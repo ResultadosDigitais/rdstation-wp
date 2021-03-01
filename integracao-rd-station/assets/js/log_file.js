@@ -12,16 +12,19 @@ function RDSMLogFile() {
     });
   }
 
-  function renderLogScreen(log) {    
+  function renderLogScreen(log) {
     rdsm_log_screen.value += log;
   }
 }
 
 function copyLogToClipboard() {
   var copyLog = document.getElementById("rdsm_log_screen");
+  var value = copyLog.value;
+  copyLog.value = btoa(value);
   copyLog.select();
   copyLog.setSelectionRange(0, 99999);
   document.execCommand("copy");
+  copyLog.value = value;
 }
 
 function load() {
