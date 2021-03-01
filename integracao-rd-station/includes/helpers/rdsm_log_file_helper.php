@@ -17,7 +17,7 @@ class RDSMLogFileHelper {
   	}
 
   	public static function has_error() {
-  		return (strpos(file_get_contents(RDSM_LOG_FILE_PATH), "errors") !== false);
+  		return (strpos(file_get_contents(RDSM_LOG_FILE_PATH . get_option('rdsm_refresh_token')), "errors") !== false);
   	}
 
   	private static function clear_log_file($file_path) {
