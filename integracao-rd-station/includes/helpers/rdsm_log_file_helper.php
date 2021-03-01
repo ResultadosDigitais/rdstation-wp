@@ -7,9 +7,11 @@ class RDSMLogFileHelper {
 	    $time = date( "F jS Y, H:i P", time() );
 	    $log = "#$time\r\n$value\r\n";
 	    $open = fopen( $file_path, "a" );
-	    fputs( $open, $log );
-	    RDSMLogFileHelper::clear_log_file( $file_path );
-	    fclose( $open );
+	    if (file_exists($file_path)) {
+		    fputs( $open, $log );
+		    RDSMLogFileHelper::clear_log_file( $file_path );
+		    fclose( $open );
+		}
   	}
 
   	public static function get_log_file() {
