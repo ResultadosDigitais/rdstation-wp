@@ -56,6 +56,10 @@ function rdstation_settings_page_callback() {
     <a href="?page=rdstation-settings-page&tab=woocommerce" class="nav-tab <?php echo rdsm_tab_class('woocommerce') ?>">
       <?php _e('WooCommerce', 'integracao-rd-station') ?>
     </a>
+
+    <a href="?page=rdstation-settings-page&tab=integrations_log" class="nav-tab <?php echo rdsm_tab_class('integrations_log') ?>">
+      <?php _e('Log', 'integracao-rd-station') ?>
+    </a>
   </p>
 
   <form action='options.php' method='post'>
@@ -65,16 +69,30 @@ function rdstation_settings_page_callback() {
           settings_fields('rdsm_general_settings');
           do_settings_sections('rdsm_general_settings');
           rdsm_tracking_code_warning_html();
+          submit_button();
           break;
         case 'woocommerce':
           settings_fields('rdsm_woocommerce_settings');
           do_settings_sections('rdsm_woocommerce_settings');
+          submit_button();
+          break;
+        case 'integrations_log':
+          do_settings_sections('rdsm_integrations_log_settings');
           break;
       }
-
-      submit_button(); ?>
+    ?>
   </form>
 
+  <?php
+}
+
+function rdsm_integrations_log_html() {
+  $options = get_option( 'rdsm_integrations_log_settings' ); 
+  if (RDSMLogFileHelper::has_error()) { ?>
+    <h3 class="alert-box"><?php _e('There are conversions that returned an error, check the log for more information', 'integracao-rd-station') ?></h3>
+  <?php } ?>
+  <a class="button" href="#" onclick="copyLogToClipboard()"><?php _e("Encrypt and Copy", 'integracao-rd-station')?></a>
+  <textarea readonly id="rdsm_log_screen" rows="50"></textarea>
   <?php
 }
 
@@ -86,7 +104,7 @@ function rdsm_woocommerce_conversion_identifier_html() {
 
 function rdsm_woocommerce_field_mapping_html() {
   $options = get_option( 'rdsm_woocommerce_settings' );
-  $field_mapping = $options['field_mapping'];  
+  $field_mapping = $options['field_mapping'];
   $hidden = (empty($field_mapping)) ? "" : "hidden";
   
   ?>  
@@ -97,6 +115,9 @@ function rdsm_woocommerce_field_mapping_html() {
   </div>
 
   <div class="rdsm-connected-box hidden">
+    <?php if (RDSMLogFileHelper::has_error()) { ?>
+      <h3 class="alert-box"><?php _e('There are conversions that returned an error, check the log for more information', 'integracao-rd-station') ?></h3>
+    <?php } ?>
     <h4 id="map_fields_title">
       <?php _e('Map the fields below according to their names in RD Station.', 'integracao-rd-station') ?>
     </h4>

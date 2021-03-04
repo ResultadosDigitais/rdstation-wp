@@ -2,4 +2,4 @@
 
 /wp-content/languages/*
 /wp-content/uploads/*
-/integracao-rd-station/log.txt
+/integracao-rd-station/log*

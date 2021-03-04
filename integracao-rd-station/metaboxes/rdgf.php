@@ -37,7 +37,10 @@
 	        		<?php _e('click here to go to Settings page and than \'Connect to RD Station\'', 'integracao-rd-station') ?>
 	        	</a>
 	        </h3>
-	        <h3 id="info_create_fields" class="hidden"><?php _e('To see the fields created in RDSM reload page.', 'integracao-rd-station') ?></h3>	        
+	        <h3 id="info_create_fields" class="hidden"><?php _e('To see the fields created in RDSM reload page.', 'integracao-rd-station') ?></h3>
+	        <?php if (RDSMLogFileHelper::has_error()) { ?>
+			    <h3 class="alert-box"><?php _e('There are conversions that returned an error, check the log in \'RD Station Settings\' for more information', 'integracao-rd-station') ?></h3>
+			<?php } ?>
 	        <div id="custom_fields"></div>
 		    <?php
 			endif;

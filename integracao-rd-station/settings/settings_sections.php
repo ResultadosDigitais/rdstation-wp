@@ -15,5 +15,12 @@ class RDSettingsSection {
       null,
       'rdsm_woocommerce_settings'
     );
+
+    add_settings_section(
+      'rdsm_integrations_log_settings_section',
+      null,
+      null,
+      'rdsm_integrations_log_settings'
+    );
   }
 }
