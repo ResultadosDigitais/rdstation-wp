@@ -14,3 +14,7 @@ define('EVENTS', '/platform/events');
 define('CONTACTS', '/platform/contacts/');
 define('TRACKING_CODE', '/marketing/tracking_code');
 define('CONTACTS_FIELDS', '/platform/contacts/fields');
+
+// File
+define('RDSM_LOG_FILE_PATH', plugin_dir_path( __FILE__ ) . '/log');
+define('RDSM_LOG_FILE_LIMIT', 1000);
