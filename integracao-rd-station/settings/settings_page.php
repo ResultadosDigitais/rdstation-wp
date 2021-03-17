@@ -92,6 +92,7 @@ function rdsm_integrations_log_html() {
     <h3 class="alert-box"><?php _e('There are conversions that returned an error, check the log for more information', 'integracao-rd-station') ?></h3>
   <?php } ?>
   <a class="button" href="#" onclick="copyLogToClipboard()"><?php _e("Encrypt and Copy", 'integracao-rd-station')?></a>
+  <a class="button" href="#" onclick="if(confirm('After this action, the data could not be recovered. Are you sure you want to clear the log?')) clearLog();"><?php _e("Clear Log", 'integracao-rd-station')?></a>
   <textarea readonly id="rdsm_log_screen" rows="50"></textarea>
   <?php
 }

@@ -9,7 +9,7 @@ class RDSMLogFileHelper {
 	    $open = fopen( $file_path, "a" );
 	    if (file_exists($file_path)) {
 		    fputs( $open, $log );
-		    RDSMLogFileHelper::clear_log_file( $file_path );
+		    RDSMLogFileHelper::limit_log_file( $file_path );
 		    fclose( $open );
 		}
   	}
@@ -22,11 +22,15 @@ class RDSMLogFileHelper {
   		return (strpos(file_get_contents(RDSM_LOG_FILE_PATH . get_option('rdsm_refresh_token')), "errors") !== false);
   	}
 
-  	private static function clear_log_file($file_path) {
+  	private static function limit_log_file($file_path) {
 		$file = file($file_path);
 		for ($i = 0;count($file) > RDSM_LOG_FILE_LIMIT;$i++) {
 		  	unset($file[$i]);
 		}
 		file_put_contents($file_path, $file);
+  	}
+
+  	public static function clear_log_file() {
+  		return file_put_contents(RDSM_LOG_FILE_PATH . get_option('rdsm_refresh_token'), "");
   	}
 }

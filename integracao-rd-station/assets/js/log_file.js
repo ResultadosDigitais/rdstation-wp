@@ -12,6 +12,18 @@ function RDSMLogFile() {
     });
   }
 
+  this.clearLogFile = function() {
+    jQuery.ajax({
+      url: ajaxurl,
+      method: 'POST',
+      data: { action: 'rdsm-clear-log-file' },
+      success: function(data) {
+        if (data == 0)
+          rdsm_log_screen.value = "";
+      }
+    });
+  }
+
   function renderLogScreen(log) {
     rdsm_log_screen.value += log;
   }
@@ -27,8 +39,13 @@ function copyLogToClipboard() {
   copyLog.value = value;
 }
 
+function clearLog() {
+  logFile = new RDSMLogFile();
+  logFile.clearLogFile();
+}
+
 function load() {
-  logFile = new RDSMLogFile();  
+  logFile = new RDSMLogFile();
   logFile.loadLogFile();
 }
 
