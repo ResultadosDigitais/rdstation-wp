@@ -4,7 +4,7 @@ Donate link: -
 Tags: integrations, forms, contact form, rd station, resultados digitais
 Requires at least: 4.7
 Tested up to: 5.5.3
-Stable tag: 5.0.5
+Stable tag: 5.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,9 +40,16 @@ More info about the version 5.0.0: [https://ajuda.rdstation.com.br/hc/pt-br/arti
 
 == Changelog ==
 
+= 5.1.1 =
+* Removing refresh token error from Log Screen and adding clear log button
+* Fix error in the integration with advanced fields Gravity Forms
+* More info about the version 5.1.1: [https://ajuda.rdstation.com.br/hc/pt-br/articles/360054981272](https://ajuda.rdstation.com.br/hc/pt-br/articles/360054981272)
+
+= 5.1.0 =
+* Log Screen
+
 = 5.0.5 =
 * Adding products to WooCommerce mapping fields list
-* More info about the version 5.0.5: [https://ajuda.rdstation.com.br/hc/pt-br/articles/360054981272](https://ajuda.rdstation.com.br/hc/pt-br/articles/360054981272)
 
 = 5.0.4 =
 * Sending drop-down menu from Contact Forms 7 as single text when Allow multiple selections aren't checked
